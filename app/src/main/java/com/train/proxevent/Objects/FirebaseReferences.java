@@ -7,4 +7,7 @@ package com.train.proxevent.Objects;
 public class FirebaseReferences {
     final public static String PROXEVENT_REFERENCE = "ProxEvent" ;
 
+    final public static String CAR_REFERENCE = "cars" ;
+
+
 }

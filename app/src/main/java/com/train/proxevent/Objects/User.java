@@ -4,7 +4,7 @@ package com.train.proxevent.Objects;
  * Created by David on 11.07.2017.
  */
 
-public class Users {
+public class User {
     int id,points,last_activation_request,lost_passpord_request,
             lost_password_timestamp,active,sign_up_stamp,last_sign_in_stamp,
             enabled,primary_group_id,points_enabled;
@@ -12,10 +12,13 @@ public class Users {
             email,location,talent,lookingfor,about_me,activation_token,
             title;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(int id, int points, int last_activation_request, int lost_passpord_request, int lost_password_timestamp, int active, int sign_up_stamp, int last_sign_in_stamp, int enabled, int primary_group_id, int points_enabled, String user_name, String display_name, String profile_pic, String password, String email, String location, String talent, String lookingfor, String about_me, String activation_token, String title) {
+    public User(int id, int points, int last_activation_request, int lost_passpord_request, int lost_password_timestamp,
+                int active, int sign_up_stamp, int last_sign_in_stamp, int enabled, int primary_group_id, int points_enabled,
+                String user_name, String display_name, String profile_pic, String password, String email, String location,
+                String talent, String lookingfor, String about_me, String activation_token, String title) {
         this.id = id;
         this.points = points;
         this.last_activation_request = last_activation_request;

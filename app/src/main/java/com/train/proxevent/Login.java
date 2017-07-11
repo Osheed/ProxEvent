@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.train.proxevent.Objects.Car;
 import com.train.proxevent.Objects.FirebaseReferences;
+import com.train.proxevent.Objects.User;
 
 public class Login extends AppCompatActivity {
 
@@ -26,6 +27,8 @@ public class Login extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         //add reference to database
         final DatabaseReference myRef = database.getReference(FirebaseReferences.PROXEVENT_REFERENCE);
+        final DatabaseReference user = database.getReference(FirebaseReferences.USER_REFERENCE);
+
 
         //add listener to button
         buttonCar.setOnClickListener(new View.OnClickListener() {
@@ -33,8 +36,16 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 //get childs to create a new car
                 Car car = new Car("ford","Cano",3,4);
+                User u  = new User(1, 1, 1, 1, 1,
+                1, 1, 1, 1, 1, 1,
+                "Admin", "Admin", "Admin", "Admin", "Admin@admin.com", "Lens",
+                        "Admin", "", "Admin", "Admin", "Admin");
+
                 //give to create
                 myRef.child(FirebaseReferences.CAR_REFERENCE).push().setValue(car);
+                user.child(FirebaseReferences.USER_REFERENCE).push().setValue(u);
+
+                
 
 
             }

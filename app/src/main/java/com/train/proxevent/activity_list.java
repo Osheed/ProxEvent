@@ -3,11 +3,11 @@ package com.train.proxevent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class settings extends AppCompatActivity {
+public class activity_list extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_list);
     }
 }

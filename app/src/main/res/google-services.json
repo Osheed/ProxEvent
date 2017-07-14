@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "301124656895",
+    "firebase_url": "https://proxevent-240cf.firebaseio.com",
+    "project_id": "proxevent-240cf",
+    "storage_bucket": "proxevent-240cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301124656895:android:faf829a12a1c5afc",
+        "android_client_info": {
+          "package_name": "com.train.proxevent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301124656895-68n3ibn0lv7fvg6v72vgda3tl4cjk93d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.train.proxevent",
+            "certificate_hash": "45ea4814874749a777f98710adbe8395278594b3"
+          }
+        },
+        {
+          "client_id": "301124656895-mb7c9d8fjbi9mp1u8acnsk0rcps2lea8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApcdIJrJtgxqGpa6jH6gXvazsSR_TDHC8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301124656895-mb7c9d8fjbi9mp1u8acnsk0rcps2lea8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

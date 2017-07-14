@@ -1,20 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.train.proxevent.Login"
+    android:background="@color/colorPrimary"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom ="16dp"
-    android:paddingLeft = "16dp"
-    android:paddingRight = "16dp"
-    android:paddingTop = "16dp"
+    android:layout_height="match_parent">
 
-    tools:context="com.train.proxevent.Login">
-
-    <Button
-        android:id="@+id/button_car"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <ImageView
+            android:layout_width="50pt"
+            android:layout_height="50pt"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20pt"/>
+
+
+        <EditText
+            android:id="@+id/login_email"
+            android:layout_width="match_parent"
+
+            android:layout_height="20pt"
+            android:ems="10"
+            android:hint="e-mail"
+            android:inputType="textPersonName"
+            android:paddingLeft="5pt" />
+
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="20pt"
+            android:hint="password"
+            android:layout_marginTop="5pt"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:paddingLeft="5pt" />
+
+
+        <CheckBox
+            android:id="@+id/cbRememberLogin"
+            android:layout_marginTop="5pt"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:checked="false" />
+
+
+        <Button
+            android:id="@+id/singin_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5pt"
+            android:onClick="onAuthStateChanged"
+            android:text="singin" />
+
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="register"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5pt" />
+
+
+        <TextView
+            android:id="@+id/tvRegister"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+
+            android:layout_marginTop="25dp" />
+
+
+
+    </LinearLayout>
+</ScrollView>

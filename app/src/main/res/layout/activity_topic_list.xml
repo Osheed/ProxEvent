@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.train.proxevent.new_notification">
+    tools:context="com.train.proxevent.topic_list">
 
 </android.support.constraint.ConstraintLayout>

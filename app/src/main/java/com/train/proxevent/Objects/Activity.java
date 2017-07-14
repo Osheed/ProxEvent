@@ -7,10 +7,11 @@ import java.util.Date;
  */
 
 public class Activity {
+
     int id,addressId,userOwnerId;
     boolean permanent;
-    Date dateCreation,dateEnd;
-    String topic,title,content,location,picture;
+    Date dateCreation, dateEnd;
+    String topic, title, content, location, picture;
 
     public Activity() {
     }

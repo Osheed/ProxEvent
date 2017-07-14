@@ -26,7 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home" />
         <activity android:name=".profile" />
         <activity android:name=".topic_list" />
         <activity android:name=".activity_list" />

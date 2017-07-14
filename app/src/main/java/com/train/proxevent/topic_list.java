@@ -19,19 +19,23 @@ public class topic_list extends AppCompatActivity {
     topic_list_custom adapter;
 
     Integer[] imgTopicsId = {
-            R.drawable.topic_all,
-            R.drawable.topic_fruit,
-            R.drawable.topic_vegetable,
-            R.drawable.topic_protein,
-            R.drawable.topic_dairy,
-            R.drawable.topic_bred,
-            R.drawable.topic_vegan,
+            R.drawable.all,
             R.drawable.topic_fastfood,
+            R.drawable.sport,
+            R.drawable.game,
             R.drawable.topic_drink,
-            R.drawable.topic_dessert,
-            R.drawable.topic_candies,
-            R.drawable.topic_general,
+            R.drawable.studies,
+            R.drawable.travel,
+            R.drawable.music,
+            R.drawable.work,
+            R.drawable.art,
+            R.drawable.nature,
+            R.drawable.health,
+            R.drawable.car,
+            R.drawable.itech,
+            R.drawable.other,
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,7 @@ public class topic_list extends AppCompatActivity {
                                     int position, long id) {
                 // Toast.makeText(TopicsList.this, "You Clicked at " +topics[+ position], Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(topic_list.this, activity_list.class);
-//                i.putExtra("topicSelected", adapter.getItem(position));
+                i.putExtra("topicSelected", adapter.getItem(position));
                 topic_list.this.startActivity(i);
             }
         });

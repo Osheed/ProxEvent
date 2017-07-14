@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ProjectXavier="http://schemas.android.com/apk/res-auto"
+    android:textColor="@color/fontColor">
+
+    <item
+        android:id="@+id/menu_add_question"
+        android:title=""
+        android:icon="@drawable/ic_action_add_white"
+        ProjectXavier:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/menu_sync"
+        android:title=""
+        android:icon="@drawable/ic_sync"
+        ProjectXavier:showAsAction="always"
+        />
+
+        <item
+            android:id="@+id/menu_sort"
+            android:title=""
+            android:icon="@drawable/ic_action_overflow"
+            ProjectXavier:showAsAction="always"
+            >
+    <menu>
+        <item
+            android:id="@+id/menu_sortTimeNew"
+            android:title="@string/sortTime"
+            android:icon="@drawable/ic_action_clock"
+            ProjectXavier:showAsAction="always"
+            />
+
+        <item
+            android:id="@+id/menu_sortTimeOld"
+            android:title="@string/sortTimeOld"
+            android:icon="@drawable/ic_action_clock"
+            ProjectXavier:showAsAction="always"
+            />
+
+        <item
+            android:id="@+id/menu_sortASC"
+            android:title="@string/sortASC"
+            android:icon="@drawable/ic_action_sort_asc"
+            ProjectXavier:showAsAction="always"
+            />
+
+        <item
+            android:id="@+id/menu_sortDESC"
+            android:title="@string/sortDESC"
+            android:icon="@drawable/ic_action_sort_asc"
+            ProjectXavier:showAsAction="always"
+            />
+    </menu>
+         </item>
+</menu>

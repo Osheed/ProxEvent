@@ -22,31 +22,38 @@
 
         <string-array name="topics_array">
             <item>All</item>
-            <item>Fruit</item>
-            <item>Vegetables</item>
-            <item>Proteins</item>
-            <item>Dairy</item>
-            <item>Grains</item>
-            <item>Vegan</item>
-            <item>Fastfood</item>
-            <item>Drinks</item>
-            <item>Desserts and cakes</item>
-            <item>Candies</item>
-            <item>General knowledge</item>
+            <item>Cuisine</item>
+            <item>Sport</item>
+            <item>Games</item>
+            <item>Party</item>
+            <item>Studies</item>
+            <item>Travel</item>
+            <item>Music</item>
+            <item>Work</item>
+            <item>Art</item>
+            <item>Nature</item>
+            <item>Health</item>
+            <item>Auto - Moto</item>
+            <item>IT - Tech</item>
+            <item>Other</item>
         </string-array>
 
         <string-array name="topics_array_spinner">
-            <item>Fruit</item>
-            <item>Vegetables</item>
-            <item>Proteins</item>
-            <item>Dairy</item>
-            <item>Grains</item>
-            <item>Vegan</item>
-            <item>Fastfood</item>
-            <item>Drinks</item>
-            <item>Desserts and cakes</item>
-            <item>Candies</item>
-            <item>General knowledge</item>
+            <item>All</item>
+            <item>Cuisine</item>
+            <item>Sport</item>
+            <item>Games</item>
+            <item>Party</item>
+            <item>Studies</item>
+            <item>Travel</item>
+            <item>Music</item>
+            <item>Work</item>
+            <item>Art</item>
+            <item>Nature</item>
+            <item>Health</item>
+            <item>Auto - Moto</item>
+            <item>IT - Tech</item>
+            <item>Other</item>
         </string-array>
 
 

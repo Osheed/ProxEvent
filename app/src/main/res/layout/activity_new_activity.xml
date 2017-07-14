@@ -1,9 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.train.proxevent.new_activity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/activity_adding_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="32dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:descendantFocusability="beforeDescendants"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_an_image"
+            android:textColor="@color/darkGray"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/pictureChoose"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="10pt"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/image_add"
+            android:contentDescription=""
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvImg_Error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/redError" />
+
+        <TextView
+            android:id="@+id/tv_Select_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/enter_a_title"
+            android:textColor="@color/darkGray"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/linear_line"
+            android:layout_marginTop="10dp"
+            android:hint="@string/title"
+            android:inputType="textCapSentences|textMultiLine" />
+
+        <TextView
+            android:id="@+id/tvEdit_Content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/enter_a_content"
+            android:textColor="@color/darkGray"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/linear_line"
+            android:ems="10"
+            android:hint="@string/content"
+            android:inputType="textCapSentences|textMultiLine" />
+
+        <TextView
+            android:id="@+id/tvChooseDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/choose_a_endDate"
+            android:textColor="@color/darkGray"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/layout_Date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvDate_New_Activity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:hint="@string/select_a_date"
+                android:textColor="@color/darkGray"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvOrDate"
+                android:layout_width="86dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/or"
+                android:textColor="@color/darkGray"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/cB_Permanent"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="0.25"
+                android:text="@string/permanent" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvChooseLocalisation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/choose_a_location"
+            android:textColor="@color/darkGray"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/layout_Location"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvLocation_New_Activity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:hint="@string/select_location" />
+
+            <TextView
+                android:id="@+id/tvOrLocation"
+                android:layout_width="86dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/or"
+                android:textColor="@color/darkGray"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/cB_NoSpecific"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="0.20"
+                android:text="@string/no_specific" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSave_new_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/greenDarkTransparent"
+            android:onClick="save_New_Activity"
+            android:text="@string/save"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+</ScrollView>

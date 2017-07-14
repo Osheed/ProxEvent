@@ -26,6 +26,23 @@ public class home extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+       /**
+        *
+        *    SELECT * FROM user WHERE email = 'user.getEmail()';
+        *
+        *
+        *    ==
+        *
+        *    new Firebase("https://examples-sql-queries.firebaseio.com/user")
+    .startAt('user.getEmail()')
+                .endAt('user.getEmail()')
+                .once('value', show);
+
+        function show(snap) {
+                $('pre').text(JSON.stringify(snap.val(), null, 2));
+        }
+
+        **/
 
     }
 }

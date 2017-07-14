@@ -15,6 +15,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.train.proxevent.Objects.User;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -56,12 +59,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         };
 
     }
-    private void register(String email, String pass) {
+    private void register(final String email, final String pass) {
         //default method with email
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                        //create minimal user
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    final DatabaseReference myRef = database.getReference(FirebaseReferences.USERS_REFERENCE);
+                    User user = new User(1, email, "", "", email, pass, "false", "");
+                    myRef.child(FirebaseReferences.USERS_REFERENCE).push().setValue(user);
+
                     Log.i("SESION", "user created ok");
 
                 }else{

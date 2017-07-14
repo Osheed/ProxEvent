@@ -27,8 +27,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".home" />
-        <activity android:name=".Objects.menu" />
-        <activity android:name=".menu" />
         <activity android:name=".profile" />
         <activity android:name=".topic_list" />
         <activity android:name=".activity_list" />

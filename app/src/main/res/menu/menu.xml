@@ -9,7 +9,7 @@
         android:id="@+id/mainMenu"
         android:icon="@drawable/ic_dehaze"
         ProjectXavier:showAsAction="always"
-        android:title="menu">
+        android:title="@string/menu">
 
         <menu>
             <item

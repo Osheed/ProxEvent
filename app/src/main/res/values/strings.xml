@@ -2,16 +2,13 @@
     <string name="app_name">ProxEvent</string>
 
 
-        <string name = "homeMap">Home map </string>
+        <string name = "Map">Map</string>
+
+
         <string name="titleTopics">Topics</string>
-        <string name="addActivity">Add activity</string>
-        <string name="messages">Message</string>
+        <string name="addActivity">Add an activity</string>
+        <string name="messages">Messages</string>
         <string name="myActivities">My activities</string>
-
-
-
-
-
 
 
         <string name="titleQuestionsList">Questions</string>
@@ -141,4 +138,6 @@
         <string name="notConnected">No internet</string>
         <string name="loading">synchronize ...</string>
     <string name="menu">menu</string>
+    <string name="Messages">Messages</string>
+    <string name="newActivity">New Activity</string>
 </resources>

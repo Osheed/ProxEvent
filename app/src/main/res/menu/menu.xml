@@ -14,13 +14,13 @@
         <menu>
             <item
                 android:id="@+id/action_home_map"
-                android:title="@string/homeMap"
-                android:icon="@drawable/ic_action_home"/>
+                android:title="@string/Map"
+                android:icon="@drawable/ic_action_globe"/>
 
             <item
                 android:id="@+id/action_topics"
                 android:title="@string/topic"
-                android:icon="@drawable/ic_action_heart"/>
+                android:icon="@drawable/ic_action_activity"/>
 
             <item
                 android:id="@+id/action_add_activity"
@@ -29,17 +29,17 @@
 
             <item
                 android:id="@+id/action_messages"
-                android:icon="@drawable/ic_action_user"
+                android:icon="@drawable/ic_action_message"
                 android:title="@string/messages"/>
 
             <item
                 android:id="@+id/action_my_activities"
-                android:icon="@drawable/ic_action_user"
+                android:icon="@drawable/ic_action_my_activities"
                 android:title="@string/myActivities"/>
 
             <item
                 android:id="@+id/action_favorite"
-                android:icon="@drawable/ic_action_gear"
+                android:icon="@drawable/ic_action_heart"
                 android:title="@string/favorite"/>
 
             <item

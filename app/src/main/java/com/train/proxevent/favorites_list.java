@@ -9,5 +9,6 @@ public class favorites_list extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites_list);
+        setTitle(R.string.favorite);
     }
 }

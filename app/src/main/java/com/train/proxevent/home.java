@@ -24,6 +24,9 @@ public class home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        setTitle(R.string.Map);
+
+
 
         Intent intent = getIntent();
 
@@ -63,37 +66,37 @@ public class home extends AppCompatActivity {
                 return true;
 
             case R.id.action_topics:
-                Intent goTopics = new Intent(this, home.class);
+                Intent goTopics = new Intent(this, topic_list.class);
                 startActivity(goTopics);
                 return true;
 
             case R.id.action_add_activity:
-                Intent goAdd = new Intent(this, home.class);
+                Intent goAdd = new Intent(this, new_activity.class);
                 startActivity(goAdd);
                 return true;
 
             case R.id.action_messages:
-                Intent goMessage = new Intent(this, home.class);
+                Intent goMessage = new Intent(this, notification_list.class);
                 startActivity(goMessage);
                 return true;
 
             case R.id.action_my_activities:
-                Intent goActicities = new Intent(this, home.class);
+                Intent goActicities = new Intent(this, my_activities.class);
                 startActivity(goActicities);
                 return true;
 
             case R.id.action_favorite:
-                Intent goFavorite = new Intent(this, home.class);
+                Intent goFavorite = new Intent(this, favorites_list.class);
                 startActivity(goFavorite);
                 return true;
 
             case R.id.action_profile:
-                Intent goProfile = new Intent(this, home.class);
+                Intent goProfile = new Intent(this, profile.class);
                 startActivity(goProfile);
                 return true;
 
             case R.id.action_settings:
-                Intent goSettings = new Intent(this, home.class);
+                Intent goSettings = new Intent(this, settings.class);
                 startActivity(goSettings);
                 return true;
 

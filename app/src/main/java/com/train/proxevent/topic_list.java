@@ -9,5 +9,6 @@ public class topic_list extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic_list);
+        setTitle(R.string.topic);
     }
 }

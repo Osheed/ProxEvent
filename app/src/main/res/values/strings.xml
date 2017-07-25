@@ -159,4 +159,5 @@
     <string name="choose_a_location">Choose a Location</string>
     <string name="select_location">select Location</string>
     <string name="no_specific">No Specific</string>
+    <string name="sign_in">sign-in</string>
 </resources>

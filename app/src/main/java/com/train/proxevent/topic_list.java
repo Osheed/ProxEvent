@@ -19,21 +19,21 @@ public class topic_list extends AppCompatActivity {
     topic_list_custom adapter;
 
     Integer[] imgTopicsId = {
-            R.drawable.all,
+            //R.drawable.all,
             R.drawable.topic_fastfood,
-            R.drawable.sport,
-            R.drawable.game,
+           // R.drawable.sport,
+           // R.drawable.game,
             R.drawable.topic_drink,
-            R.drawable.studies,
-            R.drawable.travel,
-            R.drawable.music,
-            R.drawable.work,
-            R.drawable.art,
-            R.drawable.nature,
-            R.drawable.health,
-            R.drawable.car,
-            R.drawable.itech,
-            R.drawable.other,
+          //  R.drawable.studies,
+           // R.drawable.travel,
+           // R.drawable.music,
+           // R.drawable.work,
+           // R.drawable.art,
+           // R.drawable.nature,
+           // R.drawable.health,
+           // R.drawable.car,
+           // R.drawable.itech,
+           // R.drawable.other,
     };
 
 

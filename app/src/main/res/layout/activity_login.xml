@@ -63,7 +63,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5pt"
             android:onClick="onAuthStateChanged"
-            android:text="singin" />
+            android:text="@string/sign_in" />
 
         <Button
             android:id="@+id/register_button"

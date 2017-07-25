@@ -48,12 +48,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 FirebaseUser user = firebaseAuth.getCurrentUser();//==FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
                     //start activity...
-                    Log.i("SESION", "sesion started with email: " + user.getEmail());
+                    Log.i("SESSION", "session started with email: " + user.getEmail());
                     //singleton, has the registred user next screen!
 
 
                 } else {
-                    Log.i("SESION", "sesion clossed");
+                    Log.i("SESSION", "session clossed");
                 }
             }
         };
@@ -71,10 +71,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     User user = new User(1, email, "", "", email, pass, "false", "");
                     myRef.child(FirebaseReferences.USERS_REFERENCE).push().setValue(user);
 
-                    Log.i("SESION", "user created ok");
+                    Log.i("SESSION", "user created ok");
 
                 }else{
-                    Log.e("SESION",task.getException().getMessage()+"");
+                    Log.e("SESSION",task.getException().getMessage()+"");
                 }
             }
         });
@@ -86,12 +86,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Log.i("SESION", "session started ok");
+                    Log.i("SESSION", "session started ok");
 
                     Intent intent = new Intent(getApplicationContext(), home.class);
                     startActivity(intent);
                 }else{
-                    Log.e("SESION",task.getException().getMessage()+"");
+                    Log.e("SESSION",task.getException().getMessage()+"");
                 }
             }
         });

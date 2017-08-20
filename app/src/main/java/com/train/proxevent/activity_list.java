@@ -67,4 +67,261 @@ public class activity_list extends AppCompatActivity {
 
 
     }
+
+    /* menu */
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_list, menu);
+        return true;
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.menu_add_activity:
+                Intent go = new Intent(this, new_activity.class);
+                startActivity(go);
+                return true;
+
+
+            /***** CLOUD *****/
+
+            case R.id.   menu_sync:
+
+//                if(isNetworkAvailable() == true){
+//                    getQuestionsBackend();
+//                    Toast.makeText(getBaseContext(), R.string.loading, Toast.LENGTH_SHORT).show();
+//                }else{
+//                    Toast.makeText(getBaseContext(), R.string.notConnected, Toast.LENGTH_SHORT).show();
+//                }
+
+                return true;
+
+            /***** CLOUD *****/
+
+
+            case R.id.menu_sortTimeNew:
+//                questionListDataAdapter.clear();
+//                setAllQuestions();
+                return true;
+
+            case R.id.menu_sortTimeOld:
+//                questionListDataAdapter.clear();
+//
+//                // if the user is in all questions
+//
+//
+//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
+//                            questionListDataAdapter.add(c);
+//
+//                        } while (cursor.moveToNext());
+//                    }
+//                    listViewOnClickListenerAllQuestions();
+//
+//                }else{
+//                    //if the user has selected a topic
+//                    cursor = dbHelper.getAllQuestionsFromTopic(myValueTopicSelected);
+//                    //order by last with inverse cursor
+//                    if (cursor.moveToFirst()) {
+//                        do {
+//                            int id;
+//                            String topic, title, content, username, nbLike, date;
+//                            byte [] image;
+//                            id = cursor.getInt(0);
+//                            topic = cursor.getString(1);
+//                            title = cursor.getString(2);
+//                            content = cursor.getString(3);
+//                            username = cursor.getString(4);
+//                            image = cursor.getBlob(5);
+//                            date = cursor.getString(6);
+//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
+//
+//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
+//                            questionListDataAdapter.add(c);
+//
+//                        } while (cursor.moveToNext());
+//                    }
+//                    listViewOnClickListener();
+//                }
+//
+//                listViewOnLongClickListener();
+
+                return true;
+
+
+            case R.id.menu_sortASC:
+//                questionListDataAdapter.clear();
+//
+//                // if the user is in all questions
+//                if (myValueTopicSelected.equalsIgnoreCase("All")) {
+//                    // if the app is in English, we want only the english questions
+//                    cursor = dbHelper.getAllQuestionsFromTopicSortASCEN();
+//                    if (cursor.moveToFirst()) {
+//                        do {
+//                            int id;
+//                            String topic, title, content, username, nbLike, date;
+//                            byte[] image;
+//                            id = cursor.getInt(0);
+//                            topic = cursor.getString(1);
+//                            title = cursor.getString(2);
+//                            content = cursor.getString(3);
+//                            username = cursor.getString(4);
+//                            image = cursor.getBlob(5);
+//                            date = cursor.getString(6);
+//
+//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
+//
+//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
+//                            questionListDataAdapter.add(c);
+//
+//                        } while (cursor.moveToNext());
+//                    }
+//                    listViewOnClickListenerAllQuestions();
+//
+//                } else if (myValueTopicSelected.equalsIgnoreCase("Tout")) {
+//                    // if the app is in french
+//                    cursor = dbHelper.getAllQuestionsFromTopicSortASCFR();
+//                    if (cursor.moveToFirst()) {
+//                        do {
+//                            int id;
+//                            String topic, title, content, username, nbLike, date;
+//                            byte[] image;
+//                            id = cursor.getInt(0);
+//                            topic = cursor.getString(1);
+//                            title = cursor.getString(2);
+//                            content = cursor.getString(3);
+//                            username = cursor.getString(4);
+//                            image = cursor.getBlob(5);
+//                            date = cursor.getString(6);
+//
+//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
+//
+//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
+//                            questionListDataAdapter.add(c);
+//
+//                        } while (cursor.moveToNext());
+//                    }
+//                    listViewOnClickListenerAllQuestions();
+//
+//                }else {
+//
+//                    // if the User has selected a topis
+//                    cursor = dbHelper.getAllQuestionsFromTopicSortASC(myValueTopicSelected);
+//                    if (cursor.moveToFirst()) {
+//                        do {
+//                            int id;
+//                            String topic, title, content, username, nbLike, date;
+//                            byte[] image;
+//                            id = cursor.getInt(0);
+//                            topic = cursor.getString(1);
+//                            title = cursor.getString(2);
+//                            content = cursor.getString(3);
+//                            username = cursor.getString(4);
+//                            image = cursor.getBlob(5);
+//                            date = cursor.getString(6);
+//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
+//
+//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
+//                            questionListDataAdapter.add(c);
+//
+//                        } while (cursor.moveToNext());
+//                    }
+//                    listViewOnClickListener();
+//                }
+//
+//                listViewOnLongClickListener();
+                return true;
+
+            case R.id.menu_sortDESC:
+//                questionListDataAdapter.clear();
+//
+//                // if the user is in all questions
+//                if (myValueTopicSelected.equalsIgnoreCase("All")) {
+//                    // if the app is in English, we want only the english questions
+//                    cursor = dbHelper.getAllQuestionsFromTopicSortDESCEN();
+//                    if (cursor.moveToFirst()) {
+//                        do {
+//                            int id;
+//                            String topic, title, content, username, nbLike, date;
+//                            byte[] image;
+//                            id = cursor.getInt(0);
+//                            topic = cursor.getString(1);
+//                            title = cursor.getString(2);
+//                            content = cursor.getString(3);
+//                            username = cursor.getString(4);
+//                            image = cursor.getBlob(5);
+//                            date = cursor.getString(6);
+//
+//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
+//
+//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
+//                            questionListDataAdapter.add(c);
+//
+//                        } while (cursor.moveToNext());
+//                    }
+//                    listViewOnClickListenerAllQuestions();
+//
+//                } else if (myValueTopicSelected.equalsIgnoreCase("Tout")) {
+//                    // if the app is in french
+//                    cursor = dbHelper.getAllQuestionsFromTopicSortDESCFR();
+//                    if (cursor.moveToFirst()) {
+//                        do {
+//                            int id;
+//                            String topic, title, content, username, nbLike, date;
+//                            byte[] image;
+//                            id = cursor.getInt(0);
+//                            topic = cursor.getString(1);
+//                            title = cursor.getString(2);
+//                            content = cursor.getString(3);
+//                            username = cursor.getString(4);
+//                            image = cursor.getBlob(5);
+//                            date = cursor.getString(6);
+//
+//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
+//
+//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
+//                            questionListDataAdapter.add(c);
+//
+//                        } while (cursor.moveToNext());
+//                    }
+//                    listViewOnClickListenerAllQuestions();
+//
+//                }else {
+//
+//                    // if the User has selected a topis
+//                    cursor = dbHelper.getAllQuestionsFromTopicSortDESC(myValueTopicSelected);
+//                    if (cursor.moveToFirst()) {
+//                        do {
+//                            int id;
+//                            String topic, title, content, username, nbLike, date;
+//                            byte[] image;
+//                            id = cursor.getInt(0);
+//                            topic = cursor.getString(1);
+//                            title = cursor.getString(2);
+//                            content = cursor.getString(3);
+//                            username = cursor.getString(4);
+//                            image = cursor.getBlob(5);
+//                            date = cursor.getString(6);
+//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
+//
+//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
+//                            questionListDataAdapter.add(c);
+//
+//                        } while (cursor.moveToNext());
+//                    }
+//                    listViewOnClickListener();
+//                }
+//
+//                listViewOnLongClickListener();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
 }
+
+
+

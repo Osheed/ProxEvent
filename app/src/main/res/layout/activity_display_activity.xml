@@ -43,6 +43,15 @@
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabJoinActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="bottom|left|end"
+        app:srcCompat="@android:drawable/ic_menu_share"/>
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabFavorite"
             android:layout_width="wrap_content"
@@ -51,6 +60,8 @@
             app:layout_anchor="@id/app_bar_layout"
             app:layout_anchorGravity="bottom|right|end"
             app:srcCompat="@android:drawable/ic_menu_share"/>
+
+
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -206,8 +217,8 @@
                                     android:layout_marginTop="2dp"
                                     android:gravity="center_vertical">
                                     <TextView
-                                        android:id="@+id/tvComments"
-                                        android:text="@string/Comments"
+                                        android:id="@+id/tvChat"
+                                        android:text="@string/chat"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="10dp"

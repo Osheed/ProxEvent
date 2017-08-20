@@ -24,7 +24,7 @@ public class home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        setTitle(R.string.Map);
+        setTitle(R.string.Home);
 
 
 

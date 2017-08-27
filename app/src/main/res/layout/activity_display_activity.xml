@@ -241,7 +241,7 @@
 
 
                             <EditText
-                                android:id="@+id/etAddComment"
+                                android:id="@+id/etAddMessage"
                                 android:background="@drawable/linear_line"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -249,7 +249,7 @@
                                 android:layout_marginBottom="10pt"
                                 android:inputType="textCapSentences|textMultiLine"
                                 android:textSize="7pt"
-                                android:hint="@string/addComment"
+                                android:hint="@string/addChat"
                                 />
 
                             <LinearLayout
@@ -260,20 +260,10 @@
                                 android:layout_marginTop="3dp">
 
                                 <Button
-                                    android:text="@string/cancel"
-                                    android:textColor="@color/white"
-                                    android:background="@color/greenDarkTransparent"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/btCancelComment"
-                                    android:textSize="7pt"/>
-
-                                <Button
-                                    android:id="@+id/btSaveComment"
+                                    android:id="@+id/btSaveMsg"
                                     android:textColor="@color/white"
                                     android:background="@color/greenDarkTransparent"
                                     android:text="@string/saveComent"
-                                    android:layout_marginLeft="10pt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="7pt"/>
@@ -288,12 +278,13 @@
                                 android:background="@drawable/linear_up_border"/>
 
                             <ListView
-                                android:id="@+id/listview_comments"
+                                android:id="@+id/listview_chat"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="20pt"
                                 android:layout_marginTop="5pt"
-                                android:dividerHeight="1dp"></ListView>
+                                android:dividerHeight="1dp"/>
+
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

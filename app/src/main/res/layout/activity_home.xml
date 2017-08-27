@@ -47,6 +47,13 @@
                 android:id="@+id/profile_list_layout"
                 android:background="@drawable/linear_border_square">
 
+                <Button
+                    android:id="@+id/button2"
+                    android:onClick="seeDisplayActivityTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Display activity" />
+
                 <TextView
                     android:id="@+id/tvEmptyUserCurrentList"
                     android:layout_width="match_parent"

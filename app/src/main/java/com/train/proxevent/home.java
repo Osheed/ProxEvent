@@ -28,8 +28,7 @@ import com.train.proxevent.Objects.User;
 
 public class home extends AppCompatActivity {
 
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    public FirebaseAuth Auth = FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -38,6 +37,8 @@ public class home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         setTitle(R.string.Home);
 
+        // initializes
+        mAuth = FirebaseAuth.getInstance();
 
         Intent intent = getIntent();
 
@@ -68,6 +69,23 @@ public class home extends AppCompatActivity {
         startActivity(goTopics);
 
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null){
+            sendToStart();
+        }
+    }
+
+    private void sendToStart() {
+        Intent loginIntent = new Intent(home.this, LoginActivity.class);
+        startActivity(loginIntent);
+        finish();
     }
 
 

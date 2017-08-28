@@ -1,90 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.train.proxevent.Login"
-    android:background="@color/colorPrimary"
-
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.train.proxevent.LoginActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/login_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical">
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:paddingTop="20dp"
+        android:text="@string/login_to_your_account"
+        android:textAlignment="center"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="50pt"
-            android:layout_height="50pt"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20pt"/>
-
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_login_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="89dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_label"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintHorizontal_bias="0.0">
 
         <EditText
-            android:id="@+id/login_email"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_your_email" />
 
-            android:layout_height="20pt"
-            android:ems="10"
-            android:hint="e-mail"
-            android:inputType="textPersonName"
-            android:paddingLeft="5pt" />
+    </android.support.design.widget.TextInputLayout>
 
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_login_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_login_email">
 
         <EditText
-            android:id="@+id/login_password"
-            android:layout_width="match_parent"
-            android:layout_height="20pt"
-            android:hint="password"
-            android:layout_marginTop="5pt"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:paddingLeft="5pt" />
-
-
-        <CheckBox
-            android:id="@+id/cbRememberLogin"
-            android:layout_marginTop="5pt"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:checked="false" />
+            android:hint="@string/enter_your_password"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
 
+    <Button
+        android:id="@+id/btn_login_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="21dp"
+        android:background="@color/greenDark"
+        android:text="@string/log_in"
+        app:layout_constraintHorizontal_bias="0.896"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_login_password" />
 
-        <Button
-            android:id="@+id/singin_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5pt"
-            android:onClick="onAuthStateChanged"
-            android:text="@string/sign_in" />
-
-        <Button
-            android:id="@+id/register_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="register"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5pt" />
-
-
-        <TextView
-            android:id="@+id/tvRegister"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_centerHorizontal="true"
-
-            android:layout_marginTop="25dp" />
-
-
-
-    </LinearLayout>
-</ScrollView>
+    <Button
+        android:id="@+id/btn_login_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="119dp"
+        android:background="@color/greenDark"
+        android:padding="10dp"
+        android:text="@string/need_a_new_account"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_login_password" />
+</android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.train.proxevent;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -79,6 +80,11 @@ public class display_activity extends AppCompatActivity {
     }
 
 
+    private void goChat() {
+        Intent chat = new Intent(display_activity.this, chat.class);
+        startActivity(chat);
+        finish();
+    }
 
 
 }

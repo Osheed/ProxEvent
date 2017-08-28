@@ -267,8 +267,20 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="7pt"/>
+
                             </LinearLayout>
 
+
+                            <Button
+                                android:id="@+id/buttonChat"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@color/greenDarkTransparent"
+                                android:text="chat"
+                                android:onClick="doChat"
+                                android:textColor="@color/white"
+                                android:textSize="7pt" />
 
                             <TextView
                                 android:text=""
@@ -284,6 +296,16 @@
                                 android:layout_marginBottom="20pt"
                                 android:layout_marginTop="5pt"
                                 android:dividerHeight="1dp"/>
+
+
+
+
+
+
+
+
+
+
 
                         </LinearLayout>
                     </LinearLayout>

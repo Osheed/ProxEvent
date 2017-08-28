@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.train.proxevent.chat">
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="20"
+            android:id="@+id/scrollView">
+                <RelativeLayout
+                    android:id="@+id/layout2"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+                         <LinearLayout
+                        android:id="@+id/layout1"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical">
+                         </LinearLayout>
+                </RelativeLayout>
+        </ScrollView>
+
+        <include
+            layout="@layout/message_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity = "bottom"
+            android:layout_marginTop = "5dp"/>
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

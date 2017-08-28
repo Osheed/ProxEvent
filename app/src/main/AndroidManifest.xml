@@ -17,8 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity"
-            android:parentActivityName=".home"/>
+        <activity
+            android:name=".RegisterActivity"
+            android:parentActivityName=".home" />
         <activity android:name=".profile" />
         <activity android:name=".topic_list" />
         <activity android:name=".activity_list" />
@@ -30,7 +31,7 @@
         <activity android:name=".new_notification" />
         <activity android:name=".settings" />
         <activity android:name=".new_activity" />
-
+        <activity android:name=".chat"></activity>
     </application>
 
 </manifest>

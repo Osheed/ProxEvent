@@ -19,12 +19,14 @@ public class new_activity extends AppCompatActivity {
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_activity);
         setTitle(R.string.newActivity);
 
-        mDisplayDate = (TextView)findViewById(R.id.tvDate_New_Activity);
+        //Initializes
+        mDisplayDate = (TextView)findViewById(R.id.tv_newActivity_SelectDate);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+// Add to the bottom of the file to apply google-services
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 25
@@ -16,6 +18,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
     }
 }
 
@@ -48,5 +56,3 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     testCompile 'junit:junit:4.12'
 }
-// Add to the bottom of the file to apply google-services
-apply plugin: 'com.google.gms.google-services'

@@ -21,7 +21,7 @@
         tools:ignore="UseCompoundDrawables">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_newActivity_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/select_an_image"
@@ -29,18 +29,18 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/pictureChoose"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_newActivity_ChooseImg"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:layout_marginTop="10pt"
             android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/image_add"
+            android:layout_marginTop="10pt"
             android:contentDescription=""
+            app:srcCompat="@drawable/image_add"
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/tvImg_Error"
+            android:id="@+id/tv_newActivity_errorImg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -49,7 +49,7 @@
             android:textColor="@color/redError" />
 
         <TextView
-            android:id="@+id/tv_Select_Title"
+            android:id="@+id/tv_newActivity_EnterTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -59,16 +59,16 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/etTitle"
+            android:id="@+id/et_newActivity_EnterTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/linear_line"
             android:layout_marginTop="10dp"
+            android:background="@drawable/linear_line"
             android:hint="@string/title"
             android:inputType="textCapSentences|textMultiLine" />
 
         <TextView
-            android:id="@+id/tvEdit_Content"
+            android:id="@+id/tv_newActivity_EnterContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -78,7 +78,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/etContent"
+            android:id="@+id/et_newActivity_EnterContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -88,7 +88,7 @@
             android:inputType="textCapSentences|textMultiLine" />
 
         <TextView
-            android:id="@+id/tvChooseDate"
+            android:id="@+id/tv_newActivity_ChooseDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -98,13 +98,13 @@
             android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/layout_Date"
+            android:id="@+id/layout_newActivity_Date"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvDate_New_Activity"
+                android:id="@+id/tv_newActivity_SelectDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -114,7 +114,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/tvOrDate"
+                android:id="@+id/tv_newActivity_Or"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -124,7 +124,7 @@
                 android:textStyle="bold" />
 
             <CheckBox
-                android:id="@+id/cB_Permanent"
+                android:id="@+id/cb_newActivity_Permanent"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginTop="15dp"
@@ -133,7 +133,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvChooseLocalisation"
+            android:id="@+id/tv_newActivity_ChooseLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -143,13 +143,13 @@
             android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/layout_Location"
+            android:id="@+id/layout_newActivity_Location"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvLocation_New_Activity"
+                android:id="@+id/tv_newActivity_SelectLocation"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -157,7 +157,7 @@
                 android:hint="@string/select_location" />
 
             <TextView
-                android:id="@+id/tvOrLocation"
+                android:id="@+id/tv_newActivity_OrLocation"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -167,7 +167,7 @@
                 android:textStyle="bold" />
 
             <CheckBox
-                android:id="@+id/cB_NoSpecific"
+                android:id="@+id/cb_newActivity_LocationNoSpec"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginTop="15dp"
@@ -176,7 +176,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnSave_new_activity"
+            android:id="@+id/btn_newActivity_Save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/greenDarkTransparent"

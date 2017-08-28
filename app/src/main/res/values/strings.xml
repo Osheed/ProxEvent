@@ -171,6 +171,12 @@
     <string name="enter_your_password">Enter your password</string>
     <string name="log_in">Log in</string>
     <string name="need_a_new_account">Need a new Account?</string>
+    <string name="display_name">display name</string>
+    <string name="change_image">change image</string>
+    <string name="change_status">change status</string>
+    <string name="hi_here_i_m_using_proxevent">hi here i m using proxevent</string>
+    <string name="save_changes">save changes</string>
+    <string name="your_status">your status</string>
 
 
 </resources>

@@ -20,7 +20,8 @@
         <activity
             android:name=".RegisterActivity"
             android:parentActivityName=".home" />
-        <activity android:name=".profile" />
+        <activity android:name=".profile"
+            android:parentActivityName=".home"/>
         <activity android:name=".topic_list" />
         <activity android:name=".activity_list" />
         <activity android:name=".my_activities" />
@@ -31,7 +32,11 @@
         <activity android:name=".new_notification" />
         <activity android:name=".settings" />
         <activity android:name=".new_activity" />
-        <activity android:name=".chat"></activity>
+        <activity android:name=".chat" />
+        <activity android:name=".StatusActivity"
+            android:parentActivityName=".profile"></activity>
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
     </application>
 
 </manifest>

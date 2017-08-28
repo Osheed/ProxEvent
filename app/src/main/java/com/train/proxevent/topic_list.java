@@ -17,7 +17,7 @@ public class topic_list extends AppCompatActivity {
     ListView list;
     String [] topics;
     topic_list_custom adapter;
-    /*
+
     Integer[] imgTopicsId = {
             R.drawable.all,
             R.drawable.topic_fastfood,
@@ -35,7 +35,7 @@ public class topic_list extends AppCompatActivity {
             R.drawable.itech,
             R.drawable.other,
     };
-*/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class topic_list extends AppCompatActivity {
         setTitle(R.string.topic);
 
         topics = getResources().getStringArray(R.array.topics_array);
-       /* adapter = new topic_list_custom(topic_list.this, topics, imgTopicsId);*/
+        adapter = new topic_list_custom(topic_list.this, topics, imgTopicsId);
         list = (ListView)findViewById(R.id.listviewTopics);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

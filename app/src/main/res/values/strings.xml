@@ -177,6 +177,7 @@
     <string name="hi_here_i_m_using_proxevent">hi here i m using proxevent</string>
     <string name="save_changes">save changes</string>
     <string name="your_status">your status</string>
+    <string name="title_activity_user">user</string>
 
 
 </resources>

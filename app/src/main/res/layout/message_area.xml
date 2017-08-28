@@ -13,7 +13,7 @@
         android:layout_weight="1"
         android:textColorHint="#CFD8DC"
         android:textColor="#CFD8DC"
-        android:hint="@string/chat"
+        android:hint="@string/addChat"
         android:maxHeight="80dp"/>
 
      

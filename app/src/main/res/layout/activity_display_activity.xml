@@ -278,7 +278,6 @@
                                 android:layout_weight="1"
                                 android:background="@color/greenDarkTransparent"
                                 android:text="chat"
-                                android:onClick="doChat"
                                 android:textColor="@color/white"
                                 android:textSize="7pt" />
 

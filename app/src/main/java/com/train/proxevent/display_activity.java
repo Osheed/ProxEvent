@@ -22,6 +22,7 @@ public class display_activity extends AppCompatActivity {
 
 
     Button saveMessage;
+    Button goChat;
     EditText etAddMessage;
 
     @Override
@@ -35,6 +36,7 @@ public class display_activity extends AppCompatActivity {
 
         //save a comment when user click on save
         saveMessage = (Button) findViewById(R.id.btSaveMsg);
+
         saveMessage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String comment = etAddMessage.getText().toString();
@@ -76,15 +78,17 @@ public class display_activity extends AppCompatActivity {
             }
         });
 
-
+        goChat = (Button) findViewById(R.id.buttonChat);
+        goChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent chat = new Intent(display_activity.this, chat.class);
+                startActivity(chat);
+            }
+        });
     }
 
 
-    private void goChat() {
-        Intent chat = new Intent(display_activity.this, chat.class);
-        startActivity(chat);
-        finish();
-    }
 
 
 }

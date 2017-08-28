@@ -1,7 +1,8 @@
 package com.train.proxevent;
 
-import android.support.v7.app.AppCompatActivity;
+import android.hardware.camera2.params.BlackLevelPattern;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -15,7 +16,6 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.core.view.View;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,8 +43,11 @@ public class chat extends AppCompatActivity {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         Firebase.setAndroidContext(this);
-        reference1 = new Firebase("https://androidchatapp-76776.firebaseio.com/messages/" + "UserDetails.username" + "_" + "UserDetails.chatWith");
-        reference2 = new Firebase("https://androidchatapp-76776.firebaseio.com/messages/" + "UserDetails.chatWith" + "_" + "UserDetails.username");
+        reference1 = new Firebase("https://proxevent-240cf.firebaseio.com/" + UserDetails.username + "_" + UserDetails.chatWith);
+        reference2 = new Firebase("https://proxevent-240cf.firebaseio.com/" + UserDetails.chatWith + "_" + UserDetails.username);
+
+//        reference1 = new Firebase("https://proxevent-240cf.firebaseio.com/" + "UserDetails.username" + "_" + "UserDetails.chatWith");
+//        reference2 = new Firebase("https://proxevent-240cf.firebaseio.com/" + "UserDetails.username" + "_" + "UserDetails.chatWith");
 
         sendButton.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
@@ -54,7 +57,10 @@ public class chat extends AppCompatActivity {
                 if (!messageText.equals("")) {
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("message", messageText);
-                    map.put("user", "UserDetails.username");
+                    map.put("user", UserDetails.username);
+//                    map.put("message", messageText);
+//                    map.put("user", ", messageText);
+
                     reference1.push().setValue(map);
                     reference2.push().setValue(map);
                     messageArea.setText("");
@@ -70,10 +76,10 @@ public class chat extends AppCompatActivity {
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
 
-                if (userName.equals("UserDetails.username")) {
+                if (userName.equals(UserDetails.username)) {
                     addMessageBox("You:-\n" + message, 1);
                 } else {
-                    addMessageBox("UserDetails.chatWith" + ":-\n" + message, 2);
+                    addMessageBox(UserDetails.chatWith + ":-\n" + message, 2);
                 }
             }
 

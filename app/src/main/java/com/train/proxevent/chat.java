@@ -16,6 +16,10 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,11 +33,25 @@ public class chat extends AppCompatActivity {
     ScrollView scrollView;
     Firebase reference1, reference2;
 
+    private DatabaseReference mUserDatabase;
+    private FirebaseUser mCurrentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+
+
+
+
+        //test
+        //Recover the data from db
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String current_uid = mCurrentUser.getUid();
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
+
+
 
 
         layout = (LinearLayout) findViewById(R.id.layout1);
@@ -43,8 +61,10 @@ public class chat extends AppCompatActivity {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         Firebase.setAndroidContext(this);
-        reference1 = new Firebase("https://proxevent-240cf.firebaseio.com/" + UserDetails.username + "_" + UserDetails.chatWith);
-        reference2 = new Firebase("https://proxevent-240cf.firebaseio.com/" + UserDetails.chatWith + "_" + UserDetails.username);
+        reference1 = new Firebase("https://proxevent-240cf.firebaseio.com/messages" +   "user1" + "_" + "test2");
+        reference2 = new Firebase("https://proxevent-240cf.firebaseio.com/messages" + "test2" + "_" +  "user1");
+
+
 
 //        reference1 = new Firebase("https://proxevent-240cf.firebaseio.com/" + "UserDetails.username" + "_" + "UserDetails.chatWith");
 //        reference2 = new Firebase("https://proxevent-240cf.firebaseio.com/" + "UserDetails.username" + "_" + "UserDetails.chatWith");

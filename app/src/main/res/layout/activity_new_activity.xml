@@ -24,7 +24,7 @@
             android:id="@+id/tv_newActivity_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/select_an_image"
+            android:text="@string/select_img_topic"
             android:textColor="@color/darkGray"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -35,9 +35,17 @@
             android:layout_height="130dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10pt"
+            android:background="@drawable/image_add"
             android:contentDescription=""
             app:srcCompat="@drawable/image_add"
             tools:ignore="ContentDescription" />
+
+        <Spinner
+            android:id="@+id/sp_newActivity_topics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="15dp" />
 
         <TextView
             android:id="@+id/tv_newActivity_errorImg"

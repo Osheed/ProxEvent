@@ -125,11 +125,13 @@
                 android:id="@+id/tv_newActivity_Or"
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:text="@string/or"
                 android:textColor="@color/darkGray"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="RtlHardcoded" />
 
             <CheckBox
                 android:id="@+id/cb_newActivity_Permanent"
@@ -154,7 +156,8 @@
             android:id="@+id/layout_newActivity_Location"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
 
             <TextView
                 android:id="@+id/tv_newActivity_SelectLocation"
@@ -187,6 +190,7 @@
             android:id="@+id/btn_newActivity_Save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:background="@color/greenDarkTransparent"
             android:onClick="save_New_Activity"
             android:text="@string/save"

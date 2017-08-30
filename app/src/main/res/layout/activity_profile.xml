@@ -15,7 +15,7 @@
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
         android:layout_marginTop="33dp"
-        android:background="@color/common_google_signin_btn_text_dark_pressed"
+        android:background="@android:color/transparent"
         android:padding="10dp"
         android:src="@mipmap/ic_launcher_round" />
 

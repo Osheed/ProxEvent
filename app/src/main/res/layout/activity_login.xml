@@ -41,7 +41,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/enter_your_email" />
+            android:hint="@string/enter_your_email"
+            android:inputType="textEmailAddress" />
 
     </android.support.design.widget.TextInputLayout>
 

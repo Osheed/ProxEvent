@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -65,6 +66,7 @@ public class new_activity extends AppCompatActivity {
     //Storage Firebase
     private StorageReference mImageStorage;
     private FirebaseUser mCurrentUser;
+    private String mActivity_id;
     private DatabaseReference mActivityDatabase;
     private int mYear, mMonth, mDay;
 
@@ -89,6 +91,7 @@ public class new_activity extends AppCompatActivity {
 
         //Database
         mActivityDatabase = FirebaseDatabase.getInstance().getReference().child("Activities");
+        mActivity_id = mActivityDatabase.push().getKey();
 
 
         //choose the Topic
@@ -183,7 +186,8 @@ public class new_activity extends AppCompatActivity {
                 activityMap.put("title",title);
                 activityMap.put("topic",topics);
 
-                mActivityDatabase.push().setValue(activityMap).
+
+                mActivityDatabase.child(mActivity_id).setValue(activityMap).
                         addOnCompleteListener(new OnCompleteListener<Void>() {
                              @Override
                              public void onComplete(@NonNull Task<Void> task) {
@@ -193,6 +197,9 @@ public class new_activity extends AppCompatActivity {
                                      mProgress.dismiss();
                                      Intent profileIntent = new Intent(new_activity.this, home.class);
                                      startActivity(profileIntent);
+                                     Log.d("mActivitiDatabase:",mActivity_id);
+
+
 
                                  }else{
 

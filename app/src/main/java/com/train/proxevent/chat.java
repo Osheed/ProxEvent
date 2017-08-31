@@ -47,9 +47,9 @@ public class chat extends AppCompatActivity {
 
         //test
         //Recover the data from db
-        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String current_uid = mCurrentUser.getUid();
-        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
+//        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+//        String current_uid = mCurrentUser.getUid();
+//        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
 
 
 
@@ -61,8 +61,8 @@ public class chat extends AppCompatActivity {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         Firebase.setAndroidContext(this);
-        reference1 = new Firebase("https://proxevent-240cf.firebaseio.com/messages" +   "user1" + "_" + "test2");
-        reference2 = new Firebase("https://proxevent-240cf.firebaseio.com/messages" + "test2" + "_" +  "user1");
+        reference1 = new Firebase("https://fulltopia-f6db1.firebaseio/messages/" + "user1" + "_" + "test2");
+        reference2 = new Firebase("https://fulltopia-f6db1.firebaseio/messages/" + "test2" + "_" +  "user1");
 
 
 

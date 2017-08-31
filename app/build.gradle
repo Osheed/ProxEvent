@@ -54,7 +54,6 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.theartofdev.edmodo:android-image-cropper:2.4.+'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.firebaseui:firebase-ui-database:1.2.0'
     compile 'id.zelory:compressor:2.0.0'
     testCompile 'junit:junit:4.12'
 

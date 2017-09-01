@@ -17,4 +17,6 @@
     <color name="blueButton">#1685c9</color>
     <color name="redError">#ff000d</color>
     <color name="transparent">#00ffffff</color>
+    <color name="coloMsg">#598351</color>
+    <color name="chat">#fafafa</color>
 </resources>

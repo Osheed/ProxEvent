@@ -30,33 +30,16 @@ public class chat extends AppCompatActivity {
     ImageView sendButton;
     EditText messageArea;
     ScrollView scrollView;
-//    Firebase reference1, reference2;
-
     private DatabaseReference reference1, reference2;
-//    private FirebaseUser mCurrentUser;
     String myValueChatWith;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        setTitle(UserDetails.chatWith);
 
-
-
-
-
-         myValueChatWith = getIntent().getExtras().getString("myValueKeyChatWith");
-//        textViewQuestionTitle.setText(myValueChatWith);
-
-        //test
-        //Recover the data from db
-//        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-//        String current_uid = mCurrentUser.getUid();
-//        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
-
-
-
-
+        myValueChatWith = getIntent().getExtras().getString("myValueKeyChatWith");
         layout = (LinearLayout) findViewById(R.id.layout1);
         layout_2 = (RelativeLayout) findViewById(R.id.layout2);
         sendButton = (ImageView) findViewById(R.id.sendButton);
@@ -64,33 +47,19 @@ public class chat extends AppCompatActivity {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         Firebase.setAndroidContext(this);
-//        reference1 = new Firebase("https://fulltopia-f6db1.firebaseio.com/messages/" + UserDetails.username + "_" + UserDetails.chatWith);
-//        reference2 = new Firebase("https://fulltopia-f6db1.firebaseio.com/messages/" + UserDetails.chatWith + "_" +  UserDetails.username);
-
-
         reference1 = FirebaseDatabase.getInstance().getReference("messages").child(UserDetails.username + "_" + UserDetails.chatWith);
         reference2 = FirebaseDatabase.getInstance().getReference("messages").child(UserDetails.chatWith + "_" +  UserDetails.username);
-
-
-//        reference1 = new Firebase("https://proxevent-240cf.firebaseio.com/" + "UserDetails.username" + "_" + "UserDetails.chatWith");
-//        reference2 = new Firebase("https://proxevent-240cf.firebaseio.com/" + "UserDetails.username" + "_" + "UserDetails.chatWith");
-
         sendButton.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View view) {
                 String messageText = messageArea.getText().toString();
-
                 if (!messageText.equals("")) {
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("message", messageText);
-                    map.put("user", UserDetails.username);//UserDetails.username);
-//                    map.put("message", messageText);
-//                    map.put("user", ", messageText);
-
+                    map.put("user", UserDetails.username);
                     reference1.push().setValue(map);
                     reference2.push().setValue(map);
                     messageArea.setText("");
-
                 }
             }
         });
@@ -103,55 +72,42 @@ public class chat extends AppCompatActivity {
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
                 if (userName.equals(UserDetails.username)) {
-                    addMessageBox("You:-\n" + message, 1);
+                    addMessageBox("  " + message, 1);
                 } else {
-                    addMessageBox(UserDetails.chatWith + ":-\n" + message, 2);
+                    addMessageBox("  " + message, 2);
                 }
             }
-
             @Override
             public void onChildChanged(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
-
             }
-
             @Override
             public void onChildRemoved(com.google.firebase.database.DataSnapshot dataSnapshot) {
-
             }
-
             @Override
             public void onChildMoved(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
-
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
 
-
-
-
-
     public void addMessageBox(String message, int type){
     TextView textView = new TextView(chat.this);
     textView.setText(message);
-
     LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     lp2.weight = 1.0f;
 
     if(type == 1) {
     lp2.gravity = Gravity.LEFT;
-    textView.setBackgroundResource(R.drawable.chat_right);
+        textView.setBackgroundResource(R.drawable.bubble_left);
     }
     else{
-    lp2.gravity = Gravity.RIGHT;
-    textView.setBackgroundResource(R.drawable.chat_left);
+        lp2.gravity = Gravity.RIGHT;
+        textView.setBackgroundResource(R.drawable.bubble_right);
     }
-    textView.setLayoutParams(lp2);
-    layout.addView(textView);
-    scrollView.fullScroll(android.view.View.FOCUS_DOWN);
+        textView.setLayoutParams(lp2);
+        layout.addView(textView);
+        scrollView.fullScroll(android.view.View.FOCUS_DOWN);
     }
-    }
+}

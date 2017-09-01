@@ -3,7 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/linear_border_square"
     android:gravity="bottom">
 
     <EditText
@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColorHint="#CFD8DC"
-        android:textColor="#CFD8DC"
+        android:textColorHint="@color/darkGray"
+        android:textColor="@color/darkGray"
         android:hint="@string/addChat"
         android:maxHeight="80dp"/>
 

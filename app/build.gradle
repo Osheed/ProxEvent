@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 // Add to the bottom of the file to apply google-services
-apply plugin: 'com.google.gms.google-services'
+
 
 android {
     compileSdkVersion 25
@@ -25,6 +25,10 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
     }
+
+    dexOptions {
+        preDexLibraries = false
+    }
 }
 
 dependencies {
@@ -33,6 +37,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //connected to google service 3.0.0
+
 
 
     compile 'com.firebase:firebase-client-android:2.5.+'
@@ -57,4 +62,7 @@ dependencies {
     compile 'id.zelory:compressor:2.0.0'
     testCompile 'junit:junit:4.12'
 
+
 }
+
+apply plugin: 'com.google.gms.google-services'

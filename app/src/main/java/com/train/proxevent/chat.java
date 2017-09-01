@@ -61,8 +61,8 @@ public class chat extends AppCompatActivity {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         Firebase.setAndroidContext(this);
-        reference1 = new Firebase("https://fulltopia-f6db1.firebaseio/messages/" + "thisActivity" + "user1" + "_" + "test2");
-        reference2 = new Firebase("https://fulltopia-f6db1.firebaseio/messages/" + "thisActivity" + "test2" + "_" +  "user1");
+        reference1 = new Firebase("https://fulltopia-f6db1.firebaseio/messages/" + "user1" + "_" + "test2");
+        reference2 = new Firebase("https://fulltopia-f6db1.firebaseio/messages/" + "test2" + "_" +  "user1");
 
 
 
@@ -77,7 +77,7 @@ public class chat extends AppCompatActivity {
                 if (!messageText.equals("")) {
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("message", messageText);
-                    map.put("user", UserDetails.username);
+                    map.put("user", "user1");//UserDetails.username);
 //                    map.put("message", messageText);
 //                    map.put("user", ", messageText);
 

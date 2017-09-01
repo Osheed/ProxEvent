@@ -124,8 +124,10 @@ public class home extends AppCompatActivity {
                 startActivity(goActicities);
                 return true;
 
+            //Todo: test si erreur lors topic
             case R.id.action_favorite:
-                Intent goFavorite = new Intent(this, favorites_list.class);
+                Intent goFavorite = new Intent(this, activity_list.class);
+                goFavorite.putExtra("topicSelected", "All");
                 startActivity(goFavorite);
                 return true;
 

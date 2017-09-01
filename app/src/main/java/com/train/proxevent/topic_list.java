@@ -54,7 +54,7 @@ public class topic_list extends AppCompatActivity {
                                     int position, long id) {
                 Intent i = new Intent(topic_list.this, activity_list.class);
                 i.putExtra("topicSelected", adapter.getItem(position));
-                topic_list.this.startActivity(i);
+                startActivity(i);
             }
         });
 

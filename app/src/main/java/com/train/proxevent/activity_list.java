@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 import com.train.proxevent.Objects.Activities;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
@@ -64,7 +65,8 @@ public class activity_list extends AppCompatActivity {
                         viewHolder.setTitle(model.getAct_title());
                         //viewHolder.setTopic(model.getAct_topic());
                         //viewHolder.setActImage(model.getAct_image(),getApplicationContext());
-                        
+
+                      /*
                         //retrieve the key of activity clicked
                         final String activity_id = getRef(position).getKey();
 
@@ -76,7 +78,7 @@ public class activity_list extends AppCompatActivity {
                                 startActivity(activityIntent);
                             }
                         });
-                        
+                        */
                     }
 
                     
@@ -139,7 +141,7 @@ public class activity_list extends AppCompatActivity {
 
         public void setActImage(String act_image, Context applicationContext) {
             CircleImageView activityImage = (CircleImageView)mView.findViewById(R.id.civ_AL_image);
-            //Picasso.with(applicationContext).load(act_image).placeholder(R.drawable.ic_action_clock).into(activityImage);
+            Picasso.with(applicationContext).load(act_image).placeholder(R.drawable.ic_action_clock).into(activityImage);
         }
     }
 

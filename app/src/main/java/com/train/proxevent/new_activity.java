@@ -89,9 +89,7 @@ public class new_activity extends AppCompatActivity {
         mImage = (CircleImageView) findViewById(R.id.civ_newActivity_ChooseImg);
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
-        //Database
-        mActivityDatabase = FirebaseDatabase.getInstance().getReference().child("Activities");
-        mActivity_id = mActivityDatabase.push().getKey();
+
 
 
         //choose the Topic
@@ -111,6 +109,11 @@ public class new_activity extends AppCompatActivity {
 
             }
         });
+
+        //Database
+        mActivityDatabase = FirebaseDatabase.getInstance().getReference().child("Activities");
+        mActivity_id = mActivityDatabase.push().getKey();
+
 
         //Choose the Date
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
@@ -176,18 +179,38 @@ public class new_activity extends AppCompatActivity {
 
                 // to ordenate data for db
                 HashMap< String, String> activityMap = new HashMap<>();
-                activityMap.put("adresse", adresse);
-                activityMap.put("content",content);
-                activityMap.put("date_crea",dateCrea);
-                activityMap.put("date_end",dateEnd);
-                activityMap.put("latitude",latitude);
-                activityMap.put("longitude",longitude);
-                activityMap.put("owner",current_id);
-                activityMap.put("title",title);
-                activityMap.put("topic",topics);
+                activityMap.put("Act_adresse", adresse);
+                activityMap.put("Act_content",content);
+                activityMap.put("Act_date_crea",dateCrea);
+                activityMap.put("Act_date_end",dateEnd);
+                activityMap.put("Act_latitude",latitude);
+                activityMap.put("Act_longitude",longitude);
+                activityMap.put("Act_owner",current_id);
+                activityMap.put("Act_title",title);
+                activityMap.put("Act_topic",topics);
+                activityMap.put("Act_image", "test-image");
 
+                //enregistrement pour topic all
+                mActivityDatabase.child("All").child(mActivity_id).setValue(activityMap).
+                        addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                  @Override
+                                                  public void onComplete(@NonNull Task<Void> task) {
 
-                mActivityDatabase.child(mActivity_id).setValue(activityMap).
+                                                      if(task.isSuccessful()){
+
+                                                          mProgress.dismiss();
+
+                                                      }else{
+
+                                                          Toast.makeText(getApplicationContext(),"There was some errors in Creating this Activities",Toast.LENGTH_LONG).show();
+
+                                                      }
+                                                  }
+                                              }
+                        );
+
+                //enregistrement par rapport au topic choisi
+                mActivityDatabase.child(topics).child(mActivity_id).setValue(activityMap).
                         addOnCompleteListener(new OnCompleteListener<Void>() {
                              @Override
                              public void onComplete(@NonNull Task<Void> task) {
@@ -197,19 +220,25 @@ public class new_activity extends AppCompatActivity {
                                      mProgress.dismiss();
                                      Intent profileIntent = new Intent(new_activity.this, home.class);
                                      startActivity(profileIntent);
-                                     Log.d("mActivitiDatabase:",mActivity_id);
-
-
 
                                  }else{
 
-                                     Toast.makeText(getApplicationContext(),"There was some errors in Creating this Activity",Toast.LENGTH_LONG).show();
+                                     Toast.makeText(getApplicationContext(),"There was some errors in Creating this Activities",Toast.LENGTH_LONG).show();
 
                                  }
                              }
                         }
                 );
             }
+
+
+
+
+
+
+
+
+
         });
 
 

@@ -1,65 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_AL_image"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:src="@android:drawable/presence_away" />
+
+    <TextView
+        android:id="@+id/tv_AL_Title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/activity_list_layout">
+        android:layout_alignTop="@+id/civ_AL_image"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="13dp"
+        android:layout_toEndOf="@+id/civ_AL_image"
+        android:layout_toRightOf="@+id/civ_AL_image"
+        android:text="@string/title" />
 
-        <ImageView
-            android:id="@+id/imvQuestionList"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="3pt"
-            android:layout_marginBottom="3pt"
-            android:layout_width="25pt"
-            android:layout_height="25pt"/>
+    <TextView
+        android:id="@+id/tv_AL_Adresse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_AL_Title"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tv_AL_Title"
+        android:layout_marginLeft="34dp"
+        android:layout_marginStart="34dp"
+        android:layout_toRightOf="@+id/tv_AL_Title"
+        android:text="@string/adress"
+        tools:ignore="RtlHardcoded" />
 
-        <TextView
-            android:id="@+id/question_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5pt"
-            android:layout_marginLeft="34pt"
-            android:layout_marginBottom="5pt"
-            android:text="Title"
-            android:layout_centerVertical="true"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:textColor="@color/darkGray"/>
+    <TextView
+        android:id="@+id/tv_AL_dateEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/civ_AL_image"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:text="@string/dateEnd"
+        tools:text="End date..." />
 
-        <TextView
-            android:id="@+id/nbLikeInfo"
-            android:text="@string/nbLike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#706f6f"
-            android:textSize="11sp"
-            android:layout_marginRight="9pt"
-            android:layout_marginTop="34pt"
-            android:layout_marginBottom="2pt"
-            android:layout_alignParentRight="true" />
+    <TextView
+        android:id="@+id/tv_AL_ToDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_AL_dateEnd"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_toLeftOf="@+id/tv_AL_dateEnd"
+        android:layout_toStartOf="@+id/tv_AL_dateEnd"
+        android:text="@string/to"
+        tools:text="To" />
 
-        <TextView
-            android:id="@+id/nbMember"
-            android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="34pt"
-            android:layout_marginBottom="2pt"
-            android:layout_marginRight="3pt"
-            android:layout_marginLeft="3pt"
-            android:textSize="11sp"
-            android:layout_alignParentRight="true"
-            android:textColor="@color/blueFont"/>
+    <TextView
+        android:id="@+id/tv_AL_dateCrea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_AL_ToDate"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@+id/tv_AL_ToDate"
+        android:layout_toStartOf="@+id/tv_AL_ToDate"
+        android:text="@string/created_date"
+        tools:text="Created Date..." />
 
-        <TextView
-            android:id="@+id/activityDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#706f6f"
-            android:layout_marginRight="5pt"
-            android:layout_marginTop="34pt"
-            android:layout_marginBottom="2pt"
-            android:textSize="10sp"
-            android:layout_toLeftOf="@+id/nbLikeInfo"
-            android:layout_toStartOf="@+id/nbLikeInfo" />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_AL_FromDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_AL_dateCrea"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@+id/tv_AL_dateCrea"
+        android:layout_toStartOf="@+id/tv_AL_dateCrea"
+        android:text="@string/from"
+        tools:text="@string/from" />
+
+
+</RelativeLayout>

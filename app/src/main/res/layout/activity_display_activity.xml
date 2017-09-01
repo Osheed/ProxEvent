@@ -26,12 +26,13 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="230dp"
-                    android:scaleType="centerCrop"
-                    android:fitsSystemWindows="true"
                     android:id="@+id/iv_toolbar_detail"
-                    app:layout_collapseMode="parallax"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="228dp"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"
+                    app:srcCompat="@drawable/ic_action_clock" />
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"

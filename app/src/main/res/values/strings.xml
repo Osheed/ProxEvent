@@ -178,6 +178,12 @@
     <string name="save_changes">save changes</string>
     <string name="your_status">your status</string>
     <string name="title_activity_user">user</string>
+    <string name="to">To</string>
+    <string name="textview">TextView</string>
+    <string name="from">From</string>
+    <string name="adress">Adress...</string>
+    <string name="dateEnd">End date...</string>
+    <string name="created_date">Created date</string>
 
 
 </resources>

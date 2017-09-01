@@ -1,386 +1,148 @@
 package com.train.proxevent;
 
+
 import android.content.Context;
-import android.database.Cursor;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ListView;
-import android.content.DialogInterface;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.content.Intent;
-import android.media.Image;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.util.Pair;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.train.proxevent.Objects.Activity;
+import com.train.proxevent.Objects.Activities;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
-import java.util.EventListener;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class activity_list extends AppCompatActivity {
 
-    FirebaseAuth.AuthStateListener mAuthListener;
-    ListView listView;
-    Cursor cursor;
-    activity_list_adapter activity_list_adapter;
-    String myValueTopicSelected;
-//    LanguageLocalHelper languageLocalHelper;
-    String currentLanguage;
-    Context context = this;
-    AlertDialog.Builder builder;
-    byte [] imgtest;
 
-    private DatabaseReference mUserDatabase;
-    private FirebaseUser mCurrentUser;
-    private Activity activity;
+    private RecyclerView mActivityList;
+    private DatabaseReference mActivityDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        mActivityList = (RecyclerView)findViewById(R.id.rv_activities_list);
+        mActivityList.setHasFixedSize(true);
+        mActivityList.setLayoutManager(new LinearLayoutManager(this));
 
-          /* Recover Object Question from activity_question_list */
-        myValueTopicSelected = getIntent().getExtras().getString("topicSelected");
-
-
-        listView = (ListView) findViewById(R.id.listview_activityList);
-        activity_list_adapter = new activity_list_adapter(getApplicationContext(), R.id.activity_list_layout);
-        listView.setAdapter(activity_list_adapter);
+        String choix = getIntent().getStringExtra("topicSelected");
+        mActivityDatabase = FirebaseDatabase.getInstance().getReference().child("Activities").child(choix);
 
 
-
-
-
-//        currentLanguage = languageLocalHelper.getLanguage(QuestionList.this).toString();
-
-
-        // if the user is in all questions
-        if(myValueTopicSelected.equalsIgnoreCase("All") ||
-                myValueTopicSelected.equalsIgnoreCase("Tout")){
-            //display all questions
-//            setAllQuestions();
-
-        }else{
-            //if the user select a topic
-//            displayQuestionsFromTopicSortNew();
-        }
-
-        /* Set title and count nb questions */
-        setTitle(myValueTopicSelected + " ("+ activity_list_adapter.getCount()+")");
-
-
-
-        //Recover the data from db
-        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-//        String current_uid = mCurrentUser.getUid();
-        mUserDatabase = FirebaseDatabase.getInstance().getReference("Activities");
-
-        mUserDatabase.addChildEventListener(new ChildEventListener() {
-                                                @Override
-                                                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                                    activity = dataSnapshot.getValue(Activity.class);
-                                                    activity_list_adapter.add(activity);
-//                                                    listView.setAdapter(activity_list_adapter);
-                                                }
-
-                                                @Override
-                                                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                                                }
-
-                                                @Override
-                                                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                                                }
-
-                                                @Override
-                                                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                                                }
-
-                                                @Override
-                                                public void onCancelled(DatabaseError databaseError) {
-
-                                                }
-        });
-                                            }
-
-
-//        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Activities").child().child("topic").equalTo(myValueTopicSelected);
-
-
-//        usersRef.orderByChild(‘email’).equalTo(‘user-i-need-to-find@gmail.com’).once(‘value’).then(…)
-
-
-
-
-
-
-    /* menu */
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_activity_list, menu);
-        return true;
     }
 
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-
-            case R.id.menu_add_activity:
-                Intent go = new Intent(this, new_activity.class);
-                startActivity(go);
-                return true;
+    //Recycler adapter
 
 
-            /***** CLOUD *****/
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-            case R.id.   menu_sync:
+        FirebaseRecyclerAdapter <Activities, ActivityViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter <Activities, ActivityViewHolder>(
+                        Activities.class,
+                        R.layout.activity_list_layout,
+                        ActivityViewHolder.class,
+                        mActivityDatabase
+                ){
+                    protected void populateViewHolder(ActivityViewHolder viewHolder, Activities model, int position){
+                        
+                        
+                        viewHolder.setAdresse(model.getAct_adresse());
+                        //viewHolder.setContent(model.getAct_content());
+                        viewHolder.setDate_crea(model.getAct_date_crea());
+                        viewHolder.setDate_end(model.getAct_date_end());
+                        //viewHolder.setLatitude(model.getAct_latitude());
+                        //viewHolder.setLongitude(model.getAct_longitude());
+                        //viewHolder.setOwner(model.getAct_owner());
+                        viewHolder.setTitle(model.getAct_title());
+                        //viewHolder.setTopic(model.getAct_topic());
+                        //viewHolder.setActImage(model.getAct_image(),getApplicationContext());
+                        
+                        //retrieve the key of activity clicked
+                        final String activity_id = getRef(position).getKey();
 
-//                if(isNetworkAvailable() == true){
-//                    getQuestionsBackend();
-//                    Toast.makeText(getBaseContext(), R.string.loading, Toast.LENGTH_SHORT).show();
-//                }else{
-//                    Toast.makeText(getBaseContext(), R.string.notConnected, Toast.LENGTH_SHORT).show();
-//                }
+                        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent activityIntent = new Intent(activity_list.this, display_activity.class);
+                                activityIntent.putExtra("idActivity", activity_id);
+                                startActivity(activityIntent);
+                            }
+                        });
+                        
+                    }
 
-                return true;
+                    
+                };
 
-            /***** CLOUD *****/
+        mActivityList.setAdapter(firebaseRecyclerAdapter);
 
-
-            case R.id.menu_sortTimeNew:
-//                questionListDataAdapter.clear();
-//                setAllQuestions();
-                return true;
-
-            case R.id.menu_sortTimeOld:
-//                questionListDataAdapter.clear();
-//
-//                // if the user is in all questions
-//
-//
-//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
-//                            questionListDataAdapter.add(c);
-//
-//                        } while (cursor.moveToNext());
-//                    }
-//                    listViewOnClickListenerAllQuestions();
-//
-//                }else{
-//                    //if the user has selected a topic
-//                    cursor = dbHelper.getAllQuestionsFromTopic(myValueTopicSelected);
-//                    //order by last with inverse cursor
-//                    if (cursor.moveToFirst()) {
-//                        do {
-//                            int id;
-//                            String topic, title, content, username, nbLike, date;
-//                            byte [] image;
-//                            id = cursor.getInt(0);
-//                            topic = cursor.getString(1);
-//                            title = cursor.getString(2);
-//                            content = cursor.getString(3);
-//                            username = cursor.getString(4);
-//                            image = cursor.getBlob(5);
-//                            date = cursor.getString(6);
-//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
-//
-//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
-//                            questionListDataAdapter.add(c);
-//
-//                        } while (cursor.moveToNext());
-//                    }
-//                    listViewOnClickListener();
-//                }
-//
-//                listViewOnLongClickListener();
-
-                return true;
+    }
+    //to retrieve the data
+    public static class ActivityViewHolder extends RecyclerView.ViewHolder{
+        
+        View mView;
+        
+        public ActivityViewHolder(View itemView){
+            super(itemView);
+            
+            mView = itemView;
+        }
 
 
-            case R.id.menu_sortASC:
-//                questionListDataAdapter.clear();
-//
-//                // if the user is in all questions
-//                if (myValueTopicSelected.equalsIgnoreCase("All")) {
-//                    // if the app is in English, we want only the english questions
-//                    cursor = dbHelper.getAllQuestionsFromTopicSortASCEN();
-//                    if (cursor.moveToFirst()) {
-//                        do {
-//                            int id;
-//                            String topic, title, content, username, nbLike, date;
-//                            byte[] image;
-//                            id = cursor.getInt(0);
-//                            topic = cursor.getString(1);
-//                            title = cursor.getString(2);
-//                            content = cursor.getString(3);
-//                            username = cursor.getString(4);
-//                            image = cursor.getBlob(5);
-//                            date = cursor.getString(6);
-//
-//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
-//
-//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
-//                            questionListDataAdapter.add(c);
-//
-//                        } while (cursor.moveToNext());
-//                    }
-//                    listViewOnClickListenerAllQuestions();
-//
-//                } else if (myValueTopicSelected.equalsIgnoreCase("Tout")) {
-//                    // if the app is in french
-//                    cursor = dbHelper.getAllQuestionsFromTopicSortASCFR();
-//                    if (cursor.moveToFirst()) {
-//                        do {
-//                            int id;
-//                            String topic, title, content, username, nbLike, date;
-//                            byte[] image;
-//                            id = cursor.getInt(0);
-//                            topic = cursor.getString(1);
-//                            title = cursor.getString(2);
-//                            content = cursor.getString(3);
-//                            username = cursor.getString(4);
-//                            image = cursor.getBlob(5);
-//                            date = cursor.getString(6);
-//
-//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
-//
-//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
-//                            questionListDataAdapter.add(c);
-//
-//                        } while (cursor.moveToNext());
-//                    }
-//                    listViewOnClickListenerAllQuestions();
-//
-//                }else {
-//
-//                    // if the User has selected a topis
-//                    cursor = dbHelper.getAllQuestionsFromTopicSortASC(myValueTopicSelected);
-//                    if (cursor.moveToFirst()) {
-//                        do {
-//                            int id;
-//                            String topic, title, content, username, nbLike, date;
-//                            byte[] image;
-//                            id = cursor.getInt(0);
-//                            topic = cursor.getString(1);
-//                            title = cursor.getString(2);
-//                            content = cursor.getString(3);
-//                            username = cursor.getString(4);
-//                            image = cursor.getBlob(5);
-//                            date = cursor.getString(6);
-//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
-//
-//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
-//                            questionListDataAdapter.add(c);
-//
-//                        } while (cursor.moveToNext());
-//                    }
-//                    listViewOnClickListener();
-//                }
-//
-//                listViewOnLongClickListener();
-                return true;
+        public void setAdresse(String adresse) {
+            TextView activityAdress = (TextView) mView.findViewById(R.id.tv_AL_Adresse);
+            activityAdress.setText(adresse);
+        }
 
-            case R.id.menu_sortDESC:
-//                questionListDataAdapter.clear();
-//
-//                // if the user is in all questions
-//                if (myValueTopicSelected.equalsIgnoreCase("All")) {
-//                    // if the app is in English, we want only the english questions
-//                    cursor = dbHelper.getAllQuestionsFromTopicSortDESCEN();
-//                    if (cursor.moveToFirst()) {
-//                        do {
-//                            int id;
-//                            String topic, title, content, username, nbLike, date;
-//                            byte[] image;
-//                            id = cursor.getInt(0);
-//                            topic = cursor.getString(1);
-//                            title = cursor.getString(2);
-//                            content = cursor.getString(3);
-//                            username = cursor.getString(4);
-//                            image = cursor.getBlob(5);
-//                            date = cursor.getString(6);
-//
-//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
-//
-//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
-//                            questionListDataAdapter.add(c);
-//
-//                        } while (cursor.moveToNext());
-//                    }
-//                    listViewOnClickListenerAllQuestions();
-//
-//                } else if (myValueTopicSelected.equalsIgnoreCase("Tout")) {
-//                    // if the app is in french
-//                    cursor = dbHelper.getAllQuestionsFromTopicSortDESCFR();
-//                    if (cursor.moveToFirst()) {
-//                        do {
-//                            int id;
-//                            String topic, title, content, username, nbLike, date;
-//                            byte[] image;
-//                            id = cursor.getInt(0);
-//                            topic = cursor.getString(1);
-//                            title = cursor.getString(2);
-//                            content = cursor.getString(3);
-//                            username = cursor.getString(4);
-//                            image = cursor.getBlob(5);
-//                            date = cursor.getString(6);
-//
-//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
-//
-//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
-//                            questionListDataAdapter.add(c);
-//
-//                        } while (cursor.moveToNext());
-//                    }
-//                    listViewOnClickListenerAllQuestions();
-//
-//                }else {
-//
-//                    // if the User has selected a topis
-//                    cursor = dbHelper.getAllQuestionsFromTopicSortDESC(myValueTopicSelected);
-//                    if (cursor.moveToFirst()) {
-//                        do {
-//                            int id;
-//                            String topic, title, content, username, nbLike, date;
-//                            byte[] image;
-//                            id = cursor.getInt(0);
-//                            topic = cursor.getString(1);
-//                            title = cursor.getString(2);
-//                            content = cursor.getString(3);
-//                            username = cursor.getString(4);
-//                            image = cursor.getBlob(5);
-//                            date = cursor.getString(6);
-//                            nbLike = String.valueOf(dbHelper.countPositiveVote(id));
-//
-//                            Question c = new Question(id, topic, title, content, username, image, nbLike, date);
-//                            questionListDataAdapter.add(c);
-//
-//                        } while (cursor.moveToNext());
-//                    }
-//                    listViewOnClickListener();
-//                }
-//
-//                listViewOnLongClickListener();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        public void setContent(String content) {
 
         }
+
+        public void setDate_crea(String date_crea){
+            TextView activityDate_crea = (TextView) mView.findViewById(R.id.tv_AL_dateCrea);
+            activityDate_crea.setText(date_crea);
+        }
+
+        public void setDate_end(String date_end){
+            TextView activityDate_end = (TextView) mView.findViewById(R.id.tv_AL_dateEnd);
+            activityDate_end.setText(date_end);
+        }
+
+        public void setLatitude(String latitude) {
+
+        }
+
+        public void setLongitude(String longitude){
+
+        }
+
+        public void setOwner(String owner) {
+
+        }
+
+        public void setTitle(String title){
+            TextView activityTitle = (TextView) mView.findViewById(R.id.tv_AL_Title);
+            activityTitle.setText(title);
+        }
+
+        public void setTopic(String topic) {
+
+        }
+
+        public void setActImage(String act_image, Context applicationContext) {
+            CircleImageView activityImage = (CircleImageView)mView.findViewById(R.id.civ_AL_image);
+            //Picasso.with(applicationContext).load(act_image).placeholder(R.drawable.ic_action_clock).into(activityImage);
+        }
     }
+
 }
 
 

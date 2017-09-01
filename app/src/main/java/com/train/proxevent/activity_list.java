@@ -53,8 +53,8 @@ public class activity_list extends AppCompatActivity {
                         mActivityDatabase
                 ){
                     protected void populateViewHolder(ActivityViewHolder viewHolder, Activities model, int position){
-                        
-                        
+
+
                         viewHolder.setAdresse(model.getAct_adresse());
                         //viewHolder.setContent(model.getAct_content());
                         viewHolder.setDate_crea(model.getAct_date_crea());
@@ -81,7 +81,7 @@ public class activity_list extends AppCompatActivity {
                         */
                     }
 
-                    
+
                 };
 
         mActivityList.setAdapter(firebaseRecyclerAdapter);
@@ -89,12 +89,12 @@ public class activity_list extends AppCompatActivity {
     }
     //to retrieve the data
     public static class ActivityViewHolder extends RecyclerView.ViewHolder{
-        
+
         View mView;
-        
+
         public ActivityViewHolder(View itemView){
             super(itemView);
-            
+
             mView = itemView;
         }
 

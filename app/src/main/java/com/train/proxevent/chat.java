@@ -1,9 +1,9 @@
 package com.train.proxevent;
 
-import android.hardware.camera2.params.BlackLevelPattern;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,8 +16,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,10 +30,11 @@ public class chat extends AppCompatActivity {
     ImageView sendButton;
     EditText messageArea;
     ScrollView scrollView;
-    Firebase reference1, reference2;
+//    Firebase reference1, reference2;
 
-    private DatabaseReference mUserDatabase;
-    private FirebaseUser mCurrentUser;
+    private DatabaseReference reference1, reference2;
+//    private FirebaseUser mCurrentUser;
+    String myValueChatWith;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,9 @@ public class chat extends AppCompatActivity {
 
 
 
+
+         myValueChatWith = getIntent().getExtras().getString("myValueKeyChatWith");
+//        textViewQuestionTitle.setText(myValueChatWith);
 
         //test
         //Recover the data from db
@@ -61,9 +64,12 @@ public class chat extends AppCompatActivity {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         Firebase.setAndroidContext(this);
-        reference1 = new Firebase("https://fulltopia-f6db1.firebaseio/messages/" + "user1" + "_" + "test2");
-        reference2 = new Firebase("https://fulltopia-f6db1.firebaseio/messages/" + "test2" + "_" +  "user1");
+//        reference1 = new Firebase("https://fulltopia-f6db1.firebaseio.com/messages/" + UserDetails.username + "_" + UserDetails.chatWith);
+//        reference2 = new Firebase("https://fulltopia-f6db1.firebaseio.com/messages/" + UserDetails.chatWith + "_" +  UserDetails.username);
 
+
+        reference1 = FirebaseDatabase.getInstance().getReference("messages").child(UserDetails.username + "_" + UserDetails.chatWith);
+        reference2 = FirebaseDatabase.getInstance().getReference("messages").child(UserDetails.chatWith + "_" +  UserDetails.username);
 
 
 //        reference1 = new Firebase("https://proxevent-240cf.firebaseio.com/" + "UserDetails.username" + "_" + "UserDetails.chatWith");
@@ -77,7 +83,7 @@ public class chat extends AppCompatActivity {
                 if (!messageText.equals("")) {
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("message", messageText);
-                    map.put("user", "user1");//UserDetails.username);
+                    map.put("user", UserDetails.username);//UserDetails.username);
 //                    map.put("message", messageText);
 //                    map.put("user", ", messageText);
 
@@ -89,13 +95,13 @@ public class chat extends AppCompatActivity {
             }
         });
 
-        reference1.addChildEventListener(new ChildEventListener() {
+        reference1.addChildEventListener(new com.google.firebase.database.ChildEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Map map = dataSnapshot.getValue(Map.class);
+            public void onChildAdded(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
+//                Map map = dataSnapshot.getValue(Map.class);
+                Map <String, String> map = (Map)dataSnapshot.getValue();
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
-
                 if (userName.equals(UserDetails.username)) {
                     addMessageBox("You:-\n" + message, 1);
                 } else {
@@ -104,22 +110,22 @@ public class chat extends AppCompatActivity {
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            public void onChildChanged(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
 
             }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            public void onChildRemoved(com.google.firebase.database.DataSnapshot dataSnapshot) {
 
             }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            public void onChildMoved(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
 
             }
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });

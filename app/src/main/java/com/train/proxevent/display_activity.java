@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Message;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -23,6 +25,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.firebase.client.core.Tag;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -73,7 +76,7 @@ public class display_activity extends AppCompatActivity {
     Button goChat;
     EditText etAddMessage;
     user_list_adapter user_list_adapter;
-    private DatabaseReference mUserDatabase;
+    private DatabaseReference mUserDatabase, currentUserDB;
     private FirebaseUser mCurrentUser;
     private Users users;
 
@@ -98,10 +101,6 @@ public class display_activity extends AppCompatActivity {
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
 //        String current_uid = mCurrentUser.getUid();
         mUserDatabase = FirebaseDatabase.getInstance().getReference("Users");
-
-
-
-
         mUserDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -154,19 +153,35 @@ public class display_activity extends AppCompatActivity {
                 UserDetails.chatWith = item.getName();
 
 
-
                 mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
                 String current_uid = mCurrentUser.getUid();
-                mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid).child("name");
+                currentUserDB = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
 //
                 UserDetails.username = mCurrentUser.getDisplayName();
 
 
+                ValueEventListener postListener = new ValueEventListener() {
+        @Override
+    public void onDataChange(DataSnapshot dataSnapshot) {
+    // Get Post object and use the values to update the UI
+    Users post = dataSnapshot.getValue(Users.class);
+            UserDetails.username =   post.getName();
+// ...
+}
+
+@Override
+    public void onCancelled(DatabaseError databaseError) {
+        // Getting Post failed, log a message
+//         Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            // ...
+    }
+                };
+                currentUserDB.addValueEventListener(postListener);
 
 //                mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("name");
 //                String test = name;
 
-                UserDetails.username = "xaviernendaz";
+//                UserDetails.username = "xaviernendaz";
 
 
 //    /**/            UserDetails.username

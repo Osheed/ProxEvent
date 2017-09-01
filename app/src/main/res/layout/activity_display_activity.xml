@@ -289,7 +289,7 @@
                                 android:background="@drawable/linear_up_border"/>
 
                             <ListView
-                                android:id="@+id/listview_chat"
+                                android:id="@+id/usersList"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="20pt"

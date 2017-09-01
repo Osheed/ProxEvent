@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -158,8 +159,12 @@ public class display_activity extends AppCompatActivity {
                 String current_uid = mCurrentUser.getUid();
                 mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid).child("name");
 //
+                UserDetails.username = mCurrentUser.getDisplayName();
+
+
+
 //                mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("name");
-                String test = mUserDatabase.toString();
+//                String test = name;
 
                 UserDetails.username = "xaviernendaz";
 

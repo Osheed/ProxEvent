@@ -61,8 +61,8 @@ public class chat extends AppCompatActivity {
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         Firebase.setAndroidContext(this);
-        reference1 = new Firebase("https://fulltopia-f6db1.firebaseio/messages/" + "user1" + "_" + "test2");
-        reference2 = new Firebase("https://fulltopia-f6db1.firebaseio/messages/" + "test2" + "_" +  "user1");
+        reference1 = new Firebase("https://fulltopia-f6db1.firebaseio/messages/" + "thisActivity" + "user1" + "_" + "test2");
+        reference2 = new Firebase("https://fulltopia-f6db1.firebaseio/messages/" + "thisActivity" + "test2" + "_" +  "user1");
 
 
 
@@ -129,27 +129,23 @@ public class chat extends AppCompatActivity {
 
 
 
+    public void addMessageBox(String message, int type){
+    TextView textView = new TextView(chat.this);
+    textView.setText(message);
 
+    LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    lp2.weight = 1.0f;
 
-
-
-public void addMessageBox(String message, int type){
-TextView textView = new TextView(chat.this);
-textView.setText(message);
-
-LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-lp2.weight = 1.0f;
-
-if(type == 1) {
-lp2.gravity = Gravity.LEFT;
-textView.setBackgroundResource(R.drawable.chat_right);
-}
-else{
-lp2.gravity = Gravity.RIGHT;
-textView.setBackgroundResource(R.drawable.chat_left);
-}
-textView.setLayoutParams(lp2);
-layout.addView(textView);
-scrollView.fullScroll(android.view.View.FOCUS_DOWN);
-}
-}
+    if(type == 1) {
+    lp2.gravity = Gravity.LEFT;
+    textView.setBackgroundResource(R.drawable.chat_right);
+    }
+    else{
+    lp2.gravity = Gravity.RIGHT;
+    textView.setBackgroundResource(R.drawable.chat_left);
+    }
+    textView.setLayoutParams(lp2);
+    layout.addView(textView);
+    scrollView.fullScroll(android.view.View.FOCUS_DOWN);
+    }
+    }

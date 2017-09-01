@@ -67,7 +67,7 @@ public class activity_list_adapter extends ArrayAdapter {
             LayoutInflater layoutInflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.activity_list_layout, parent, false);
             layoutHandler = new LayoutHandler();
-            layoutHandler.ACTIVITY_IMAGE = (ImageView) row.findViewById(R.id.imvQuestionList );
+            layoutHandler.ACTIVITY_IMAGE = (ImageView)row.findViewById(R.id.imvQuestionList );
             layoutHandler.ACTIVITY_TITLE = (TextView)row.findViewById(R.id.question_title );
             layoutHandler.ACTIVITY_LIKE = (TextView)row.findViewById(R.id.nbMember );
             layoutHandler.ACTIVITY_DATE = (TextView)row.findViewById(R.id.activityDate );

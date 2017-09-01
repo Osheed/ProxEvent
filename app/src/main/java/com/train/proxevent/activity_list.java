@@ -18,6 +18,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.train.proxevent.Objects.Activity;
+
+import java.util.EventListener;
 
 public class activity_list extends AppCompatActivity {
 
@@ -32,6 +41,10 @@ public class activity_list extends AppCompatActivity {
     AlertDialog.Builder builder;
     byte [] imgtest;
 
+    private DatabaseReference mUserDatabase;
+    private FirebaseUser mCurrentUser;
+    private Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +58,9 @@ public class activity_list extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listview_activityList);
         activity_list_adapter = new activity_list_adapter(getApplicationContext(), R.id.activity_list_layout);
         listView.setAdapter(activity_list_adapter);
+
+
+
 
 
 //        currentLanguage = languageLocalHelper.getLanguage(QuestionList.this).toString();
@@ -66,7 +82,51 @@ public class activity_list extends AppCompatActivity {
 
 
 
-    }
+        //Recover the data from db
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+//        String current_uid = mCurrentUser.getUid();
+        mUserDatabase = FirebaseDatabase.getInstance().getReference("Activities");
+
+        mUserDatabase.addChildEventListener(new ChildEventListener() {
+                                                @Override
+                                                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                                    activity = dataSnapshot.getValue(Activity.class);
+                                                    activity_list_adapter.add(activity);
+//                                                    listView.setAdapter(activity_list_adapter);
+                                                }
+
+                                                @Override
+                                                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                                                }
+
+                                                @Override
+                                                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                                                }
+
+                                                @Override
+                                                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+
+                                                }
+        });
+                                            }
+
+
+//        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Activities").child().child("topic").equalTo(myValueTopicSelected);
+
+
+//        usersRef.orderByChild(‘email’).equalTo(‘user-i-need-to-find@gmail.com’).once(‘value’).then(…)
+
+
+
+
+
 
     /* menu */
     public boolean onCreateOptionsMenu(Menu menu) {

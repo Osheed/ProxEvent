@@ -37,10 +37,6 @@
                 android:icon="@drawable/ic_action_my_activities"
                 android:title="@string/myActivities"/>
 
-            <item
-                android:id="@+id/action_favorite"
-                android:icon="@drawable/ic_action_heart"
-                android:title="@string/favorite"/>
 
             <item
                 android:id="@+id/action_profile"

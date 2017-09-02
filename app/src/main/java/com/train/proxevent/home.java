@@ -141,11 +141,6 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
                 startActivity(goActicities);
                 return true;
 
-            case R.id.action_favorite:
-                Intent goFavorite = new Intent(this, favorites_list.class);
-                startActivity(goFavorite);
-                return true;
-
             case R.id.action_profile:
                 Intent goProfile = new Intent(this, profile.class);
                 startActivity(goProfile);

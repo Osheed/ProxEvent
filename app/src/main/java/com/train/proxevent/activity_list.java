@@ -28,12 +28,15 @@ public class activity_list extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+
+
         mActivityList = (RecyclerView)findViewById(R.id.rv_activities_list);
         mActivityList.setHasFixedSize(true);
         mActivityList.setLayoutManager(new LinearLayoutManager(this));
 
         String choix = getIntent().getStringExtra("topicSelected");
         mActivityDatabase = FirebaseDatabase.getInstance().getReference().child("Activities").child(choix);
+        setTitle(choix);
 
 
     }

@@ -94,7 +94,7 @@ public class chat extends AppCompatActivity {
 
     public void addMessageBox(String message, int type){
     TextView textView = new TextView(chat.this);
-    textView.setText(message);
+        textView.setText(message);
     LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     lp2.weight = 1.0f;
 

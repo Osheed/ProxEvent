@@ -25,16 +25,26 @@
             android:parentActivityName=".home" />
         <activity android:name=".topic_list" />
         <activity android:name=".activity_list"
+            android:parentActivityName=".topic_list"/>
+        
+        <activity android:name=".my_activities"
             android:parentActivityName=".home"/>
-        <activity android:name=".my_activities" />
+
         <activity android:name=".display_activity" />
         <activity android:name=".favorites_list" />
         <activity android:name=".display_notification" />
         <activity android:name=".notification_list" />
         <activity android:name=".new_notification" />
-        <activity android:name=".settings" />
-        <activity android:name=".new_activity" />
-        <activity android:name=".chat" />
+
+        <activity android:name=".settings"
+            android:parentActivityName=".home"/>
+
+
+        <activity android:name=".new_activity"
+            android:parentActivityName=".home"/>
+
+        <activity android:name=".chat"
+            android:parentActivityName=".display_activity"/>
         <activity
             android:name=".StatusActivity"
             android:parentActivityName=".profile" />

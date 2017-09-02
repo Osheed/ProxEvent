@@ -22,7 +22,8 @@
                 android:orientation="vertical"
                 android:layout_gravity="center_horizontal"
                 android:weightSum="1"
-                android:layout_weight="0.23">
+                android:layout_weight="0.23"
+                tools:ignore="InefficientWeight">
 
                 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/map"
@@ -32,16 +33,18 @@
                     android:fitsSystemWindows="true"
                     android:layout_gravity="center_horizontal"
                     app:srcCompat="@drawable/map"
-                    android:layout_weight="1.50" />
+                    android:layout_weight="1.50"
+                    tools:ignore="InefficientWeight,NestedWeights" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="263dp"
                 android:orientation="vertical"
                 android:id="@+id/profile_list_layout"
-                android:background="@drawable/linear_border_square">
+                android:background="@drawable/linear_border_square"
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/tvEmptyUserCurrentList"
@@ -53,13 +56,13 @@
                     android:textSize="10pt"
                     android:textColor="@color/darkGray" />
 
-                <ListView
-                    android:id="@+id/listview_questionList_profile"
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_home_currActivities"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10pt"
-                    android:layout_gravity="center_horizontal">
-                </ListView>
+                    tools:ignore="NestedScrolling"></android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
         </LinearLayout>

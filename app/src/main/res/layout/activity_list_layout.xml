@@ -14,33 +14,32 @@
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
-        android:src="@android:drawable/presence_away" />
+        android:src="@android:drawable/presence_away"
+        tools:ignore="RtlHardcoded" />
 
     <TextView
         android:id="@+id/tv_AL_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/civ_AL_image"
         android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="13dp"
-        android:layout_toEndOf="@+id/civ_AL_image"
-        android:layout_toRightOf="@+id/civ_AL_image"
-        android:text="@string/title" />
+        android:text="@string/title"
+        android:textStyle="bold"
+        tools:ignore="RtlHardcoded"
+        android:layout_alignTop="@+id/civ_AL_image"
+        android:layout_alignEnd="@+id/tv_AL_dateEnd"
+        android:layout_toEndOf="@+id/civ_AL_image" />
 
     <TextView
         android:id="@+id/tv_AL_Adresse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tv_AL_Title"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/tv_AL_Title"
         android:layout_marginLeft="34dp"
-        android:layout_marginStart="34dp"
-        android:layout_toRightOf="@+id/tv_AL_Title"
         android:text="@string/adress"
-        tools:ignore="RtlHardcoded" />
+        android:textAlignment="center"
+        tools:ignore="RtlHardcoded"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/tv_AL_Title"
+        android:layout_alignStart="@+id/tv_AL_Title" />
 
     <TextView
         android:id="@+id/tv_AL_dateEnd"
@@ -52,7 +51,8 @@
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:text="@string/dateEnd"
-        tools:text="End date..." />
+        tools:text="End date..."
+        tools:ignore="RtlHardcoded" />
 
     <TextView
         android:id="@+id/tv_AL_ToDate"
@@ -64,6 +64,8 @@
         android:layout_toLeftOf="@+id/tv_AL_dateEnd"
         android:layout_toStartOf="@+id/tv_AL_dateEnd"
         android:text="@string/to"
+        android:textStyle="bold"
+        tools:ignore="RtlHardcoded"
         tools:text="To" />
 
     <TextView
@@ -76,7 +78,8 @@
         android:layout_toLeftOf="@+id/tv_AL_ToDate"
         android:layout_toStartOf="@+id/tv_AL_ToDate"
         android:text="@string/created_date"
-        tools:text="Created Date..." />
+        tools:text="Created Date..."
+        tools:ignore="RtlHardcoded" />
 
     <TextView
         android:id="@+id/tv_AL_FromDate"
@@ -88,6 +91,8 @@
         android:layout_toLeftOf="@+id/tv_AL_dateCrea"
         android:layout_toStartOf="@+id/tv_AL_dateCrea"
         android:text="@string/from"
+        android:textStyle="bold"
+        tools:ignore="RtlHardcoded"
         tools:text="@string/from" />
 
 

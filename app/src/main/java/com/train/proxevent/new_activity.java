@@ -190,6 +190,8 @@ public class new_activity extends AppCompatActivity {
                 activityMap.put("Act_topic",topics);
                 activityMap.put("Act_image", "test-image");
 
+
+                //TODO faire le test si topics n'est pas egal a all sinon fait 2x 
                 //enregistrement pour topic all
                 mActivityDatabase.child("All").child(mActivity_id).setValue(activityMap).
                         addOnCompleteListener(new OnCompleteListener<Void>() {

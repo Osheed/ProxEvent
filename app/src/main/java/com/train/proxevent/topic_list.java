@@ -53,7 +53,8 @@ public class topic_list extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Intent i = new Intent(topic_list.this, activity_list.class);
-                i.putExtra("topicSelected", adapter.getItem(position));
+                String choice = adapter.getItem(position);
+                i.putExtra("topicSelected", choice);
                 startActivity(i);
             }
         });

@@ -141,10 +141,8 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
                 startActivity(goActicities);
                 return true;
 
-            //Todo: test si erreur lors topic
             case R.id.action_favorite:
-                Intent goFavorite = new Intent(this, activity_list.class);
-                goFavorite.putExtra("topicSelected", "All");
+                Intent goFavorite = new Intent(this, favorites_list.class);
                 startActivity(goFavorite);
                 return true;
 

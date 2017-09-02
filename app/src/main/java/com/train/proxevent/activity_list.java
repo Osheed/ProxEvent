@@ -52,6 +52,7 @@ public class activity_list extends AppCompatActivity {
                         ActivityViewHolder.class,
                         mActivityDatabase
                 ){
+                    @Override
                     protected void populateViewHolder(ActivityViewHolder viewHolder, Activities model, int position){
 
 
@@ -64,9 +65,9 @@ public class activity_list extends AppCompatActivity {
                         //viewHolder.setOwner(model.getAct_owner());
                         viewHolder.setTitle(model.getAct_title());
                         //viewHolder.setTopic(model.getAct_topic());
-                        //viewHolder.setActImage(model.getAct_image(),getApplicationContext());
+                        viewHolder.setActImage(model.getAct_image(),getApplicationContext());
 
-                      /*
+
                         //retrieve the key of activity clicked
                         final String activity_id = getRef(position).getKey();
 
@@ -78,7 +79,7 @@ public class activity_list extends AppCompatActivity {
                                 startActivity(activityIntent);
                             }
                         });
-                        */
+
                     }
 
 
@@ -104,10 +105,6 @@ public class activity_list extends AppCompatActivity {
             activityAdress.setText(adresse);
         }
 
-        public void setContent(String content) {
-
-        }
-
         public void setDate_crea(String date_crea){
             TextView activityDate_crea = (TextView) mView.findViewById(R.id.tv_AL_dateCrea);
             activityDate_crea.setText(date_crea);
@@ -118,25 +115,9 @@ public class activity_list extends AppCompatActivity {
             activityDate_end.setText(date_end);
         }
 
-        public void setLatitude(String latitude) {
-
-        }
-
-        public void setLongitude(String longitude){
-
-        }
-
-        public void setOwner(String owner) {
-
-        }
-
         public void setTitle(String title){
             TextView activityTitle = (TextView) mView.findViewById(R.id.tv_AL_Title);
             activityTitle.setText(title);
-        }
-
-        public void setTopic(String topic) {
-
         }
 
         public void setActImage(String act_image, Context applicationContext) {

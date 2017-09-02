@@ -6,9 +6,9 @@ package com.train.proxevent.Objects;
 
 public class Users {
 
-    public String name;
-    public String image;
-    public String status;
+    private String name;
+    private String image;
+    private String status;
 
     public Users(){
 

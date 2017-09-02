@@ -8,16 +8,16 @@ import java.util.Date;
 
 public class Activities {
 
-    public String Act_adresse;
-    public String Act_content;
-    public String Act_date_crea;
-    public String Act_date_end;
-    public String Act_latitude;
-    public String Act_longitude;
-    public String Act_owner;
-    public String Act_title;
-    public String Act_topic;
-    public String Act_image;
+    private String Act_adresse;
+    private String Act_content;
+    private String Act_date_crea;
+    private String Act_date_end;
+    private String Act_latitude;
+    private String Act_longitude;
+    private String Act_owner;
+    private String Act_title;
+    private String Act_topic;
+    private String Act_image;
 
     public Activities(){}
 

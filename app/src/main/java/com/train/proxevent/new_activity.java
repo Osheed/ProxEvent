@@ -26,11 +26,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.ByteArrayOutputStream;
@@ -45,7 +49,6 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
 
-import static com.train.proxevent.R.array.topics_array_spinner;
 
 public class new_activity extends AppCompatActivity {
 
@@ -68,7 +71,9 @@ public class new_activity extends AppCompatActivity {
     private FirebaseUser mCurrentUser;
     private String mActivity_id;
     private DatabaseReference mActivityDatabase;
+    private DatabaseReference mActivityImgDb;
     private int mYear, mMonth, mDay;
+    private String img_url;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +87,6 @@ public class new_activity extends AppCompatActivity {
         mTopics = (Spinner)findViewById(R.id.sp_newActivity_topics);
         mEnterTitle = (EditText) findViewById(R.id.et_newActivity_EnterTitle);
         mEnterContent = (EditText) findViewById(R.id.et_newActivity_EnterContent);
-        mPermanent = (CheckBox) findViewById(R.id.cb_newActivity_Permanent);
         mSelectLocation = (TextView) findViewById(R.id.tv_newActivity_SelectLocation);
         mLocation = (CheckBox) findViewById(R.id.cb_newActivity_LocationNoSpec);
         mSave = (Button) findViewById(R.id.btn_newActivity_Save);
@@ -139,19 +143,23 @@ public class new_activity extends AppCompatActivity {
             }
 
         });
-/*
-        //Display the date
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
 
+        mImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
+            public void onClick(View view) {
 
-                dateEnd = day + "-" + month + "-" + year;
-                mDisplayDate.setText(dateEnd);
+                //Recover image in the phone
+                Intent galleryIntent = new Intent();
+                galleryIntent.setType("image/*");
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
+
             }
-        };
-*/
+        });
+
+
+
 
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,7 +196,7 @@ public class new_activity extends AppCompatActivity {
                 activityMap.put("Act_owner",current_id);
                 activityMap.put("Act_title",title);
                 activityMap.put("Act_topic",topics);
-                activityMap.put("Act_image", "test-image");
+                activityMap.put("Act_image", img_url);
 
 
 
@@ -246,7 +254,119 @@ public class new_activity extends AppCompatActivity {
 
 
 
+    }
+    //Recover the Crop Image
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
+
+            Uri imageUri = data.getData();
+
+            // start cropping activity for pre-acquired image saved on the device
+            CropImage.activity(imageUri)
+                    .setAspectRatio(1, 1)
+                    .setMinCropWindowSize(500,500)
+                    .start(this);
 
 
+        }
+        // Checks and retrieves the uri of the image
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
+            if (resultCode == RESULT_OK) {
+
+                //Progress Bar for the User
+                mProgress = new ProgressDialog(new_activity.this);
+                mProgress.setTitle("Uploading Image...");
+                mProgress.setMessage("Please wait while we upload and process the image");
+                mProgress.setCanceledOnTouchOutside(false);
+                mProgress.show();
+
+
+                Uri resultUri = result.getUri();
+
+                String current_activity_id = mActivity_id;
+
+                //Compress-Convert
+                final File thumb_filePath = new File(resultUri.getPath());
+                final Bitmap thumb_bitmap = new Compressor(this)
+                        .setMaxHeight(200)
+                        .setMaxHeight(200)
+                        .setQuality(75)
+                        .compressToBitmap(thumb_filePath);
+
+                //Upload
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                thumb_bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+                final byte [] thumb_byte = baos.toByteArray();
+
+                StorageReference filepath = mImageStorage.child("activities_images").child(current_activity_id +".jpg");
+                final StorageReference thumb_filepath = mImageStorage.child("profile_images").child("thumbs").child(current_activity_id +".jpg");
+
+
+                //Upload Main image
+                filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+
+                    @SuppressWarnings("VisibleForTests")
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                        if (task.isSuccessful()) {
+
+                            //get the url for activity db
+                            final String download_url = task.getResult().getDownloadUrl().toString();
+                            img_url = download_url;
+                            //Task for thumb image
+                            UploadTask uploadTask = thumb_filepath.putBytes(thumb_byte);
+                            uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> thumb_task) {
+
+                                    String thumb_downloadUrl = thumb_task.getResult().getDownloadUrl().toString();
+
+                                    if (thumb_task.isSuccessful()) {
+
+                                        Map update_hashMap = new HashMap();
+                                        update_hashMap.put("image", download_url);
+                                        update_hashMap.put("thumb_image", thumb_downloadUrl);
+
+
+                                        mActivityDatabase.updateChildren(update_hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                                if (task.isSuccessful()) {
+
+                                                    mProgress.dismiss();
+                                                    Toast.makeText(new_activity.this, "Success Uploading", Toast.LENGTH_LONG).show();
+                                                    //Picasso.with(new_activity.this).load(img_url).placeholder(R.drawable.button_add_icon).into(mImage);
+                                                    Picasso.with(new_activity.this).load(img_url).into(mImage);
+
+                                                }
+                                            }
+                                        });
+
+                                    } else {
+
+                                        Toast.makeText(new_activity.this, "Error in uploading Thumbnail", Toast.LENGTH_LONG).show();
+                                        mProgress.dismiss();
+                                    }
+
+                                }
+                            });
+                        } else {
+                            Toast.makeText(new_activity.this, "Error in uploading", Toast.LENGTH_LONG).show();
+                            mProgress.dismiss();
+                        }
+                    }
+                });
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+
+            }
+        }
     }
 }

@@ -35,9 +35,8 @@
             android:layout_height="130dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10pt"
-            android:background="@drawable/image_add"
             android:contentDescription=""
-            app:srcCompat="@drawable/image_add"
+            android:src="@drawable/image_add"
             tools:ignore="ContentDescription" />
 
         <Spinner
@@ -126,25 +125,6 @@
                 android:textColor="@color/darkGray"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/tv_newActivity_Or"
-                android:layout_width="86dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:text="@string/or"
-                android:textColor="@color/darkGray"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:ignore="RtlHardcoded" />
-
-            <CheckBox
-                android:id="@+id/cb_newActivity_Permanent"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginTop="15dp"
-                android:layout_weight="0.25"
-                android:text="@string/permanent" />
         </LinearLayout>
 
         <TextView

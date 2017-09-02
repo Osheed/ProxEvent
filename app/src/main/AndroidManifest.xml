@@ -49,9 +49,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyANwMTHPYIV0xwxhdKYg1JKir7bmGlWoAM"/>
 
-        <uses-feature
-            android:glEsVersion="0x00020000"
-            android:required="true"/>
     </application>
 
 </manifest>

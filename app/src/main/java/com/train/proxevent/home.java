@@ -32,6 +32,12 @@ import com.train.proxevent.Objects.User;
  * Created by David on 14.07.2017.
  */
 
+    //TODO: activité avec date indeterminée
+    //TODO: Join an activity
+    //TODO: Send private message to all membres of one activity
+    //TODO: Receive a notification
+    //TODO: View detail of a notification
+    //TODO: Helder: new activity(image pr date au lieu du tv)
 
 public class home extends AppCompatActivity implements OnMapReadyCallback {
 

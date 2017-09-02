@@ -12,6 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,16 +33,26 @@ import com.train.proxevent.Objects.User;
  */
 
 
-public class home extends AppCompatActivity {
+public class home extends AppCompatActivity implements OnMapReadyCallback {
 
     private FirebaseAuth mAuth;
 
+    private GoogleMap mymap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setTitle(R.string.Home);
+
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map);
+
+        mapFragment.getMapAsync(this);
+
+
+
+
 
         // initializes
         mAuth = FirebaseAuth.getInstance();
@@ -144,6 +161,19 @@ public class home extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        mymap = map;
+        mymap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        mymap.getUiSettings().setZoomControlsEnabled(true);
+        CameraUpdate camUpd1 =
+                CameraUpdateFactory
+                        .newLatLngZoom(new LatLng(46.2443, 7.3250), 10);
+
+        mymap.moveCamera(camUpd1);
+
     }
 }
 

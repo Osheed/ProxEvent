@@ -1,8 +1,14 @@
 package com.train.proxevent;
 
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -31,7 +37,7 @@ public class chat extends AppCompatActivity {
     EditText messageArea;
     ScrollView scrollView;
     private DatabaseReference reference1, reference2;
-    String myValueChatWith;
+    String myValueChatWith, myValueKeyIdActivity, myValueKeyTopic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,8 @@ public class chat extends AppCompatActivity {
         setTitle(UserDetails.chatWith);
 
         myValueChatWith = getIntent().getExtras().getString("myValueKeyChatWith");
+        myValueKeyIdActivity = getIntent().getExtras().getString("myValueKeyIdActivity");
+        myValueKeyTopic = getIntent().getExtras().getString("myValueKeyTopic");
         layout = (LinearLayout) findViewById(R.id.layout1);
         layout_2 = (RelativeLayout) findViewById(R.id.layout2);
         sendButton = (ImageView) findViewById(R.id.sendButton);
@@ -92,6 +100,7 @@ public class chat extends AppCompatActivity {
         });
     }
 
+
     public void addMessageBox(String message, int type){
     TextView textView = new TextView(chat.this);
         textView.setText(message);
@@ -110,4 +119,44 @@ public class chat extends AppCompatActivity {
         layout.addView(textView);
         scrollView.fullScroll(android.view.View.FOCUS_DOWN);
     }
+
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+             case android.R.id.home:
+        Intent upIntent = NavUtils.getParentActivityIntent(this);
+                 upIntent.putExtra("idActivity", myValueKeyIdActivity);
+                 upIntent.putExtra("topic", myValueKeyTopic);
+if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+ // This activity is NOT part of this app's task, so create a new task
+// when navigating up, with a synthesized back stack.
+ TaskStackBuilder.create(this)
+                         // Add all of this activity's parents to the back stack
+.addNextIntentWithParentStack(upIntent)
+// Navigate up to the closest parent
+.startActivities();
+} else {
+// This activity is part of this app's task, so simply
+// navigate up to the logical parent activity.
+            NavUtils.navigateUpTo(this, upIntent);
 }
+return true;
+}
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -19,7 +19,7 @@
 
             <item
                 android:id="@+id/action_topics"
-                android:title="@string/topic"
+                android:title="@string/Activities"
                 android:icon="@drawable/ic_action_activity"/>
 
             <item

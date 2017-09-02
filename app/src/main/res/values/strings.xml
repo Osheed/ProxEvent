@@ -112,7 +112,7 @@
     <string name="nbLike">Like: </string>
     <string name="sortASC">ASC</string>
     <string name="sortTime">New</string>
-    <string name="addedDate">Added: </string>
+    <string name="addedDate">From: </string>
     <string name="deletAccount">Delete my account</string>
     <string name="sortTimeOld">Old</string>
     <string name="sortDESC">DESC</string>
@@ -184,6 +184,8 @@
     <string name="adress">Adress...</string>
     <string name="dateEnd">End date...</string>
     <string name="created_date">Created date</string>
+    <string name="endDate">End:</string>
+    <string name="Activities">Activities</string>
 
 
 </resources>

@@ -9,8 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.train.proxevent.Objects.Activities;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -19,7 +23,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class activity_list extends AppCompatActivity {
 
-
+    int nbActivities;
+    String choix;
     private RecyclerView mActivityList;
     private DatabaseReference mActivityDatabase;
 
@@ -34,9 +39,28 @@ public class activity_list extends AppCompatActivity {
         mActivityList.setHasFixedSize(true);
         mActivityList.setLayoutManager(new LinearLayoutManager(this));
 
-        String choix = getIntent().getStringExtra("topicSelected");
+        choix = getIntent().getStringExtra("topicSelected");
         mActivityDatabase = FirebaseDatabase.getInstance().getReference().child("Activities").child(choix);
-        setTitle(choix);
+        mActivityDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snap: dataSnapshot.getChildren()){
+
+                    nbActivities += 1;
+//                    nbActivities = snap.getChildrenCount();
+                }
+                setTitle(choix + " (" + nbActivities + ")");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+//        setTitle(choix + " (" + nbActivities + ")");
 
 
     }
@@ -79,12 +103,12 @@ public class activity_list extends AppCompatActivity {
                             public void onClick(View v) {
                                 Intent activityIntent = new Intent(activity_list.this, display_activity.class);
                                 activityIntent.putExtra("idActivity", activity_id);
+                                activityIntent.putExtra("topic", choix);
                                 startActivity(activityIntent);
                             }
                         });
 
                     }
-
 
                 };
 

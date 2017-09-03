@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +40,7 @@ public class profile extends AppCompatActivity {
     private TextView mName;
     private TextView mStatus;
     private Button mStatusBtn;
-    private Button mImageBtn;
+    private ImageView mImageBtn;
 
     private static final int GALLERY_PICK = 1;
 
@@ -60,7 +61,7 @@ public class profile extends AppCompatActivity {
         mName = (TextView) findViewById(R.id.tv_profile_displayName);
         mStatus = (TextView) findViewById(R.id.tv_profile_status);
         mStatusBtn = (Button) findViewById(R.id.btn_settings_chStatus);
-        mImageBtn = (Button) findViewById(R.id.btn_profile_chImage);
+        mImageBtn = (ImageView) findViewById(R.id.btn_profile_chImage);
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
         //Recover the data from db

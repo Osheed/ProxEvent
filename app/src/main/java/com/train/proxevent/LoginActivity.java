@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout til_Email;
     private TextInputLayout til_Password;
     private Button btn_LogIn;
-    private Button btn_Register;
+    private TextView btn_Register;
     private ProgressDialog mLoginProgress;
     private FirebaseAuth mAuth;
 
@@ -31,11 +32,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
+
         //Initializes
         til_Email = (TextInputLayout) findViewById(R.id.til_login_email);
         til_Password = (TextInputLayout) findViewById(R.id.til_login_password);
         btn_LogIn = (Button) findViewById(R.id.btn_login_login);
-        btn_Register = (Button) findViewById(R.id.btn_login_register);
+        btn_Register = (TextView) findViewById(R.id.btn_login_register);
         mLoginProgress = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
 

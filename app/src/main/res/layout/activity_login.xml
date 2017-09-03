@@ -4,25 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="20pt"
     tools:context="com.train.proxevent.LoginActivity">
 
-    <TextView
-        android:id="@+id/login_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:paddingTop="20dp"
-        android:text="@string/login_to_your_account"
-        android:textAlignment="center"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="24sp"
+
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="50pt"
+        android:layout_height="50pt"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="15pt"
+        app:layout_constraintBottom_toTopOf="@+id/til_login_email"
+        app:layout_constraintHorizontal_bias="0.476" />
+
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_login_email"
@@ -30,13 +29,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="89dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_label"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintHorizontal_bias="0.0">
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:layout_editor_absoluteY="170dp">
 
         <EditText
             android:layout_width="match_parent"
@@ -55,7 +54,9 @@
         android:layout_marginTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_login_email">
+        app:layout_constraintTop_toBottomOf="@+id/til_login_email"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
 
         <EditText
             android:layout_width="match_parent"
@@ -66,30 +67,34 @@
 
     <Button
         android:id="@+id/btn_login_login"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="21dp"
         android:background="@color/greenDark"
+        android:textColor="@color/white"
         android:text="@string/log_in"
         app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_login_password" />
+        app:layout_constraintTop_toBottomOf="@+id/til_login_password"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
 
-    <Button
+    <TextView
         android:id="@+id/btn_login_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="119dp"
-        android:background="@color/greenDark"
-        android:padding="10dp"
-        android:text="@string/need_a_new_account"
-        app:layout_constraintHorizontal_bias="0.956"
+        android:layout_marginTop="15pt"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/createAccount"
+        android:textColor="@color/greenLight"
+        android:textSize="@dimen/mediumSize"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_login_password" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login_login" />
+
+
 </android.support.constraint.ConstraintLayout>

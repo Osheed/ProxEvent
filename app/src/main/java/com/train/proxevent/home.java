@@ -51,12 +51,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by David on 14.07.2017.
  */
 
-    //TODO: activité avec date debut
-    //TODO: Join an activity
-    //TODO: Send private message to all membres of one activity
     //TODO: Receive a notification
     //TODO: View detail of a notification
-    //TODO: Helder: new activity(image pr date au lieu du tv)
     //TODO: Controler que dans home l'affichage des activités se fait a partir d'aujourd'hui
     //TODO: Detruire une activity si on est le proprietaire
 

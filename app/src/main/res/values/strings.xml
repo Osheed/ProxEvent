@@ -188,6 +188,9 @@
     <string name="Activities">Activities</string>
     <string name="enter_a_location">Enter a Location</string>
     <string name="location">Location...</string>
+    <string name="begin_date">Begin Date...</string>
+    <string name="enter_the_begin_date">Enter the Begin Date</string>
+    <string name="choose_the_begining_date">Choose the Begining Date</string>
 
 
 </resources>

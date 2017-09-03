@@ -41,7 +41,8 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/nestedScrollView">
 
 
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -237,7 +238,22 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_collapseMode="pin"/>
-        <!-- app:logo="@drawable/ic_action_arrow_left" -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_displayActivity_Delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginLeft="15dp"
+        android:clickable="true"
+        android:paddingStart="10dp"
+        app:fabSize="mini"
+        app:layout_anchor="@+id/nestedScrollView"
+        app:layout_anchorGravity="top|left"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+    <!-- app:logo="@drawable/ic_action_arrow_left" -->
 
 
 </android.support.design.widget.CoordinatorLayout>

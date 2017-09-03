@@ -191,6 +191,10 @@
     <string name="begin_date">Begin Date...</string>
     <string name="enter_the_begin_date">Enter the Begin Date</string>
     <string name="choose_the_begining_date">Choose the Begining Date</string>
+    <string name="dilog_message_deleteActivity">Delete this Activity?</string>
+    <string name="dialog_title_deleteActivity">Are you sure you want to delete this Activity?</string>
+    <string name="Continue">Continue</string>
+    <string name="Cancel">Cancel</string>
 
 
 </resources>

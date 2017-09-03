@@ -1,11 +1,13 @@
 package com.train.proxevent;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -45,6 +47,7 @@ public class display_activity extends AppCompatActivity {
     private Users users;
     private ListView listView;
     FloatingActionButton fab;
+    private FloatingActionButton fabDelete;
     String myValueIdActivity, myValueTopic, mUserActivity_id, currentUserId;
     Activities activities_displayed;
     //Progress
@@ -52,6 +55,7 @@ public class display_activity extends AppCompatActivity {
     ImageView imageTop, imageCreator;
     TextView activity_Tile, activity_content, activityDate, activityDateEnd, tvCreator, tvEmptyUserCurrentList;
     UserActivity userActivity;
+    private String Continue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,7 @@ public class display_activity extends AppCompatActivity {
         tvCreator = (TextView) findViewById(R.id.tvCreator);
         tvEmptyUserCurrentList = (TextView) findViewById(R.id.tvEmptyUserCurrentList);
         listView.setAdapter(user_list_adapter);
+        fabDelete = (FloatingActionButton)findViewById(R.id.fab_displayActivity_Delete);
 
         setUserDetails();
 
@@ -153,7 +158,37 @@ public class display_activity extends AppCompatActivity {
 
 
 
+        //to delete the activity
+        fabDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(display_activity.this);
+                builder.setTitle(R.string.dilog_message_deleteActivity);
+                builder.setMessage(R.string.dialog_title_deleteActivity);
 
+
+                builder.setPositiveButton(getResources().getString(R.string.Continue), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        //Code to delete - intent - and finish
+                        //finish();
+                    }
+                });
+                builder.setNegativeButton(getResources().getString(R.string.Cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        dialogInterface.cancel();
+                    }
+                });
+
+                //create
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+            }
+        });
 
     }
 

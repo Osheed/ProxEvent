@@ -55,6 +55,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
     //TODO: View detail of a notification
     //TODO: Controler que dans home l'affichage des activités se fait a partir d'aujourd'hui
     //TODO: Detruire une activity si on est le proprietaire
+    //TODO: Sortir tous les strings comme dans display activity
 
 public class home extends AppCompatActivity implements OnMapReadyCallback {
 

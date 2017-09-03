@@ -16,8 +16,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,13 +59,14 @@ public class new_activity extends AppCompatActivity {
     private EditText mEnterTitle;
     private EditText mEnterContent;
     private CheckBox mPermanent;
-    private TextView mSelectLocation;
+    private TextView mEnterLocation;
     private CheckBox mLocation;
     private Button mSave;
     private CircleImageView mImage;
     private static final int GALLERY_PICK = 1;
     private String topics;
     private String dateEnd;
+    private String adresse;
     //Progress
     private ProgressDialog mProgress;
     //Storage Firebase
@@ -87,12 +90,12 @@ public class new_activity extends AppCompatActivity {
         mTopics = (Spinner)findViewById(R.id.sp_newActivity_topics);
         mEnterTitle = (EditText) findViewById(R.id.et_newActivity_EnterTitle);
         mEnterContent = (EditText) findViewById(R.id.et_newActivity_EnterContent);
-        mSelectLocation = (TextView) findViewById(R.id.tv_newActivity_SelectLocation);
+        mEnterLocation = (EditText) findViewById(R.id.et_newActivity_EnterLocation);
         mLocation = (CheckBox) findViewById(R.id.cb_newActivity_LocationNoSpec);
         mSave = (Button) findViewById(R.id.btn_newActivity_Save);
         mImage = (CircleImageView) findViewById(R.id.civ_newActivity_ChooseImg);
         mImageStorage = FirebaseStorage.getInstance().getReference();
-
+        mPermanent = (CheckBox)findViewById(R.id.cb_newActivity_Date);
 
 
 
@@ -158,7 +161,32 @@ public class new_activity extends AppCompatActivity {
             }
         });
 
-
+        //Test for Date
+        mPermanent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                if((compoundButton).isChecked()){
+                    dateEnd = "31-12-9999";
+                    mDisplayDate.setHint("No Specific");
+                }else {
+                    mDisplayDate.setHint("Date...");
+                    dateEnd = mDisplayDate.getText().toString().trim();
+                }
+            }
+        });
+        //test for Location
+        mLocation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                if((compoundButton.isChecked())){
+                    adresse = "No Specific";
+                    mEnterLocation.setHint("No Specific");
+                }else {
+                    mEnterLocation.setHint("Location..");
+                    adresse = mEnterLocation.getText().toString().trim();
+                }
+            }
+        });
 
 
         mSave.setOnClickListener(new View.OnClickListener() {
@@ -176,13 +204,15 @@ public class new_activity extends AppCompatActivity {
                 Date todayDate = Calendar.getInstance().getTime();
                 SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
                 String dateCrea = formatter.format(todayDate);
-                String dateEnd = mDisplayDate.getText().toString().trim();
                 String latitude = "latitudeyyyy";
                 String longitude = "longitudexxx";
-                String adresse = "adresse-test";
+
                 mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
                 String current_id = mCurrentUser.getUid();
                 String title = mEnterTitle.getText().toString().trim();
+
+
+
 
 
                 // to ordenate data for db

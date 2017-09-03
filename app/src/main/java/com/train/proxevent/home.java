@@ -41,18 +41,24 @@ import com.squareup.picasso.Picasso;
 import com.train.proxevent.Objects.Activities;
 import com.train.proxevent.Objects.User;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by David on 14.07.2017.
  */
 
-    //TODO: activité avec date indeterminée
+    //TODO: activité avec date debut
     //TODO: Join an activity
     //TODO: Send private message to all membres of one activity
     //TODO: Receive a notification
     //TODO: View detail of a notification
     //TODO: Helder: new activity(image pr date au lieu du tv)
+    //TODO: Controler que dans home l'affichage des activités se fait a partir d'aujourd'hui
+    //TODO: Detruire une activity si on est le proprietaire
 
 public class home extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -198,6 +204,11 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
         // Check if user is signed
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
+        //Today
+        Date todayDate = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String today = formatter.format(todayDate);
+
         if(currentUser == null){
             sendToStart();
         }
@@ -208,7 +219,7 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
                         Activities.class,
                         R.layout.activity_list_layout,
                         activity_list.ActivityViewHolder.class,
-                        mActivityDatabase.orderByChild("Act_date_end")
+                        mActivityDatabase.orderByChild("Act_date_end").endAt("31-12-2100")
                 ){
                     @Override
                     protected void populateViewHolder(activity_list.ActivityViewHolder viewHolder, Activities model, int position){

@@ -186,6 +186,8 @@
     <string name="created_date">Created date</string>
     <string name="endDate">End:</string>
     <string name="Activities">Activities</string>
+    <string name="enter_a_location">Enter a Location</string>
+    <string name="location">Location...</string>
 
 
 </resources>

@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,8 +64,6 @@ public class display_activity extends AppCompatActivity {
     Boolean same;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +79,7 @@ public class display_activity extends AppCompatActivity {
         tvCreator = (TextView) findViewById(R.id.tvCreator);
         tvEmptyUserCurrentList = (TextView) findViewById(R.id.tvEmptyUserCurrentList);
         listView.setAdapter(user_list_adapter);
-        fabDelete = (FloatingActionButton)findViewById(R.id.fab_displayActivity_Delete);
+        fabDelete = (FloatingActionButton) findViewById(R.id.fab_displayActivity_Delete);
         currentUserID = FirebaseAuth.getInstance();
 
         setUserDetails();
@@ -89,7 +89,7 @@ public class display_activity extends AppCompatActivity {
 
 
         //test author & currentUser
-        final String uID =currentUserID.getCurrentUser().toString();
+        final String uID = currentUserID.getCurrentUser().toString();
         //Recover the data from db
         mUserActivityDatabaseAdd = FirebaseDatabase.getInstance().getReference().child("UserActivity");
         mActivityDatabase = FirebaseDatabase.getInstance().getReference()
@@ -100,9 +100,9 @@ public class display_activity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 act_owner = dataSnapshot.getValue().toString();
-                if(act_owner.equals(uID)){
+                if (act_owner.equals(uID)) {
                     same = true;
-                }else{
+                } else {
                     same = false;
                 }
             }
@@ -114,7 +114,7 @@ public class display_activity extends AppCompatActivity {
         });
 
 
-       mUserActivity_id = mUserActivityDatabaseAdd.push().getKey();
+        mUserActivity_id = mUserActivityDatabaseAdd.push().getKey();
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         mUserDatabase = FirebaseDatabase.getInstance().getReference("Users");
         mUserDatabase.addChildEventListener(new ChildEventListener() {
@@ -125,9 +125,9 @@ public class display_activity extends AppCompatActivity {
                 String idUserChat = dataSnapshot.getKey();
                 mUserActivityDatabase = FirebaseDatabase.getInstance().getReference().child("UserActivity").child(myValueIdActivity).child(idUserChat);
                 //to do: check if it's a good path for add only members in the chat
-                if(mUserActivityDatabase != null) {
+                if (mUserActivityDatabase != null) {
                     //add all users excepts the current user
-                    if(users.getName() != UserDetails.username){
+                    if (users.getName() != UserDetails.username) {
                         user_list_adapter.add(users);
                         setListViewHeight(listView);
                     }
@@ -137,15 +137,19 @@ public class display_activity extends AppCompatActivity {
 
 
             }
+
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
             }
+
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
             }
+
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -162,7 +166,7 @@ public class display_activity extends AppCompatActivity {
             public void onClick(View view) {
 
                 // to ordenate data for db
-                HashMap< String, String> userActivity = new HashMap<>();
+                HashMap<String, String> userActivity = new HashMap<>();
                 userActivity.put("idUser", currentUserId);
 //                userActivity.put("idActivity",content);
 
@@ -171,13 +175,13 @@ public class display_activity extends AppCompatActivity {
                                                   @Override
                                                   public void onComplete(@NonNull Task<Void> task) {
 
-                                                      if(task.isSuccessful()){
+                                                      if (task.isSuccessful()) {
 
-                                                          Toast.makeText(getApplicationContext(),"You are a member of this activity",Toast.LENGTH_LONG).show();
+                                                          Toast.makeText(getApplicationContext(), "You are a member of this activity", Toast.LENGTH_LONG).show();
 
-                                                      }else{
+                                                      } else {
 
-                                                          Toast.makeText(getApplicationContext(),"Errors in Database",Toast.LENGTH_LONG).show();
+                                                          Toast.makeText(getApplicationContext(), "Errors in Database", Toast.LENGTH_LONG).show();
 
                                                       }
                                                   }
@@ -185,7 +189,6 @@ public class display_activity extends AppCompatActivity {
                         );
             }
         });
-
 
 
         //Mask the delete Activity Button
@@ -233,8 +236,7 @@ public class display_activity extends AppCompatActivity {
     }
 
 
-
-    public void getCurrentActivity(){
+    public void getCurrentActivity() {
         currentActivity = FirebaseDatabase.getInstance().getReference().child("Activities").child(myValueTopic).child(myValueIdActivity);
         currentActivity.addValueEventListener(new ValueEventListener() {
             @Override
@@ -267,7 +269,7 @@ public class display_activity extends AppCompatActivity {
     }
 
 
-    public void setUserCreator(String id){
+    public void setUserCreator(String id) {
         mCurrentUserCreator = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -284,13 +286,14 @@ public class display_activity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {      }
+            public void onCancelled(DatabaseError databaseError) {
+            }
         };
         mCurrentUserCreator.addValueEventListener(postListener);
     }
 
 
-    public void setUserDetails(){
+    public void setUserDetails() {
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         currentUserId = mCurrentUser.getUid();
         currentUserDB = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
@@ -303,13 +306,14 @@ public class display_activity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {      }
+            public void onCancelled(DatabaseError databaseError) {
+            }
         };
         currentUserDB.addValueEventListener(postListener);
     }
 
 
-    public void listViewOnClickListener(){
+    public void listViewOnClickListener() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -327,14 +331,14 @@ public class display_activity extends AppCompatActivity {
 
     // set the list height automatically
     public static boolean setListViewHeight(ListView listView) {
-        int position =0;
+        int position = 0;
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter != null) {
             int numberOfItems = listAdapter.getCount();
 
             // height of items
             int totalItemsHeight = 0;
-            for ( position = 0; position < numberOfItems;position++) {
+            for (position = 0; position < numberOfItems; position++) {
                 View item = listAdapter.getView(position, null, listView);
                 item.measure(0, 0);
                 totalItemsHeight += item.getMeasuredHeight();
@@ -342,7 +346,7 @@ public class display_activity extends AppCompatActivity {
 
             // Set list height
             ViewGroup.LayoutParams params = listView.getLayoutParams();
-            params.height = totalItemsHeight ;
+            params.height = totalItemsHeight;
             listView.setLayoutParams(params);
             listView.requestLayout();
 

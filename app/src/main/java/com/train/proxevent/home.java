@@ -2,21 +2,15 @@ package com.train.proxevent;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.maps.CameraUpdate;
@@ -25,22 +19,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.train.proxevent.Objects.Activities;
-import com.train.proxevent.Objects.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -89,33 +73,13 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
 
 
-
-
-
         // initializes
         mAuth = FirebaseAuth.getInstance();
 
         Intent intent = getIntent();
 
-        /**
-         *
-         *    SELECT * FROM user WHERE email = 'user.getEmail()';
-         *
-         *
-         *    ==
-         *
-         *    new Firebase("https://examples-sql-queries.firebaseio.com/user")
-         .startAt('user.getEmail()')
-         .endAt('user.getEmail()')
-         .once('value', show);
 
-         function show(snap) {
-         $('pre').text(JSON.stringify(snap.val(), null, 2));
-         }
-
-         **/
     }
-
 
 
     // When the user click on Login button
@@ -125,10 +89,17 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
 
 
     }
+
     public void goAdmin(View view) {
-        Intent goToAdmin = new Intent(this, messageFromAdmin.class);
-       // Intent goToAdmin = new Intent(this, admin.class);
+        //  Intent goToAdmin = new Intent(this, messageFromAdmin.class);
+        Intent goToAdmin = new Intent(this, admin.class);
         startActivity(goToAdmin);
+
+
+    }
+    public void goAdminMessages(View view) {
+        Intent goToMessages = new Intent(this, messageFromAdmin.class);
+        startActivity(goToMessages);
 
 
     }
@@ -215,7 +186,7 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String today = formatter.format(todayDate);
 
-        if(currentUser == null){
+        if (currentUser == null) {
             sendToStart();
         }
 
@@ -223,21 +194,21 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
         // FirebaseUser currentUser = mAuth.getCurrentUser();
         // Log.i("currentUser", "you are admin + "+currentUser.getUid());
         String uid = currentUser.getUid();
-        String admin ="mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
+        String admin = "mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
 
         if (uid.equalsIgnoreCase(admin)) {
             goAdminBtn = (Button) findViewById(R.id.goAdmin);
             goAdminBtn.setVisibility(View.VISIBLE);
         }
         FirebaseRecyclerAdapter<Activities, activity_list.ActivityViewHolder> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter <Activities, activity_list.ActivityViewHolder>(
+                new FirebaseRecyclerAdapter<Activities, activity_list.ActivityViewHolder>(
                         Activities.class,
                         R.layout.activity_list_layout,
                         activity_list.ActivityViewHolder.class,
                         mActivityDatabase.orderByChild("Act_date_end").endAt("31-12-2100")
-                ){
+                ) {
                     @Override
-                    protected void populateViewHolder(activity_list.ActivityViewHolder viewHolder, Activities model, int position){
+                    protected void populateViewHolder(activity_list.ActivityViewHolder viewHolder, Activities model, int position) {
 
 
                         viewHolder.setAdresse(model.getAct_adresse());
@@ -249,7 +220,7 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
                         //viewHolder.setOwner(model.getAct_owner());
                         viewHolder.setTitle(model.getAct_title());
                         //viewHolder.setTopic(model.getAct_topic());
-                        viewHolder.setActImage(model.getAct_image(),getApplicationContext());
+                        viewHolder.setActImage(model.getAct_image(), getApplicationContext());
 
 
                         //retrieve the key of activity clicked
@@ -272,12 +243,13 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
         rv_currActivities.setAdapter(firebaseRecyclerAdapter);
 
     }
+
     //to retrieve the data
-    public static class ActivityViewHolder extends RecyclerView.ViewHolder{
+    public static class ActivityViewHolder extends RecyclerView.ViewHolder {
 
         View mView;
 
-        public ActivityViewHolder(View itemView){
+        public ActivityViewHolder(View itemView) {
             super(itemView);
 
             mView = itemView;
@@ -289,32 +261,26 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
             activityAdress.setText(adresse);
         }
 
-        public void setDate_crea(String date_crea){
+        public void setDate_crea(String date_crea) {
             TextView activityDate_crea = (TextView) mView.findViewById(R.id.tv_AL_dateCrea);
             activityDate_crea.setText(date_crea);
         }
 
-        public void setDate_end(String date_end){
+        public void setDate_end(String date_end) {
             TextView activityDate_end = (TextView) mView.findViewById(R.id.tv_AL_dateEnd);
             activityDate_end.setText(date_end);
         }
 
-        public void setTitle(String title){
+        public void setTitle(String title) {
             TextView activityTitle = (TextView) mView.findViewById(R.id.tv_AL_Title);
             activityTitle.setText(title);
         }
 
         public void setActImage(String act_image, Context applicationContext) {
-            CircleImageView activityImage = (CircleImageView)mView.findViewById(R.id.civ_AL_image);
+            CircleImageView activityImage = (CircleImageView) mView.findViewById(R.id.civ_AL_image);
             Picasso.with(applicationContext).load(act_image).placeholder(R.drawable.ic_action_clock).into(activityImage);
         }
     }
-
-
-
-
-
-
 
 
 }

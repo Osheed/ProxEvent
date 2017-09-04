@@ -1,31 +1,15 @@
 package com.train.proxevent;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.squareup.picasso.Picasso;
-import com.train.proxevent.Objects.Activities;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by David on 14.07.2017.
@@ -47,7 +31,6 @@ public class admin extends AppCompatActivity {
         setTitle(R.string.Admin);
 
     }
-
 
 
     /* menu */

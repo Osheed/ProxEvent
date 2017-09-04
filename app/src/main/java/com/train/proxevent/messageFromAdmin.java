@@ -75,7 +75,7 @@ public class messageFromAdmin extends AppCompatActivity {
                 // Read the input field and push a new instance
                 // of ChatMessage to the Firebase database
                 FirebaseDatabase.getInstance()
-                        .getReference()
+                        .getReference().child("AdminMessages")
                         .push()
                         .setValue(new com.train.proxevent.Objects.MessageAdmin(input.getText().toString(),
                                 FirebaseAuth.getInstance()
@@ -165,7 +165,7 @@ public class messageFromAdmin extends AppCompatActivity {
         ListView listOfMessages = (ListView) findViewById(R.id.list_of_messages);
 
         adapter = new FirebaseListAdapter<com.train.proxevent.Objects.MessageAdmin>(this, com.train.proxevent.Objects.MessageAdmin.class,
-                R.layout.activity_single_message_admin, FirebaseDatabase.getInstance().getReference()) {
+                R.layout.activity_single_message_admin, FirebaseDatabase.getInstance().getReference().child("AdminMessages")) {
             @Override
             protected void populateView(View v, com.train.proxevent.Objects.MessageAdmin model, int position) {
                 // Get references to the views of message.xml

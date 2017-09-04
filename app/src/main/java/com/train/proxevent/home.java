@@ -225,12 +225,16 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
 
                         //retrieve the key of activity clicked
                         final String activity_id = getRef(position).getKey();
+                        final String activity_topic = model.getAct_topic();
+                        final String activity_owner = model.getAct_owner();
 
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent activityIntent = new Intent(home.this, display_activity.class);
                                 activityIntent.putExtra("idActivity", activity_id);
+                                activityIntent.putExtra("topic",activity_topic);
+                                activityIntent.putExtra("owner",activity_owner);
                                 startActivity(activityIntent);
                             }
                         });

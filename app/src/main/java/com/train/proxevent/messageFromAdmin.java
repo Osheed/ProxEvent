@@ -170,7 +170,7 @@ public class messageFromAdmin extends AppCompatActivity {
             protected void populateView(View v, com.train.proxevent.Objects.MessageAdmin model, int position) {
                 // Get references to the views of message.xml
                 TextView messageText = (TextView) v.findViewById(R.id.message_text);
-                TextView messageUser = (TextView) v.findViewById(R.id.message_user);
+                TextView messageUser = (TextView) v.findViewById(R.id.table_name);
                 TextView messageTime = (TextView) v.findViewById(R.id.message_time);
 
                 // Set their text

@@ -25,6 +25,9 @@
         <activity
             android:name=".profile"
             android:parentActivityName=".home" />
+        <activity
+            android:name=".admin"
+            android:parentActivityName=".home" />
 
         <activity android:name=".topic_list"
             android:parentActivityName=".home"/>

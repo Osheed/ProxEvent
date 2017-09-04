@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,17 +52,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by David on 14.07.2017.
  */
 
-    //TODO: Receive a notification
-    //TODO: View detail of a notification
-    //TODO: Controler que dans home l'affichage des activités se fait a partir d'aujourd'hui
-    //TODO: Detruire une activity si on est le proprietaire
-    //TODO: Sortir tous les strings comme dans display activity
+//TODO: Receive a notification
+//TODO: View detail of a notification
+//TODO: Controler que dans home l'affichage des activités se fait a partir d'aujourd'hui
+//TODO: Detruire une activity si on est le proprietaire
+//TODO: Sortir tous les strings comme dans display activity
 
 public class home extends AppCompatActivity implements OnMapReadyCallback {
 
     private FirebaseAuth mAuth;
     private RecyclerView rv_currActivities;
     private DatabaseReference mActivityDatabase;
+    private Button goAdminBtn;
 
     private GoogleMap mymap;
 
@@ -70,6 +72,7 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setTitle(R.string.Home);
+
 
         //Current activities
         rv_currActivities = (RecyclerView) findViewById(R.id.rv_home_currActivities);
@@ -120,6 +123,12 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
     public void seeDisplayActivityTest(View view) {
         Intent goTopics = new Intent(this, display_activity.class);
         startActivity(goTopics);
+
+
+    }
+    public void goAdmin(View view) {
+        Intent goToAdmin = new Intent(this, admin.class);
+        startActivity(goToAdmin);
 
 
     }
@@ -211,6 +220,15 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
         }
 
 
+        // FirebaseUser currentUser = mAuth.getCurrentUser();
+        // Log.i("currentUser", "you are admin + "+currentUser.getUid());
+        String uid = currentUser.getUid();
+        String admin ="mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
+
+        if (uid.equalsIgnoreCase(admin)) {
+            goAdminBtn = (Button) findViewById(R.id.goAdmin);
+            goAdminBtn.setVisibility(View.VISIBLE);
+        }
         FirebaseRecyclerAdapter<Activities, activity_list.ActivityViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter <Activities, activity_list.ActivityViewHolder>(
                         Activities.class,

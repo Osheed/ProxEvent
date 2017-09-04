@@ -7,6 +7,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,12 +28,11 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog mLoginProgress;
     private FirebaseAuth mAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
 
         //Initializes
         til_Email = (TextInputLayout) findViewById(R.id.til_login_email);
@@ -81,18 +82,37 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-
-
-                if( task.isSuccessful()){
+                if( task.isSuccessful() ){
 
                     mLoginProgress.dismiss();
 
-                    Intent mainIntent = new Intent(LoginActivity.this, home.class);
 
-                    // Intent to redirect the user at login_page not at the map_activity when they push back
-                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(mainIntent);
-                    finish();
+
+                    FirebaseUser currentUser = mAuth.getCurrentUser();
+                    Log.i("currentUser", "you are admin + "+currentUser.getUid());
+                    String uid = currentUser.getUid();
+                    String admin ="mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
+
+                    if (uid.equalsIgnoreCase(admin)){
+                        Log.i("aaa", "aaa admin + "+currentUser.getUid());
+
+                        Intent goAdmin = new Intent(LoginActivity.this, admin.class);
+
+                        startActivity(goAdmin);
+                        finish();
+
+
+
+                    }else {
+                        Log.i("home", "home admin + "+currentUser.getUid());
+                        Intent mainIntent = new Intent(LoginActivity.this, home.class);
+
+
+                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                        startActivity(mainIntent);
+                        finish();
+                    }
                 }else{
 
                     mLoginProgress.hide();
@@ -103,3 +123,4 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 }
+

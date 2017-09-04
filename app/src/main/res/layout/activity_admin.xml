@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.train.proxevent.home">
+    tools:context="com.train.proxevent.admin">
 
     <LinearLayout
         android:id="@+id/activity_profile"
@@ -15,28 +15,43 @@
         android:orientation="vertical"
         android:weightSum="1">
 
-        <LinearLayout
-            android:id="@+id/linearChangeUserPhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
-            android:weightSum="1"
+        <Button
+            android:id="@+id/send"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="0.23"
-            tools:ignore="InefficientWeight">
+            android:text="@string/send"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sendMessageEditText"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_conversion_absoluteWidth="352dp"
+            tools:layout_conversion_absoluteX="25dp"
+            tools:layout_conversion_absoluteY="227dp" />
 
-            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.MapFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="250dp"
-                android:fitsSystemWindows="true"
-                android:layout_gravity="center_horizontal"
-                app:srcCompat="@drawable/map"
-                android:layout_weight="1.50"
-                tools:ignore="InefficientWeight,NestedWeights" />
-
-        </LinearLayout>
+        <EditText
+            android:id="@+id/sendMessageEditText"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="0.23"
+            android:hint="@string/enter_your_email"
+            android:inputType="textEmailAddress"
+            android:text="@string/sendMessage"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home"
+            tools:layout_conversion_absoluteHeight="42dp"
+            tools:layout_conversion_absoluteWidth="352dp"
+            tools:layout_conversion_absoluteX="16dp"
+            tools:layout_conversion_absoluteY="143dp" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -48,7 +63,7 @@
                 android:layout_width="201dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/currentActivities"
+                android:text="@string/currentUsers"
                 android:textColor="@color/darkGray"
                 android:textSize="10pt"
                 android:textStyle="bold"
@@ -90,3 +105,4 @@
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
+

@@ -195,6 +195,10 @@
     <string name="dialog_title_deleteActivity">Are you sure you want to delete this Activity?</string>
     <string name="Continue">Continue</string>
     <string name="Cancel">Cancel</string>
+    <string name="send">Send</string>
+    <string name="sendMessage">Send Message</string>
+    <string name="currentUsers">Users</string>
+    <string name="Admin">Administrator</string>
 
 
 </resources>

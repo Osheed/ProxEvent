@@ -126,7 +126,8 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
 
     }
     public void goAdmin(View view) {
-        Intent goToAdmin = new Intent(this, admin.class);
+        Intent goToAdmin = new Intent(this, messageFromAdmin.class);
+       // Intent goToAdmin = new Intent(this, admin.class);
         startActivity(goToAdmin);
 
 

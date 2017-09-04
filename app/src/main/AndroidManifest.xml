@@ -31,6 +31,8 @@
 
         <activity android:name=".topic_list"
             android:parentActivityName=".home"/>
+        <activity android:name=".messageFromAdmin"
+            android:parentActivityName=".home"/>
 
         <activity android:name=".activity_list"
             android:parentActivityName=".topic_list"/>

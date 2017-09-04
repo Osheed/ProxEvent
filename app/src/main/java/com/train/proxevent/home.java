@@ -80,7 +80,6 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
         rv_currActivities.setLayoutManager(new LinearLayoutManager(this));
 
         mActivityDatabase = FirebaseDatabase.getInstance().getReference("Activities").child("All");
-        Query sortByDate = mActivityDatabase.orderByChild("Act_date_end");
 
 
         // Map

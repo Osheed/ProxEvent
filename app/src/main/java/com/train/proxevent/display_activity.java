@@ -55,7 +55,14 @@ public class display_activity extends AppCompatActivity {
     ImageView imageTop, imageCreator;
     TextView activity_Tile, activity_content, activityDate, activityDateEnd, tvCreator, tvEmptyUserCurrentList;
     UserActivity userActivity;
+    private FirebaseAuth currentUserID;
+    private DatabaseReference mActivityDatabase;
     private String Continue;
+    String act_owner;
+    Boolean same;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +80,7 @@ public class display_activity extends AppCompatActivity {
         tvEmptyUserCurrentList = (TextView) findViewById(R.id.tvEmptyUserCurrentList);
         listView.setAdapter(user_list_adapter);
         fabDelete = (FloatingActionButton)findViewById(R.id.fab_displayActivity_Delete);
+        currentUserID = FirebaseAuth.getInstance();
 
         setUserDetails();
 
@@ -80,8 +88,31 @@ public class display_activity extends AppCompatActivity {
         myValueTopic = getIntent().getExtras().getString("topic");
 
 
+        //test author & currentUser
+        final String uID =currentUserID.getCurrentUser().toString();
         //Recover the data from db
         mUserActivityDatabaseAdd = FirebaseDatabase.getInstance().getReference().child("UserActivity");
+        mActivityDatabase = FirebaseDatabase.getInstance().getReference()
+                .child("Activities")
+                .child("All").child(myValueIdActivity).child("Act_owner");
+
+        mActivityDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                act_owner = dataSnapshot.getValue().toString();
+                if(act_owner.equals(uID)){
+                    same = true;
+                }else{
+                    same = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
        mUserActivity_id = mUserActivityDatabaseAdd.push().getKey();
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -157,40 +188,51 @@ public class display_activity extends AppCompatActivity {
 
 
 
+        //Mask the delete Activity Button
+        /*
+        if(!Act_owner.equals(uID)){
 
-        //to delete the activity
-        fabDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(display_activity.this);
-                builder.setTitle(R.string.dilog_message_deleteActivity);
-                builder.setMessage(R.string.dialog_title_deleteActivity);
+            fabDelete.hide();
+        }else{
+            fabDelete.show();
+            //to delete the activity
+            fabDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(display_activity.this);
+                    builder.setTitle(R.string.dilog_message_deleteActivity);
+                    builder.setMessage(R.string.dialog_title_deleteActivity);
 
+                    builder.setPositiveButton(getResources().getString(R.string.Continue), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                builder.setPositiveButton(getResources().getString(R.string.Continue), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                            //Code to delete - intent - and finish
 
-                        //Code to delete - intent - and finish
-                        //finish();
-                    }
-                });
-                builder.setNegativeButton(getResources().getString(R.string.Cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent toHome = new Intent(display_activity.this,home.class);
+                            startActivity(toHome);
+                            finish();
+                        }
+                    });
+                    builder.setNegativeButton(getResources().getString(R.string.Cancel), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
 
-                        dialogInterface.cancel();
-                    }
-                });
+                    //create
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
 
-                //create
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                }
+            });
 
-            }
-        });
-
+        }
+        */
     }
+
+
 
     public void getCurrentActivity(){
         currentActivity = FirebaseDatabase.getInstance().getReference().child("Activities").child(myValueTopic).child(myValueIdActivity);
@@ -203,6 +245,7 @@ public class display_activity extends AppCompatActivity {
                 String content = dataSnapshot.child("Act_content").getValue().toString();
                 String dateCrea = dataSnapshot.child("Act_date_crea").getValue().toString();
                 String dateEnd = dataSnapshot.child("Act_date_end").getValue().toString();
+
 
                 activity_Tile.setText(title);
                 activity_content.setText(content);

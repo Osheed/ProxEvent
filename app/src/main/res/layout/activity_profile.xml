@@ -18,7 +18,7 @@
         android:layout_marginTop="14dp"
         android:background="@android:color/transparent"
         android:padding="10dp"
-        android:src="@mipmap/ic_launcher_round" />
+        app:srcCompat="@drawable/default_avatar" />
 
     <ImageView
         android:id="@+id/btn_profile_chImage"

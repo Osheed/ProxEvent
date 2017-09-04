@@ -81,7 +81,7 @@ public class profile extends AppCompatActivity {
                 mStatus.setText(status);
 
                 //load image
-                Picasso.with(profile.this).load(image).into(mDisplayImage);
+                Picasso.with(profile.this).load(image).placeholder(R.drawable.default_avatar).into(mDisplayImage);
 
 
             }

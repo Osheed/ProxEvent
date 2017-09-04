@@ -248,10 +248,24 @@ public class new_activity extends AppCompatActivity {
                 mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
                 String current_id = mCurrentUser.getUid();
                 String title = mEnterTitle.getText().toString().trim();
-                adresse = mEnterLocation.getText().toString().trim();
-                dateEnd = mDisplayDate.getText().toString().trim();
-                dateBegining = mDisplayNDate.getText().toString().trim();
+                String vide = "";
+                if(mEnterLocation.getText().toString().trim().equals(vide)){
+                        mEnterLocation.setText("No Specific");
+                }else{
+                        adresse = mEnterLocation.getText().toString().trim();
+                }
 
+                if(mDisplayDate.getText().toString().trim().equals(vide)){
+                    mDisplayDate.setText("No Specific");
+                }else{
+                    dateEnd = mDisplayDate.getText().toString().trim();
+                }
+
+                if (mDisplayNDate.getText().toString().trim().equals(vide)){
+                    mDisplayNDate.setText("No Specific");
+                }else{
+                    dateBegining = mDisplayNDate.getText().toString().trim();
+                }
 
                 // to ordenate data for db
                 HashMap<String, String> activityMap = new HashMap<>();

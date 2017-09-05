@@ -234,13 +234,6 @@ public class new_activity extends AppCompatActivity {
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Progress
-                mProgress = new ProgressDialog(new_activity.this);
-                mProgress.setTitle("Saving Changes");
-                mProgress.setMessage("Please wait while we save the changes");
-                mProgress.show();
-
                 //Recover data
                 String content = mEnterContent.getText().toString().trim();
                 String latitude = "latitudeyyyy";
@@ -249,6 +242,18 @@ public class new_activity extends AppCompatActivity {
                 String current_id = mCurrentUser.getUid();
                 String title = mEnterTitle.getText().toString().trim();
                 String vide = "";
+
+                //Control for minimum data
+                if (title.equals(vide) || content.equals(vide)) {
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.Title_Content), Toast.LENGTH_LONG).show();
+                } else {
+                //Progress
+                mProgress = new ProgressDialog(new_activity.this);
+                mProgress.setTitle("Saving Changes");
+                mProgress.setMessage("Please wait while we save the changes");
+                mProgress.show();
+
+
                 if (mEnterLocation.getText().toString().trim().equals(vide)) {
                     mEnterLocation.setText("No Specific");
                 } else {
@@ -270,9 +275,7 @@ public class new_activity extends AppCompatActivity {
                     img_url = "ic_action_clock";
                 }
 
-                if (title == null || content == null) {
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.Title_Content), Toast.LENGTH_LONG).show();
-                } else {
+
                     // to ordenate data for db
                     HashMap<String, String> activityMap = new HashMap<>();
                     activityMap.put("Act_adresse", adresse);

@@ -59,7 +59,8 @@ public class display_activity extends AppCompatActivity {
     TextView activity_Tile, activity_content, activityDate, activityDateEnd, tvCreator, tvEmptyUserCurrentList;
     UserActivity userActivity;
     private FirebaseAuth mAuth;
-    private DatabaseReference mActivityDatabase;
+    private DatabaseReference mActivityAllDatabase;
+    private DatabaseReference mActivityTopicDatabase;
     private String Continue;
 
 
@@ -92,7 +93,8 @@ public class display_activity extends AppCompatActivity {
 
         //Recover the data from db
         mUserActivityDatabaseAdd = FirebaseDatabase.getInstance().getReference().child("UserActivity");
-
+        mActivityAllDatabase = FirebaseDatabase.getInstance().getReference("Activities").child("All").child(myValueIdActivity);
+        mActivityTopicDatabase = FirebaseDatabase.getInstance().getReference("Activities").child(myValueTopic).child(myValueIdActivity);
 
 
         mUserActivity_id = mUserActivityDatabaseAdd.push().getKey();
@@ -137,9 +139,16 @@ public class display_activity extends AppCompatActivity {
         });
         listViewOnClickListener();
 
-
-        getCurrentActivity();
-
+        //check infos
+        if(mActivityAllDatabase ==  null){
+            Intent toHome = new Intent(display_activity.this,home.class);
+            // Intent to redirect the user at home not at the display_activity when they push back
+            toHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(toHome);
+            finish();
+        }else {
+            getCurrentActivity();
+        }
 
         fab = (FloatingActionButton) findViewById(R.id.fabJoinActivity);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -193,9 +202,13 @@ public class display_activity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
-                            //Code to delete - intent - and finish
+                            //Code to delete in All and topic related
+                            mActivityAllDatabase.removeValue();
+                            mActivityTopicDatabase.removeValue();
 
                             Intent toHome = new Intent(display_activity.this,home.class);
+                            // Intent to redirect the user at home not at the display_activity when they push back
+                            toHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(toHome);
                             finish();
                         }

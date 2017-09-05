@@ -200,6 +200,9 @@
     <string name="currentUsers">Users</string>
     <string name="Admin">Administrator</string>
     <string name="Title_Content">You need to have a Title and a Content</string>
+    <string name="dilog_title_deleteUser">Delete your Account</string>
+    <string name="dialog_message_deleteUser">Are you sure that you want to delete your Account?</string>
+    <string name="ContactAdmin">Errors on deleting your account, retry or send message to the admin</string>
 
 
 </resources>

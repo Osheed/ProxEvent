@@ -225,6 +225,7 @@ public class display_activity extends AppCompatActivity {
                     dialog.show();
 
                 }
+
             });
 
         }

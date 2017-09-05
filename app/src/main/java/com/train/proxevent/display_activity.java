@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,11 +58,11 @@ public class display_activity extends AppCompatActivity {
     ImageView imageTop, imageCreator;
     TextView activity_Tile, activity_content, activityDate, activityDateEnd, tvCreator, tvEmptyUserCurrentList;
     UserActivity userActivity;
-    private FirebaseAuth currentUserID;
+    private FirebaseAuth mAuth;
     private DatabaseReference mActivityDatabase;
     private String Continue;
-    String act_owner;
-    Boolean same;
+
+
 
 
     @Override
@@ -80,7 +81,8 @@ public class display_activity extends AppCompatActivity {
         tvEmptyUserCurrentList = (TextView) findViewById(R.id.tvEmptyUserCurrentList);
         listView.setAdapter(user_list_adapter);
         fabDelete = (FloatingActionButton) findViewById(R.id.fab_displayActivity_Delete);
-        currentUserID = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
 
         setUserDetails();
 
@@ -88,30 +90,9 @@ public class display_activity extends AppCompatActivity {
         myValueTopic = getIntent().getExtras().getString("topic");
 
 
-        //test author & currentUser
-        final String uID = currentUserID.getCurrentUser().toString();
         //Recover the data from db
         mUserActivityDatabaseAdd = FirebaseDatabase.getInstance().getReference().child("UserActivity");
-        mActivityDatabase = FirebaseDatabase.getInstance().getReference()
-                .child("Activities")
-                .child("All").child(myValueIdActivity).child("Act_owner");
 
-        mActivityDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                act_owner = dataSnapshot.getValue().toString();
-                if (act_owner.equals(uID)) {
-                    same = true;
-                } else {
-                    same = false;
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
         mUserActivity_id = mUserActivityDatabaseAdd.push().getKey();
@@ -190,10 +171,12 @@ public class display_activity extends AppCompatActivity {
             }
         });
 
-
+        //test author & currentUser
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String uid = currentUser.getUid();
         //Mask the delete Activity Button
-        /*
-        if(!Act_owner.equals(uID)){
+        String Act_owner = getIntent().getExtras().getString("owner");
+        if(!Act_owner.equals(uid)){
 
             fabDelete.hide();
         }else{
@@ -232,7 +215,7 @@ public class display_activity extends AppCompatActivity {
             });
 
         }
-        */
+
     }
 
 
@@ -254,8 +237,9 @@ public class display_activity extends AppCompatActivity {
                 activityDate.setText(activityDate.getText() + " " + dateCrea);
                 activityDateEnd.setText(activityDateEnd.getText() + " " + dateEnd);
                 //load image
-                Picasso.with(display_activity.this).load(imgTop).into(imageTop);
-
+                if(!imgTop.equals("ic_action_clock")) {
+                    Picasso.with(display_activity.this).load(imgTop).placeholder(R.drawable.ic_action_clock).into(imageTop);
+                }
                 //User creator
                 setUserCreator(dataSnapshot.child("Act_owner").getValue().toString());
             }

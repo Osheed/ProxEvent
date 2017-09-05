@@ -36,8 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by David on 14.07.2017.
  */
 
-//TODO: Receive a notification
-//TODO: View detail of a notification
+
 //TODO: Controler que dans home l'affichage des activités se fait a partir d'aujourd'hui
 //TODO: Detruire une activity si on est le proprietaire
 //TODO: Sortir tous les strings comme dans display activity

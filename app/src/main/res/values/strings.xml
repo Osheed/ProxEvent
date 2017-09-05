@@ -199,6 +199,7 @@
     <string name="sendMessage">Send Message</string>
     <string name="currentUsers">Users</string>
     <string name="Admin">Administrator</string>
+    <string name="Title_Content">You need to have a Title and a Content</string>
 
 
 </resources>

@@ -249,72 +249,78 @@ public class new_activity extends AppCompatActivity {
                 String current_id = mCurrentUser.getUid();
                 String title = mEnterTitle.getText().toString().trim();
                 String vide = "";
-                if(mEnterLocation.getText().toString().trim().equals(vide)){
-                        mEnterLocation.setText("No Specific");
-                }else{
-                        adresse = mEnterLocation.getText().toString().trim();
+                if (mEnterLocation.getText().toString().trim().equals(vide)) {
+                    mEnterLocation.setText("No Specific");
+                } else {
+                    adresse = mEnterLocation.getText().toString().trim();
                 }
 
-                if(mDisplayDate.getText().toString().trim().equals(vide)){
+                if (mDisplayDate.getText().toString().trim().equals(vide)) {
                     mDisplayDate.setText("No Specific");
-                }else{
+                } else {
                     dateEnd = mDisplayDate.getText().toString().trim();
                 }
 
-                if (mDisplayNDate.getText().toString().trim().equals(vide)){
+                if (mDisplayNDate.getText().toString().trim().equals(vide)) {
                     mDisplayNDate.setText("No Specific");
-                }else{
+                } else {
                     dateBegining = mDisplayNDate.getText().toString().trim();
                 }
+                if (img_url == null) {
+                    img_url = "ic_action_clock";
+                }
 
-                // to ordenate data for db
-                HashMap<String, String> activityMap = new HashMap<>();
-                activityMap.put("Act_adresse", adresse);
-                activityMap.put("Act_content", content);
-                activityMap.put("Act_date_crea", dateBegining);
-                activityMap.put("Act_date_end", dateEnd);
-                activityMap.put("Act_latitude", latitude);
-                activityMap.put("Act_longitude", longitude);
-                activityMap.put("Act_owner", current_id);
-                activityMap.put("Act_title", title);
-                activityMap.put("Act_topic", topics);
-                activityMap.put("Act_image", img_url);
+                if (title == null || content == null) {
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.Title_Content), Toast.LENGTH_LONG).show();
+                } else {
+                    // to ordenate data for db
+                    HashMap<String, String> activityMap = new HashMap<>();
+                    activityMap.put("Act_adresse", adresse);
+                    activityMap.put("Act_content", content);
+                    activityMap.put("Act_date_crea", dateBegining);
+                    activityMap.put("Act_date_end", dateEnd);
+                    activityMap.put("Act_latitude", latitude);
+                    activityMap.put("Act_longitude", longitude);
+                    activityMap.put("Act_owner", current_id);
+                    activityMap.put("Act_title", title);
+                    activityMap.put("Act_topic", topics);
+                    activityMap.put("Act_image", img_url);
 
-                //saving for topic all
-                mActivityDatabase.child("All").child(mActivity_id).setValue(activityMap).
-                        addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                  @Override
-                                                  public void onComplete(@NonNull Task<Void> task) {
+                    //saving for topic all
+                    mActivityDatabase.child("All").child(mActivity_id).setValue(activityMap).
+                            addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                      @Override
+                                                      public void onComplete(@NonNull Task<Void> task) {
 
-                                                      if (task.isSuccessful()) {
-                                                          mProgress.dismiss();
-                                                      } else {
-                                                          Toast.makeText(getApplicationContext(), "There was some errors in Creating this Activities", Toast.LENGTH_LONG).show();
+                                                          if (task.isSuccessful()) {
+                                                              mProgress.dismiss();
+                                                          } else {
+                                                              Toast.makeText(getApplicationContext(), "There was some errors in Creating this Activities", Toast.LENGTH_LONG).show();
+                                                          }
                                                       }
                                                   }
-                                              }
-                        );
+                            );
 
-                //Saving for choosen topic
-                mActivityDatabase.child(topics).child(mActivity_id).setValue(activityMap).
-                        addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                  @Override
-                                                  public void onComplete(@NonNull Task<Void> task) {
+                    //Saving for choosen topic
+                    mActivityDatabase.child(topics).child(mActivity_id).setValue(activityMap).
+                            addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                      @Override
+                                                      public void onComplete(@NonNull Task<Void> task) {
 
-                                                      if (task.isSuccessful()) {
-                                                          mProgress.dismiss();
-                                                          Intent profileIntent = new Intent(new_activity.this, home.class);
-                                                          startActivity(profileIntent);
-                                                      } else {
-                                                          Toast.makeText(getApplicationContext(), "There was some errors in Creating this Activities", Toast.LENGTH_LONG).show();
+                                                          if (task.isSuccessful()) {
+                                                              mProgress.dismiss();
+                                                              Intent profileIntent = new Intent(new_activity.this, home.class);
+                                                              startActivity(profileIntent);
+                                                          } else {
+                                                              Toast.makeText(getApplicationContext(), "There was some errors in Creating this Activities", Toast.LENGTH_LONG).show();
+                                                          }
                                                       }
                                                   }
-                                              }
-                        );
-            }
+                            );
+                }
 
 
-        });
+            }});
 
     }
 

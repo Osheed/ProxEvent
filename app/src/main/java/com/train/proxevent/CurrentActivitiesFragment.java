@@ -32,7 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CurrentActivitiesFragment extends Fragment {
 
     private DatabaseReference mActivityDatabase;
-    private Button goAdminBtn;
+
     private FirebaseAuth mAuth;
     private View mMainView;
     private RecyclerView rv_currActivities;
@@ -58,18 +58,6 @@ public class CurrentActivitiesFragment extends Fragment {
         // initializes
         mAuth = FirebaseAuth.getInstance();
 
-        // Check if user is signed
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        // FirebaseUser currentUser = mAuth.getCurrentUser();
-        // Log.i("currentUser", "you are admin + "+currentUser.getUid());
-        String uid = currentUser.getUid();
-        String admin = "mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
-
-        if (uid.equalsIgnoreCase(admin)) {
-            goAdminBtn = (Button) mMainView.findViewById(R.id.goAdmin);
-            goAdminBtn.setVisibility(View.VISIBLE);
-        }
 
         // Inflate the layout for this fragment
         return mMainView;
@@ -87,16 +75,6 @@ public class CurrentActivitiesFragment extends Fragment {
         String today = formatter.format(todayDate);
 
 
-
-            // FirebaseUser currentUser = mAuth.getCurrentUser();
-            // Log.i("currentUser", "you are admin + "+currentUser.getUid());
-            String uid = currentUser.getUid();
-            String admin = "mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
-
-            if (uid.equalsIgnoreCase(admin)) {
-                goAdminBtn = (Button) mMainView.findViewById(R.id.goAdmin);
-                goAdminBtn.setVisibility(View.VISIBLE);
-            }
 
             FirebaseRecyclerAdapter<Activities, activity_list.ActivityViewHolder> firebaseRecyclerAdapter =
                     new FirebaseRecyclerAdapter<Activities, activity_list.ActivityViewHolder>(

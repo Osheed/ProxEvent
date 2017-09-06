@@ -62,13 +62,6 @@ public class home extends AppCompatActivity  {
         setContentView(R.layout.activity_home);
         setTitle(R.string.Home);
 
-
-
-
-
-
-
-
         // initializes
         mAuth = FirebaseAuth.getInstance();
         mViewPager = (ViewPager)findViewById(R.id.home_tabPager);
@@ -79,7 +72,6 @@ public class home extends AppCompatActivity  {
         mViewPager.setAdapter(mHomePagerAdapter);
         mTabLayout = (TabLayout)findViewById(R.id.home_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
-
 
 
     }
@@ -176,6 +168,18 @@ public class home extends AppCompatActivity  {
         if (currentUser == null) {
             sendToStart();
         }
+
+/*
+        // FirebaseUser currentUser = mAuth.getCurrentUser();
+        // Log.i("currentUser", "you are admin + "+currentUser.getUid());
+        String uid = currentUser.getUid();
+        String admin = "mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
+
+        if (uid.equalsIgnoreCase(admin)) {
+            goAdminBtn = (Button) findViewById(R.id.goAdmin);
+            goAdminBtn.setVisibility(View.VISIBLE);
+        }
+*/
 
     }
 

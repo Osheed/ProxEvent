@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i("home", "home admin + "+currentUser.getUid());
                         Intent mainIntent = new Intent(LoginActivity.this, home.class);
 
-
+                        //Clear previous tasks
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                         startActivity(mainIntent);

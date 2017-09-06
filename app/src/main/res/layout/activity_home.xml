@@ -1,101 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.train.proxevent.home">
 
-    <LinearLayout
-        android:id="@+id/activity_profile"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/appBarLayout">
 
-        android:focusableInTouchMode="true"
-        android:orientation="vertical"
-        android:weightSum="1">
-
-        <Button
-            android:id="@+id/messages"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/home_tabs"
             android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_weight="0.23"
-            android:onClick="goAdminMessages"
-            android:text="View admin messages" />
+            android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/linearChangeUserPhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
-            android:weightSum="1"
-            android:layout_weight="0.23"
-            tools:ignore="InefficientWeight">
+        </android.support.design.widget.TabLayout>
+    </android.support.design.widget.AppBarLayout>
 
-            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.MapFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="250dp"
-                android:fitsSystemWindows="true"
-                android:layout_gravity="center_horizontal"
-                app:srcCompat="@drawable/map"
-                android:layout_weight="1.50"
-                tools:ignore="InefficientWeight,NestedWeights" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/home_tabPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBarLayout"></android.support.v4.view.ViewPager>
 
-        </LinearLayout>
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.23">
 
-            <TextView
-                android:id="@+id/tvEmptyUserCurrentList"
-                android:layout_width="201dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/currentActivities"
-                android:textColor="@color/darkGray"
-                android:textSize="10pt"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="8dp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp" />
-
-            <Button
-                android:id="@+id/goAdmin"
-                android:layout_width="175dp"
-                android:layout_height="43dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:onClick="goAdmin"
-                android:text="Administrate"
-                android:visibility="invisible"
-                app:layout_constraintHorizontal_bias="0.466"
-                app:layout_constraintLeft_toRightOf="@+id/tvEmptyUserCurrentList"
-                app:layout_constraintRight_toRightOf="parent"
-                tools:layout_editor_absoluteY="-5dp"
-                tools:layout_editor_absoluteX="212dp" />
-        </android.support.constraint.ConstraintLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="263dp"
-            android:orientation="vertical"
-            android:id="@+id/profile_list_layout"
-            android:background="@drawable/linear_border_square"
-            android:weightSum="1">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_home_currActivities"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10pt"
-                tools:ignore="NestedScrolling"></android.support.v7.widget.RecyclerView>
-
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+</RelativeLayout>

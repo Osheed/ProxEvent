@@ -3,6 +3,8 @@ package com.train.proxevent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,12 +44,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 //TODO: Detruire une activity si on est le proprietaire
 //TODO: Sortir tous les strings comme dans display activity
 
-public class home extends AppCompatActivity implements OnMapReadyCallback {
+public class home extends AppCompatActivity  {
 
     private FirebaseAuth mAuth;
-    private RecyclerView rv_currActivities;
-    private DatabaseReference mActivityDatabase;
+
+
     private Button goAdminBtn;
+    private ViewPager mViewPager;
+    private HomePagerAdapter mHomePagerAdapter;
+    private TabLayout mTabLayout;
 
     private GoogleMap mymap;
 
@@ -58,25 +63,23 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
         setTitle(R.string.Home);
 
 
-        //Current activities
-        rv_currActivities = (RecyclerView) findViewById(R.id.rv_home_currActivities);
-        rv_currActivities.setHasFixedSize(true);
-        rv_currActivities.setLayoutManager(new LinearLayoutManager(this));
-
-        mActivityDatabase = FirebaseDatabase.getInstance().getReference("Activities").child("All");
 
 
-        // Map
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
-                .findFragmentById(R.id.map);
 
-        mapFragment.getMapAsync(this);
+
 
 
         // initializes
         mAuth = FirebaseAuth.getInstance();
+        mViewPager = (ViewPager)findViewById(R.id.home_tabPager);
 
-        Intent intent = getIntent();
+        mHomePagerAdapter = new HomePagerAdapter(getSupportFragmentManager());
+
+        //Fragments
+        mViewPager.setAdapter(mHomePagerAdapter);
+        mTabLayout = (TabLayout)findViewById(R.id.home_tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
+
 
 
     }
@@ -162,18 +165,6 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
-    @Override
-    public void onMapReady(GoogleMap map) {
-        mymap = map;
-        mymap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        mymap.getUiSettings().setZoomControlsEnabled(true);
-        CameraUpdate camUpd1 =
-                CameraUpdateFactory
-                        .newLatLngZoom(new LatLng(46.2443, 7.3250), 10);
-
-        mymap.moveCamera(camUpd1);
-
-    }
 
     @Override
     protected void onStart() {
@@ -181,109 +172,11 @@ public class home extends AppCompatActivity implements OnMapReadyCallback {
         // Check if user is signed
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        //Today
-        Date todayDate = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        String today = formatter.format(todayDate);
 
         if (currentUser == null) {
             sendToStart();
         }
 
-
-        // FirebaseUser currentUser = mAuth.getCurrentUser();
-        // Log.i("currentUser", "you are admin + "+currentUser.getUid());
-        String uid = currentUser.getUid();
-        String admin = "mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
-
-        if (uid.equalsIgnoreCase(admin)) {
-            goAdminBtn = (Button) findViewById(R.id.goAdmin);
-            goAdminBtn.setVisibility(View.VISIBLE);
-        }
-        FirebaseRecyclerAdapter<Activities, activity_list.ActivityViewHolder> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<Activities, activity_list.ActivityViewHolder>(
-                        Activities.class,
-                        R.layout.activity_list_layout,
-                        activity_list.ActivityViewHolder.class,
-                        mActivityDatabase.orderByChild("Act_date_end").endAt("31-12-2100")
-                ) {
-                    @Override
-                    protected void populateViewHolder(activity_list.ActivityViewHolder viewHolder, Activities model, int position) {
-
-
-                        viewHolder.setAdresse(model.getAct_adresse());
-                        //viewHolder.setContent(model.getAct_content());
-                        viewHolder.setDate_crea(model.getAct_date_crea());
-                        viewHolder.setDate_end(model.getAct_date_end());
-                        //viewHolder.setLatitude(model.getAct_latitude());
-                        //viewHolder.setLongitude(model.getAct_longitude());
-                        //viewHolder.setOwner(model.getAct_owner());
-                        viewHolder.setTitle(model.getAct_title());
-                        //viewHolder.setTopic(model.getAct_topic());
-                        viewHolder.setActImage(model.getAct_image(), getApplicationContext());
-
-
-                        //retrieve the key of activity clicked
-                        final String activity_id = getRef(position).getKey();
-                        final String activity_topic = model.getAct_topic();
-                        final String activity_owner = model.getAct_owner();
-
-                        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent activityIntent = new Intent(home.this, display_activity.class);
-                                activityIntent.putExtra("idActivity", activity_id);
-                                activityIntent.putExtra("topic",activity_topic);
-                                activityIntent.putExtra("owner",activity_owner);
-                                startActivity(activityIntent);
-                            }
-                        });
-
-                    }
-
-
-                };
-
-        rv_currActivities.setAdapter(firebaseRecyclerAdapter);
-
-    }
-
-    //to retrieve the data
-    public static class ActivityViewHolder extends RecyclerView.ViewHolder {
-
-        View mView;
-
-        public ActivityViewHolder(View itemView) {
-            super(itemView);
-
-            mView = itemView;
-        }
-
-
-        public void setAdresse(String adresse) {
-            TextView activityAdress = (TextView) mView.findViewById(R.id.tv_AL_Adresse);
-            activityAdress.setText(adresse);
-        }
-
-        public void setDate_crea(String date_crea) {
-            TextView activityDate_crea = (TextView) mView.findViewById(R.id.tv_AL_dateCrea);
-            activityDate_crea.setText(date_crea);
-        }
-
-        public void setDate_end(String date_end) {
-            TextView activityDate_end = (TextView) mView.findViewById(R.id.tv_AL_dateEnd);
-            activityDate_end.setText(date_end);
-        }
-
-        public void setTitle(String title) {
-            TextView activityTitle = (TextView) mView.findViewById(R.id.tv_AL_Title);
-            activityTitle.setText(title);
-        }
-
-        public void setActImage(String act_image, Context applicationContext) {
-            CircleImageView activityImage = (CircleImageView) mView.findViewById(R.id.civ_AL_image);
-            Picasso.with(applicationContext).load(act_image).placeholder(R.drawable.ic_action_clock).into(activityImage);
-        }
     }
 
 

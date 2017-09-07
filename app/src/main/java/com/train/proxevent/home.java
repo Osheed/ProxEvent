@@ -143,7 +143,7 @@ public class home extends AppCompatActivity  {
                 return true;
 
             case R.id.action_messages:
-                Intent goMessage = new Intent(this, admin.class);
+                Intent goMessage = new Intent(this, messageFromAdmin.class);
                 startActivity(goMessage);
                 return true;
 

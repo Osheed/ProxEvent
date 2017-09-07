@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class settings extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class settings extends AppCompatActivity {
     private DatabaseReference MUserDB;
     private FirebaseUser currentUser;
     private Button goAdminBtn;
-
+    private ValueEventListener listner;
     private DatabaseReference mUserDatabase;
     private FirebaseUser mCurrentUser;
 
@@ -83,7 +84,6 @@ public class settings extends AppCompatActivity {
                 //Code to delete from db
                 MUserDB = FirebaseDatabase.getInstance().getReference("Users").child(uid);
                 MUserDB.removeValue();
-
 
                 //Code to delete from auth
                 currentUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {

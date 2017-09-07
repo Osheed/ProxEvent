@@ -45,7 +45,7 @@ import java.util.HashMap;
 public class display_activity extends AppCompatActivity {
 
     user_list_adapter user_list_adapter;
-    private DatabaseReference mUserDatabase, currentUserDB, currentActivity, mCurrentUserCreator, mUserActivityDatabase, mUserActivityDatabaseAdd;
+    private DatabaseReference mUserDatabase, currentUserDB, currentActivity, mCurrentUserCreator, mUserActivityDatabase, mUserActivityDatabaseAdd, mUserTestDelete;
     private FirebaseUser mCurrentUser;
     private Users users;
     private ListView listView;
@@ -62,8 +62,9 @@ public class display_activity extends AppCompatActivity {
     private DatabaseReference mActivityAllDatabase;
     private DatabaseReference mActivityTopicDatabase;
     private String Continue;
-
-
+    private boolean test;
+    private int cpt;
+    private ValueEventListener listner;
 
 
     @Override
@@ -99,6 +100,8 @@ public class display_activity extends AppCompatActivity {
 
         mUserActivity_id = mUserActivityDatabaseAdd.push().getKey();
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String current_uid = mCurrentUser.getUid();
+        mUserTestDelete = FirebaseDatabase.getInstance().getReference("Users").child(current_uid);
         mUserDatabase = FirebaseDatabase.getInstance().getReference("Users");
         mUserDatabase.addChildEventListener(new ChildEventListener() {
             @Override
@@ -181,61 +184,64 @@ public class display_activity extends AppCompatActivity {
         });
 
         //test author & currentUser
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        String uid = currentUser.getUid();
-        //Mask the delete Activity Button
-        String Act_owner = getIntent().getExtras().getString("owner");
-        if(!Act_owner.equals(uid)){
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        String uid = currentUser.getUid();
+//        //Mask the delete Activity Button
+//        String Act_owner = getIntent().getExtras().getString("owner");
+//        if(!mCurrentUserCreator.equals(mCurrentUser)){
+//
+//            fabDelete.hide();
+//        }else{
+//            fabDelete.show();
+//            //to delete the activity
+//            fabDelete.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(display_activity.this);
+//                    builder.setTitle(R.string.dilog_message_deleteActivity);
+//                    builder.setMessage(R.string.dialog_title_deleteActivity);
+//
+//                    builder.setPositiveButton(getResources().getString(R.string.Continue), new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                            //Code to delete in All and topic related
+//                            mActivityAllDatabase.removeValue();
+//                            mActivityTopicDatabase.removeValue();
+//
+//                            Intent toHome = new Intent(display_activity.this,home.class);
+//                            // Intent to redirect the user at home not at the display_activity when they push back
+//                            toHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            startActivity(toHome);
+//                            finish();
+//                        }
+//                    });
+//                    builder.setNegativeButton(getResources().getString(R.string.Cancel), new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialogInterface, int i) {
+//                            dialogInterface.cancel();
+//                        }
+//                    });
+//
+//                    //create
+//                    AlertDialog dialog = builder.create();
+//                    dialog.show();
+//
+//                }
+//
+//            });
+//
+//        }
 
-            fabDelete.hide();
-        }else{
-            fabDelete.show();
-            //to delete the activity
-            fabDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(display_activity.this);
-                    builder.setTitle(R.string.dilog_message_deleteActivity);
-                    builder.setMessage(R.string.dialog_title_deleteActivity);
 
-                    builder.setPositiveButton(getResources().getString(R.string.Continue), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                            //Code to delete in All and topic related
-                            mActivityAllDatabase.removeValue();
-                            mActivityTopicDatabase.removeValue();
-
-                            Intent toHome = new Intent(display_activity.this,home.class);
-                            // Intent to redirect the user at home not at the display_activity when they push back
-                            toHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(toHome);
-                            finish();
-                        }
-                    });
-                    builder.setNegativeButton(getResources().getString(R.string.Cancel), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel();
-                        }
-                    });
-
-                    //create
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-
-                }
-
-            });
-
-        }
 
     }
 
 
     public void getCurrentActivity() {
         currentActivity = FirebaseDatabase.getInstance().getReference().child("Activities").child(myValueTopic).child(myValueIdActivity);
-        currentActivity.addValueEventListener(new ValueEventListener() {
+        currentActivity.addValueEventListener(listner = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -281,6 +287,61 @@ public class display_activity extends AppCompatActivity {
                 String imgAuthor = dataSnapshot.child("image").getValue().toString();
                 Picasso.with(display_activity.this).load(imgAuthor).into(imageCreator);
 
+
+
+                    if(mCurrentUserCreator.equals(mUserTestDelete)){
+                        fabDelete.show();
+                        //to delete the activity
+                        fabDelete.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(display_activity.this);
+                                builder.setTitle(R.string.dilog_message_deleteActivity);
+                                builder.setMessage(R.string.dialog_title_deleteActivity);
+
+                                builder.setPositiveButton(getResources().getString(R.string.Continue), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        mActivityAllDatabase.removeValue();
+                                        mActivityAllDatabase.removeEventListener(listner);
+                                        mActivityTopicDatabase.removeValue();
+                                        mActivityTopicDatabase.removeEventListener(listner);
+                                        Intent toHome = new Intent(display_activity.this,home.class);
+                                        // Intent to redirect the user at home not at the display_activity when they push back
+                                        toHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(toHome);
+                                        finish();
+
+                                    }
+                                });
+                                builder.setNegativeButton(getResources().getString(R.string.Cancel), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                });
+
+                                //create
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+
+                            }
+
+                        });
+
+                    }else{
+//                        fabDelete.hide;
+                        fabDelete.setVisibility(View.GONE);
+//                        fabDelete.hide();
+
+                    }
+
+
+
+
+
+
+
             }
 
             @Override
@@ -289,6 +350,7 @@ public class display_activity extends AppCompatActivity {
         };
         mCurrentUserCreator.addValueEventListener(postListener);
     }
+
 
 
     public void setUserDetails() {

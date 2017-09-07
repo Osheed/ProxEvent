@@ -69,7 +69,7 @@ public class my_activities extends AppCompatActivity {
                 for(DataSnapshot snap: dataSnapshot.getChildren()){
                     nbActivities += 1;
                 }
-                setTitle("My activities " + " (" + nbActivities + ")");
+                setTitle("My activities ");// + " (" + nbActivities + ")");
             }
 
             @Override
@@ -105,7 +105,7 @@ public class my_activities extends AppCompatActivity {
                         Activities.class,
                         R.layout.activity_list_layout,
                         activity_list.ActivityViewHolder.class,
-                        mActivityDatabase
+                        mActivityDatabase.orderByChild("Act_owner").equalTo(current_uid)
                 ){
                     @Override
                     protected void populateViewHolder(activity_list.ActivityViewHolder viewHolder, Activities model, int position){

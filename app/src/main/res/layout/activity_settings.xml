@@ -152,5 +152,13 @@
                         />
                 </LinearLayout>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/goAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="goAdmin"
+                android:text="Administrate"
+                android:visibility="invisible" />
         </LinearLayout>
     </ScrollView>

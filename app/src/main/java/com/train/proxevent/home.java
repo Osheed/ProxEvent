@@ -31,6 +31,15 @@ import com.train.proxevent.Objects.Activities;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import android.app.Application;
+
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
+
+import android.app.Application;
+
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -47,7 +56,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class home extends AppCompatActivity  {
 
     private FirebaseAuth mAuth;
-
+    private Tracker mTracker;
 
     private Button goAdminBtn;
     private ViewPager mViewPager;
@@ -55,6 +64,14 @@ public class home extends AppCompatActivity  {
     private TabLayout mTabLayout;
 
     private GoogleMap mymap;
+
+    synchronized public Tracker getDefaultTracker() {
+        if (mTracker == null) {
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            mTracker = analytics.newTracker(R.xml.global_tracker);
+        }
+        return mTracker;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,17 +98,9 @@ public class home extends AppCompatActivity  {
     public void seeDisplayActivityTest(View view) {
         Intent goTopics = new Intent(this, display_activity.class);
         startActivity(goTopics);
-
-
     }
 
-    public void goAdmin(View view) {
-        //  Intent goToAdmin = new Intent(this, messageFromAdmin.class);
-        Intent goToAdmin = new Intent(this, admin.class);
-        startActivity(goToAdmin);
 
-
-    }
     public void goAdminMessages(View view) {
         Intent goToMessages = new Intent(this, messageFromAdmin.class);
         startActivity(goToMessages);
@@ -169,16 +178,7 @@ public class home extends AppCompatActivity  {
             sendToStart();
         }
 
-/*
-        // FirebaseUser currentUser = mAuth.getCurrentUser();
-        // Log.i("currentUser", "you are admin + "+currentUser.getUid());
-        String uid = currentUser.getUid();
-        String admin = "mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
-        if (uid.equalsIgnoreCase(admin)) {
-            goAdminBtn = (Button) findViewById(R.id.goAdmin);
-            goAdminBtn.setVisibility(View.VISIBLE);
-        }
-*/
+
 
     }
 

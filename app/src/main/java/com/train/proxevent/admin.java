@@ -92,6 +92,8 @@ public class admin extends AppCompatActivity implements OnChartValueSelectedList
     ListView list_of_tables;
     TextView text;
     private int cpt;
+    private PieChart pieChart;
+
 
     MapFragment mapFragment = (MapFragment) getFragmentManager()
             .findFragmentById(R.id.map);
@@ -101,14 +103,15 @@ public class admin extends AppCompatActivity implements OnChartValueSelectedList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-        PieChart pieChart = (PieChart) findViewById(R.id.piechart);
+         pieChart = (PieChart) findViewById(R.id.piechart);
         pieChart.setUsePercentValues(true);
 
         // IMPORTANT: In a PieChart, no values (Entry) should have the same
         // xIndex (even if from different DataSets), since no values can be
         // drawn above each other.
-        ArrayList<Entry> yvalues = new ArrayList<Entry>();
-        yvalues.add(new Entry(8f, 0));
+      /**  ArrayList<Entry> yvalues = new ArrayList<Entry>();
+        DataSnapshot dataSnapshot = null;
+
         yvalues.add(new Entry(15f, 1));
         yvalues.add(new Entry(12f, 2));
         yvalues.add(new Entry(25f, 3));
@@ -119,12 +122,12 @@ public class admin extends AppCompatActivity implements OnChartValueSelectedList
 
         ArrayList<String> xVals = new ArrayList<String>();
 
-        xVals.add("January");
-        xVals.add("February");
-        xVals.add("March");
-        xVals.add("April");
-        xVals.add("May");
-        xVals.add("June");
+        xVals.add("Activities");
+        xVals.add("Messages from Admin");
+        xVals.add("User Activities");
+        xVals.add("Users");
+        xVals.add("Mail");
+        xVals.add("Messages");
 
         PieData data = new PieData(xVals, dataSet);
         data.setValueFormatter(new PercentFormatter());
@@ -140,7 +143,7 @@ public class admin extends AppCompatActivity implements OnChartValueSelectedList
         data.setValueTextColor(Color.DKGRAY);
         pieChart.setOnChartValueSelectedListener(this);
 
-        pieChart.animateXY(1400, 1400);
+        pieChart.animateXY(1400, 1400);**/
 
         cpt = 1;
 
@@ -150,15 +153,38 @@ public class admin extends AppCompatActivity implements OnChartValueSelectedList
 
 
         myRef.addChildEventListener(new ChildEventListener() {
+
+
+            ArrayList<Entry> yvalues = new ArrayList<Entry>();
+            PieDataSet dataSet = new PieDataSet(yvalues, "Election Results");
+            ArrayList<String> xVals = new ArrayList<String>();
+            PieData data = new PieData(xVals, dataSet);
+            PieChart pieChart = (PieChart) findViewById(R.id.piechart);
+
+          //  pieChart.setOnChartValueSelectedListener(this);
+
+
+
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                if (cpt == 1) {
-                    TextView textView1 = (TextView) findViewById(R.id.textView1);
-                    textView1.setText(dataSnapshot.getKey());
 
-                    TextView textView2 = (TextView) findViewById(R.id.textView2);
-                    textView2.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+
+
+
+
+                if (cpt == 1) {
+
+                    TextView textView3 = (TextView) findViewById(R.id.textView1);
+                    textView3.setText(dataSnapshot.getKey());
+
+                    TextView textView4 = (TextView) findViewById(R.id.textView2);
+                    textView4.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+
+                    float num = dataSnapshot.getChildrenCount();
+                    xVals.add("Activities");
+                    yvalues.add(new Entry(num, 1));
+
                 }
                 if (cpt == 2) {
 
@@ -168,28 +194,62 @@ public class admin extends AppCompatActivity implements OnChartValueSelectedList
                     TextView textView4 = (TextView) findViewById(R.id.textView4);
                     textView4.setText(String.valueOf(dataSnapshot.getChildrenCount()));
 
+                    float num = dataSnapshot.getChildrenCount();
+                    xVals.add("Admin Messages");
+                    yvalues.add(new Entry(num, 2));
+
                 }
                 if (cpt == 3) {
                     TextView textView5 = (TextView) findViewById(R.id.textView5);
                     textView5.setText(dataSnapshot.getKey());
                     TextView textView6 = (TextView) findViewById(R.id.textView6);
                     textView6.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+
+                    float num = dataSnapshot.getChildrenCount();
+                    xVals.add("Users Activities");
+                    yvalues.add(new Entry(num, 3));
                 }
                 if (cpt == 4) {
                     TextView textView7 = (TextView) findViewById(R.id.textView7);
                     textView7.setText(dataSnapshot.getKey());
                     TextView textView8 = (TextView) findViewById(R.id.textView8);
                     textView8.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+
+                    float num = dataSnapshot.getChildrenCount();
+                    xVals.add("Users");
+                    yvalues.add(new Entry(num, 4));
                 }
                 if (cpt == 5) {
                     TextView textView9 = (TextView) findViewById(R.id.textView9);
                     textView9.setText(dataSnapshot.getKey());
                     TextView textView10 = (TextView) findViewById(R.id.textView10);
                     textView10.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+
+                    float num = dataSnapshot.getChildrenCount();
+                    xVals.add("Messages");
+                    yvalues.add(new Entry(num, 5));
                 }
 
 
                 cpt++;
+
+                PieData data = new PieData(xVals, dataSet);
+                data.setValueFormatter(new PercentFormatter());
+                pieChart.setData(data);
+                pieChart.setDescription("This is Pie Chart");
+
+                pieChart.setDrawHoleEnabled(true);
+                pieChart.setTransparentCircleRadius(25f);
+                pieChart.setHoleRadius(25f);
+
+                dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+                data.setValueTextSize(13f);
+                data.setValueTextColor(Color.DKGRAY);
+
+                pieChart.setUsePercentValues(true);
+
+
+                pieChart.animateXY(1400, 1400);
 
             }
 

@@ -30,14 +30,16 @@ android {
         preDexLibraries = false
     }
 }
-
+repositories {
+    maven { url "https://jitpack.io" }
+}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.firebase:firebase-client-android:2.5.2'
-
+    compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
@@ -62,6 +64,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'id.zelory:compressor:2.0.0'
     compile 'com.firebaseui:firebase-ui:2.1.0'
+
 
     apply plugin: 'com.google.gms.google-services'
 

@@ -37,7 +37,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
 
-     //   mapFragment.getMapAsync(getContext());
+        //   mapFragment.getMapAsync(getContext());
 
 
 

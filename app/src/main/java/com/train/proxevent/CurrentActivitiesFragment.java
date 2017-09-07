@@ -4,14 +4,12 @@ package com.train.proxevent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -46,7 +44,7 @@ public class CurrentActivitiesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mMainView = inflater.inflate(R.layout.fragment_current_activities,container,false);
+        mMainView = inflater.inflate(R.layout.fragment_current_activities, container, false);
         //Current activities
         rv_currActivities = (RecyclerView) mMainView.findViewById(R.id.rv_home_currActivities);
         rv_currActivities.setHasFixedSize(true);
@@ -75,52 +73,51 @@ public class CurrentActivitiesFragment extends Fragment {
         String today = formatter.format(todayDate);
 
 
-
-            FirebaseRecyclerAdapter<Activities, activity_list.ActivityViewHolder> firebaseRecyclerAdapter =
-                    new FirebaseRecyclerAdapter<Activities, activity_list.ActivityViewHolder>(
-                            Activities.class,
-                            R.layout.activity_list_layout,
-                            activity_list.ActivityViewHolder.class,
-                            mActivityDatabase.orderByChild("Act_date_end").endAt("31-12-2100")
-                    ) {
-                        @Override
-                        protected void populateViewHolder(activity_list.ActivityViewHolder viewHolder, Activities model, int position) {
-
-
-                            viewHolder.setAdresse(model.getAct_adresse());
-                            //viewHolder.setContent(model.getAct_content());
-                            viewHolder.setDate_crea(model.getAct_date_crea());
-                            viewHolder.setDate_end(model.getAct_date_end());
-                            //viewHolder.setLatitude(model.getAct_latitude());
-                            //viewHolder.setLongitude(model.getAct_longitude());
-                            //viewHolder.setOwner(model.getAct_owner());
-                            viewHolder.setTitle(model.getAct_title());
-                            //viewHolder.setTopic(model.getAct_topic());
-                            viewHolder.setActImage(model.getAct_image(), getContext() );
+        FirebaseRecyclerAdapter<Activities, activity_list.ActivityViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Activities, activity_list.ActivityViewHolder>(
+                        Activities.class,
+                        R.layout.activity_list_layout,
+                        activity_list.ActivityViewHolder.class,
+                        mActivityDatabase.orderByChild("Act_date_end").endAt("31-12-2100")
+                ) {
+                    @Override
+                    protected void populateViewHolder(activity_list.ActivityViewHolder viewHolder, Activities model, int position) {
 
 
-                            //retrieve the key of activity clicked
-                            final String activity_id = getRef(position).getKey();
-                            final String activity_topic = model.getAct_topic();
-                            final String activity_owner = model.getAct_owner();
-
-                            viewHolder.mView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent activityIntent = new Intent(getContext(), display_activity.class);
-                                    activityIntent.putExtra("idActivity", activity_id);
-                                    activityIntent.putExtra("topic", activity_topic);
-                                    activityIntent.putExtra("owner", activity_owner);
-                                    startActivity(activityIntent);
-                                }
-                            });
-
-                        }
+                        viewHolder.setAdresse(model.getAct_adresse());
+                        //viewHolder.setContent(model.getAct_content());
+                        viewHolder.setDate_crea(model.getAct_date_crea());
+                        viewHolder.setDate_end(model.getAct_date_end());
+                        //viewHolder.setLatitude(model.getAct_latitude());
+                        //viewHolder.setLongitude(model.getAct_longitude());
+                        //viewHolder.setOwner(model.getAct_owner());
+                        viewHolder.setTitle(model.getAct_title());
+                        //viewHolder.setTopic(model.getAct_topic());
+                        viewHolder.setActImage(model.getAct_image(), getContext());
 
 
-                    };
+                        //retrieve the key of activity clicked
+                        final String activity_id = getRef(position).getKey();
+                        final String activity_topic = model.getAct_topic();
+                        final String activity_owner = model.getAct_owner();
 
-            rv_currActivities.setAdapter(firebaseRecyclerAdapter);
+                        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent activityIntent = new Intent(getContext(), display_activity.class);
+                                activityIntent.putExtra("idActivity", activity_id);
+                                activityIntent.putExtra("topic", activity_topic);
+                                activityIntent.putExtra("owner", activity_owner);
+                                startActivity(activityIntent);
+                            }
+                        });
+
+                    }
+
+
+                };
+
+        rv_currActivities.setAdapter(firebaseRecyclerAdapter);
 
     }
 

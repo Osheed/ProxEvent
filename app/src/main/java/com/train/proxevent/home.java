@@ -48,10 +48,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by David on 14.07.2017.
  */
 
-//TODO: Fragment carte dans home et fragment activity list dans le 2e
-//TODO: Delete l'utilisateur
-//TODO: Controler que dans home l'affichage des activités se fait a partir d'aujourd'hui
-//TODO: Detruire une activity si on est le proprietaire
+
+
+
 //TODO: Sortir tous les strings comme dans display activity
 
 public class home extends AppCompatActivity  {

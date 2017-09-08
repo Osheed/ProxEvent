@@ -2,15 +2,14 @@ package com.train.proxevent;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,7 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class StatusActivity extends AppCompatActivity {
-
 
     private TextInputLayout mStatus;
     private Button mSavebtn;
@@ -63,15 +61,15 @@ public class StatusActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
                             mProgress.dismiss();
                             Intent profileIntent = new Intent(StatusActivity.this, profile.class);
                             startActivity(profileIntent);
 
-                        }else{
+                        } else {
 
-                            Toast.makeText(getApplicationContext(),"There was some errors in saving Changes",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "There was some errors in saving Changes", Toast.LENGTH_LONG).show();
 
                         }
                     }

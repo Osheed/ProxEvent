@@ -1,12 +1,9 @@
 package com.train.proxevent.Objects;
 
-/**
- * Created by David on 11.07.2017.
- */
 
 public class User {
     int id;
-    String username,firstname,lastname,mail,password,isAdmin,picture;
+    String username, firstname, lastname, mail, password, isAdmin, picture;
 
     public User() {
     }

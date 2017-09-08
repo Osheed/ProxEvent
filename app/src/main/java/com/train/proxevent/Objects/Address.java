@@ -1,12 +1,9 @@
 package com.train.proxevent.Objects;
 
-/**
- * Created by David on 14.07.2017.
- */
 
 public class Address {
     int id;
-    String city,npa,country;
+    String city, npa, country;
 
     public Address() {
     }

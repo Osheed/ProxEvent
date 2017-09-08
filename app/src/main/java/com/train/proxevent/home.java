@@ -1,59 +1,25 @@
 package com.train.proxevent;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
-import com.train.proxevent.Objects.Activities;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import android.app.Application;
-
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
-
-import android.app.Application;
-
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
-
-import de.hdodenhof.circleimageview.CircleImageView;
-
-/**
- * Created by David on 14.07.2017.
- */
-
-
 
 
 //TODO: Sortir tous les strings comme dans display activity
 
-public class home extends AppCompatActivity  {
+public class home extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private Tracker mTracker;
@@ -81,13 +47,13 @@ public class home extends AppCompatActivity  {
 
         // initializes
         mAuth = FirebaseAuth.getInstance();
-        mViewPager = (ViewPager)findViewById(R.id.home_tabPager);
+        mViewPager = (ViewPager) findViewById(R.id.home_tabPager);
 
         mHomePagerAdapter = new HomePagerAdapter(getSupportFragmentManager());
 
         //Fragments
         mViewPager.setAdapter(mHomePagerAdapter);
-        mTabLayout = (TabLayout)findViewById(R.id.home_tabs);
+        mTabLayout = (TabLayout) findViewById(R.id.home_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
 
 
@@ -177,9 +143,6 @@ public class home extends AppCompatActivity  {
         if (currentUser == null) {
             sendToStart();
         }
-
-
-
 
 
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/chat_list_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -35,5 +36,6 @@
             android:layout_alignBaseline="@+id/author"
             android:layout_alignBottom="@+id/author"
             android:layout_alignParentRight="true"
-            android:textColor="#706f6f" />
+            android:textColor="#706f6f"
+            tools:ignore="RtlHardcoded" />
 </RelativeLayout>

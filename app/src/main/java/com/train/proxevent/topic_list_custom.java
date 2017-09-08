@@ -8,9 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by xavne on 14/07/2017.
- */
 
 public class topic_list_custom extends ArrayAdapter<String> {
 

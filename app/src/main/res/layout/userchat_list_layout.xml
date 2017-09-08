@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="30pt"
@@ -11,7 +12,8 @@
             android:layout_marginTop="3pt"
             android:layout_marginBottom="3pt"
             android:layout_width="25pt"
-            android:layout_height="25pt"/>
+            android:layout_height="25pt"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/question_title"
@@ -24,7 +26,8 @@
             android:layout_centerVertical="true"
             android:textSize="17sp"
             android:textStyle="bold"
-            android:textColor="@color/darkGray"/>
+            android:textColor="@color/darkGray"
+            tools:ignore="HardcodedText,RtlHardcoded" />
 
         <TextView
             android:id="@+id/nbLikeInfo"
@@ -36,7 +39,8 @@
             android:layout_marginRight="9pt"
             android:layout_marginTop="34pt"
             android:layout_marginBottom="2pt"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            tools:ignore="RtlHardcoded,SmallSp" />
 
         <TextView
             android:id="@+id/nbMember"
@@ -48,8 +52,9 @@
             android:layout_marginRight="3pt"
             android:layout_marginLeft="3pt"
             android:textSize="11sp"
-            android:layout_alignParentRight="true"
-            android:textColor="@color/blueFont"/>
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/blueFont"
+            tools:ignore="RtlHardcoded,SmallSp" />
 
         <TextView
             android:id="@+id/activityDate"
@@ -61,5 +66,6 @@
             android:layout_marginBottom="2pt"
             android:textSize="10sp"
             android:layout_toLeftOf="@+id/nbLikeInfo"
-            android:layout_toStartOf="@+id/nbLikeInfo" />
+            android:layout_toStartOf="@+id/nbLikeInfo"
+            tools:ignore="RelativeOverlap,RtlHardcoded,SmallSp" />
     </RelativeLayout>

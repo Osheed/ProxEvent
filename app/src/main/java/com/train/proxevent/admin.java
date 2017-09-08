@@ -1,23 +1,16 @@
 package com.train.proxevent;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -26,38 +19,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
-import com.train.proxevent.Objects.Activities;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
-import de.hdodenhof.circleimageview.CircleImageView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.AbsoluteLayout;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
-
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.maps.MapFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -65,91 +27,81 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
 
-/**
- * Created by David on 14.07.2017.
- */
+import java.util.ArrayList;
 
-//TODO: Fragment carte dans home et fragment activity list dans le 2e
-//TODO: Delete l'utilisateur
-//TODO: Controler que dans home l'affichage des activités se fait a partir d'aujourd'hui
-//TODO: Detruire une activity si on est le proprietaire
+
 //TODO: Sortir tous les strings comme dans display activity
 
 public class admin extends AppCompatActivity implements OnChartValueSelectedListener {
 
-    private Tracker mTracker;
-    private FirebaseAuth mAuth;
-    private RecyclerView rv_currActivities;
-    private DatabaseReference mActivityDatabase;
-    private Button goAdminBtn;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     DatabaseReference Ref = database.getReference();
     ListView list_of_tables;
     TextView text;
-    private int cpt;
-    private PieChart pieChart;
-
-
     MapFragment mapFragment = (MapFragment) getFragmentManager()
             .findFragmentById(R.id.map);
-
+    private Tracker mTracker;
+    private FirebaseAuth mAuth;
+    private RecyclerView rv_currActivities;
+    private DatabaseReference mActivityDatabase;
+    private Button goAdminBtn;
+    private int cpt;
+    private PieChart pieChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-         pieChart = (PieChart) findViewById(R.id.piechart);
+        pieChart = (PieChart) findViewById(R.id.piechart);
         pieChart.setUsePercentValues(true);
 
         // IMPORTANT: In a PieChart, no values (Entry) should have the same
         // xIndex (even if from different DataSets), since no values can be
         // drawn above each other.
-      /**  ArrayList<Entry> yvalues = new ArrayList<Entry>();
-        DataSnapshot dataSnapshot = null;
+        /**  ArrayList<Entry> yvalues = new ArrayList<Entry>();
+         DataSnapshot dataSnapshot = null;
 
-        yvalues.add(new Entry(15f, 1));
-        yvalues.add(new Entry(12f, 2));
-        yvalues.add(new Entry(25f, 3));
-        yvalues.add(new Entry(23f, 4));
-        yvalues.add(new Entry(17f, 5));
+         yvalues.add(new Entry(15f, 1));
+         yvalues.add(new Entry(12f, 2));
+         yvalues.add(new Entry(25f, 3));
+         yvalues.add(new Entry(23f, 4));
+         yvalues.add(new Entry(17f, 5));
 
-        PieDataSet dataSet = new PieDataSet(yvalues, "Election Results");
+         PieDataSet dataSet = new PieDataSet(yvalues, "Election Results");
 
-        ArrayList<String> xVals = new ArrayList<String>();
+         ArrayList<String> xVals = new ArrayList<String>();
 
-        xVals.add("Activities");
-        xVals.add("Messages from Admin");
-        xVals.add("User Activities");
-        xVals.add("Users");
-        xVals.add("Mail");
-        xVals.add("Messages");
+         xVals.add("Activities");
+         xVals.add("Messages from Admin");
+         xVals.add("User Activities");
+         xVals.add("Users");
+         xVals.add("Mail");
+         xVals.add("Messages");
 
-        PieData data = new PieData(xVals, dataSet);
-        data.setValueFormatter(new PercentFormatter());
-        pieChart.setData(data);
-        pieChart.setDescription("This is Pie Chart");
+         PieData data = new PieData(xVals, dataSet);
+         data.setValueFormatter(new PercentFormatter());
+         pieChart.setData(data);
+         pieChart.setDescription("This is Pie Chart");
 
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setTransparentCircleRadius(25f);
-        pieChart.setHoleRadius(25f);
+         pieChart.setDrawHoleEnabled(true);
+         pieChart.setTransparentCircleRadius(25f);
+         pieChart.setHoleRadius(25f);
 
-        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
-        data.setValueTextSize(13f);
-        data.setValueTextColor(Color.DKGRAY);
-        pieChart.setOnChartValueSelectedListener(this);
+         dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+         data.setValueTextSize(13f);
+         data.setValueTextColor(Color.DKGRAY);
+         pieChart.setOnChartValueSelectedListener(this);
 
-        pieChart.animateXY(1400, 1400);**/
+         pieChart.animateXY(1400, 1400);**/
 
         cpt = 1;
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
-//You must remember to remove the listener when you finish using it, also to keep track of changes you can use the ChildChange
+
+        //You must remember to remove the listener when you finish using it, also to keep track of changes you can use the ChildChange
 
 
         myRef.addChildEventListener(new ChildEventListener() {
@@ -161,17 +113,11 @@ public class admin extends AppCompatActivity implements OnChartValueSelectedList
             PieData data = new PieData(xVals, dataSet);
             PieChart pieChart = (PieChart) findViewById(R.id.piechart);
 
-          //  pieChart.setOnChartValueSelectedListener(this);
-
+            //  pieChart.setOnChartValueSelectedListener(this);
 
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-
-
-
-
 
                 if (cpt == 1) {
 

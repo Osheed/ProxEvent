@@ -30,6 +30,7 @@ public class messageFromAdmin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_admin);
+        setTitle(R.string.MessageFromAdmin);
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             // Start sign in/sign up activity
@@ -39,13 +40,7 @@ public class messageFromAdmin extends AppCompatActivity {
             );
         } else {
             // User is already signed in. Therefore, display
-            // a welcome Toast
-            Toast.makeText(this,
-                    "Welcome " + FirebaseAuth.getInstance()
-                            .getCurrentUser()
-                            .getDisplayName(),
-                    Toast.LENGTH_LONG)
-                    .show();
+
 
             displayChatMessages();
         }

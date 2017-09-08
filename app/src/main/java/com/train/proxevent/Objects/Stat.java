@@ -1,15 +1,12 @@
 package com.train.proxevent.Objects;
 
-/**
- * Created by David on 04.09.2017.
- */
 
 public class Stat {
 
     private String tableName;
     private long number;
 
-    public Stat(String tableName,long number) {
+    public Stat(String tableName, long number) {
         this.tableName = tableName;
         this.number = number;
 

@@ -1,11 +1,8 @@
 package com.train.proxevent.Objects;
 
-/**
- * Created by David on 14.07.2017.
- */
 
 public class Favorite {
-    int id,idUser,idActivity;
+    int id, idUser, idActivity;
 
     public Favorite() {
     }

@@ -1,15 +1,12 @@
 package com.train.proxevent;
 
-import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.app.NotificationCompat;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,10 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.firebase.client.ChildEventListener;
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,8 +30,8 @@ public class chat extends AppCompatActivity {
     ImageView sendButton;
     EditText messageArea;
     ScrollView scrollView;
-    private DatabaseReference reference1, reference2;
     String myValueChatWith, myValueKeyIdActivity, myValueKeyTopic;
+    private DatabaseReference reference1, reference2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +50,7 @@ public class chat extends AppCompatActivity {
 
         Firebase.setAndroidContext(this);
         reference1 = FirebaseDatabase.getInstance().getReference("messages").child(UserDetails.username + "_" + UserDetails.chatWith);
-        reference2 = FirebaseDatabase.getInstance().getReference("messages").child(UserDetails.chatWith + "_" +  UserDetails.username);
+        reference2 = FirebaseDatabase.getInstance().getReference("messages").child(UserDetails.chatWith + "_" + UserDetails.username);
         sendButton.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View view) {
@@ -75,8 +69,8 @@ public class chat extends AppCompatActivity {
         reference1.addChildEventListener(new com.google.firebase.database.ChildEventListener() {
             @Override
             public void onChildAdded(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
-//                Map map = dataSnapshot.getValue(Map.class);
-                Map <String, String> map = (Map)dataSnapshot.getValue();
+
+                Map<String, String> map = (Map) dataSnapshot.getValue();
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
                 if (userName.equals(UserDetails.username)) {
@@ -85,15 +79,19 @@ public class chat extends AppCompatActivity {
                     addMessageBox("  " + message, 2);
                 }
             }
+
             @Override
             public void onChildChanged(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
             }
+
             @Override
             public void onChildRemoved(com.google.firebase.database.DataSnapshot dataSnapshot) {
             }
+
             @Override
             public void onChildMoved(com.google.firebase.database.DataSnapshot dataSnapshot, String s) {
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -101,53 +99,51 @@ public class chat extends AppCompatActivity {
     }
 
 
-    public void addMessageBox(String message, int type){
-    TextView textView = new TextView(chat.this);
+    public void addMessageBox(String message, int type) {
+        TextView textView = new TextView(chat.this);
         textView.setText(message);
-    LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    lp2.weight = 1.0f;
+        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp2.weight = 1.0f;
 
-    if(type == 1) {
-    lp2.gravity = Gravity.LEFT;
-        textView.setBackgroundResource(R.drawable.bubble_left);
-    }
-    else{
-        lp2.gravity = Gravity.RIGHT;
-        textView.setBackgroundResource(R.drawable.bubble_right);
-    }
+        if (type == 1) {
+            lp2.gravity = Gravity.LEFT;
+            textView.setBackgroundResource(R.drawable.bubble_left);
+        } else {
+            lp2.gravity = Gravity.RIGHT;
+            textView.setBackgroundResource(R.drawable.bubble_right);
+        }
         textView.setLayoutParams(lp2);
         layout.addView(textView);
         scrollView.fullScroll(android.view.View.FOCUS_DOWN);
     }
 
 
-
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
 
-             case android.R.id.home:
-        Intent upIntent = NavUtils.getParentActivityIntent(this);
-                 upIntent.putExtra("idActivity", myValueKeyIdActivity);
-                 upIntent.putExtra("topic", myValueKeyTopic);
-if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
- // This activity is NOT part of this app's task, so create a new task
-// when navigating up, with a synthesized back stack.
- TaskStackBuilder.create(this)
-                         // Add all of this activity's parents to the back stack
-.addNextIntentWithParentStack(upIntent)
-// Navigate up to the closest parent
-.startActivities();
-} else {
-// This activity is part of this app's task, so simply
-// navigate up to the logical parent activity.
-            NavUtils.navigateUpTo(this, upIntent);
-}
-return true;
-}
-                return super.onOptionsItemSelected(item);
+            case android.R.id.home:
+                Intent upIntent = NavUtils.getParentActivityIntent(this);
+                upIntent.putExtra("idActivity", myValueKeyIdActivity);
+                upIntent.putExtra("topic", myValueKeyTopic);
+                if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+                    // This activity is NOT part of this app's task, so create a new task
+                    // when navigating up, with a synthesized back stack.
+                    TaskStackBuilder.create(this)
+                            // Add all of this activity's parents to the back stack
+                            .addNextIntentWithParentStack(upIntent)
+                    // Navigate up to the closest parent
+                            .startActivities();
+                } else {
+                    // This activity is part of this app's task, so simply
+                    // navigate up to the logical parent activity.
+                    NavUtils.navigateUpTo(this, upIntent);
+                }
+                return true;
         }
+        return super.onOptionsItemSelected(item);
     }
+}
 
 
 

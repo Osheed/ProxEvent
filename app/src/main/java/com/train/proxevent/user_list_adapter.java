@@ -8,17 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-import com.train.proxevent.Objects.User;
 import com.train.proxevent.Objects.Users;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by xavne on 14/07/2017.
- */
 
 public class user_list_adapter extends ArrayAdapter {
 
@@ -30,8 +25,7 @@ public class user_list_adapter extends ArrayAdapter {
         super(context, resource);
     }
 
-    static class LayoutHandler
-    {
+    static class LayoutHandler {
         ImageView ACTIVITY_IMAGE;
         TextView ACTIVITY_TITLE;
         TextView ACTIVITY_DATE;
@@ -64,23 +58,22 @@ public class user_list_adapter extends ArrayAdapter {
         View row = convertView;
 
 
-        if(row == null){
-            LayoutInflater layoutInflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if (row == null) {
+            LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.userchat_list_layout, parent, false);
             layoutHandler = new LayoutHandler();
-            layoutHandler.ACTIVITY_IMAGE = (ImageView)row.findViewById(R.id.imvQuestionList );
-            layoutHandler.ACTIVITY_TITLE = (TextView)row.findViewById(R.id.question_title );
-            layoutHandler.ACTIVITY_LIKE = (TextView)row.findViewById(R.id.nbMember );
-            layoutHandler.ACTIVITY_DATE = (TextView)row.findViewById(R.id.activityDate );
+            layoutHandler.ACTIVITY_IMAGE = (ImageView) row.findViewById(R.id.imvQuestionList);
+            layoutHandler.ACTIVITY_TITLE = (TextView) row.findViewById(R.id.question_title);
+            layoutHandler.ACTIVITY_LIKE = (TextView) row.findViewById(R.id.nbMember);
+            layoutHandler.ACTIVITY_DATE = (TextView) row.findViewById(R.id.activityDate);
             row.setTag(layoutHandler);
+        } else {
+
+            layoutHandler = (user_list_adapter.LayoutHandler) row.getTag();
+
         }
-        else{
 
-            layoutHandler = (user_list_adapter.LayoutHandler)row.getTag();
-
-        }
-
-        Users cbUser = (Users)this.getItem(position);
+        Users cbUser = (Users) this.getItem(position);
 
         // display image in list
 //        byte[] img = cbUser.getImage();
@@ -92,11 +85,11 @@ public class user_list_adapter extends ArrayAdapter {
 //        //load image
 //        Picasso.with(profile.this).load(image).into(layoutHandler.ACTIVITY_IMAGE);
 ////       .setIma
-//
+
 //        layoutHandler.ACTIVITY_IMAGE.setImageBitmap(theImage);
         layoutHandler.ACTIVITY_TITLE.setText(cbUser.getName());
-//        layoutHandler.ACTIVITY_LIKE.setText(cActivity.getNbMember());
-        layoutHandler.ACTIVITY_DATE.setText(""+cbUser.getStatus());
+        layoutHandler.ACTIVITY_LIKE.setText(cbUser.getStatus());
+        layoutHandler.ACTIVITY_DATE.setText("" + cbUser.getStatus());
 
 
         return row;

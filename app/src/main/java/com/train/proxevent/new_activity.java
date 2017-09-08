@@ -69,7 +69,7 @@ public class new_activity extends AppCompatActivity {
     private String mActivity_id;
     private DatabaseReference mActivityDatabase;
     private DatabaseReference mActivityImgDb;
-    private int mYear, mMonth, mDay, mNYear,mNMonth,mNDay;
+    private int mYear, mMonth, mDay, mNYear, mNMonth, mNDay;
     private String img_url;
 
 
@@ -247,33 +247,33 @@ public class new_activity extends AppCompatActivity {
                 if (title.equals(vide) || content.equals(vide)) {
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.Title_Content), Toast.LENGTH_LONG).show();
                 } else {
-                //Progress
-                mProgress = new ProgressDialog(new_activity.this);
-                mProgress.setTitle("Saving Changes");
-                mProgress.setMessage("Please wait while we save the changes");
-                mProgress.show();
+                    //Progress
+                    mProgress = new ProgressDialog(new_activity.this);
+                    mProgress.setTitle("Saving Changes");
+                    mProgress.setMessage("Please wait while we save the changes");
+                    mProgress.show();
 
 
-                if (mEnterLocation.getText().toString().trim().equals(vide)) {
-                    mEnterLocation.setText("No Specific");
-                } else {
-                    adresse = mEnterLocation.getText().toString().trim();
-                }
+                    if (mEnterLocation.getText().toString().trim().equals(vide)) {
+                        mEnterLocation.setText("No Specific");
+                    } else {
+                        adresse = mEnterLocation.getText().toString().trim();
+                    }
 
-                if (mDisplayDate.getText().toString().trim().equals(vide)) {
-                    mDisplayDate.setText("No Specific");
-                } else {
-                    dateEnd = mDisplayDate.getText().toString().trim();
-                }
+                    if (mDisplayDate.getText().toString().trim().equals(vide)) {
+                        mDisplayDate.setText("No Specific");
+                    } else {
+                        dateEnd = mDisplayDate.getText().toString().trim();
+                    }
 
-                if (mDisplayNDate.getText().toString().trim().equals(vide)) {
-                    mDisplayNDate.setText("No Specific");
-                } else {
-                    dateBegining = mDisplayNDate.getText().toString().trim();
-                }
-                if (img_url == null) {
-                    img_url = "ic_action_clock";
-                }
+                    if (mDisplayNDate.getText().toString().trim().equals(vide)) {
+                        mDisplayNDate.setText("No Specific");
+                    } else {
+                        dateBegining = mDisplayNDate.getText().toString().trim();
+                    }
+                    if (img_url == null) {
+                        img_url = "ic_action_clock";
+                    }
 
 
                     // to ordenate data for db
@@ -323,7 +323,8 @@ public class new_activity extends AppCompatActivity {
                 }
 
 
-            }});
+            }
+        });
 
     }
 

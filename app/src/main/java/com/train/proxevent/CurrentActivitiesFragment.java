@@ -85,14 +85,9 @@ public class CurrentActivitiesFragment extends Fragment {
 
 
                         viewHolder.setAdresse(model.getAct_adresse());
-                        //viewHolder.setContent(model.getAct_content());
                         viewHolder.setDate_crea(model.getAct_date_crea());
                         viewHolder.setDate_end(model.getAct_date_end());
-                        //viewHolder.setLatitude(model.getAct_latitude());
-                        //viewHolder.setLongitude(model.getAct_longitude());
-                        //viewHolder.setOwner(model.getAct_owner());
                         viewHolder.setTitle(model.getAct_title());
-                        //viewHolder.setTopic(model.getAct_topic());
                         viewHolder.setActImage(model.getAct_image(), getContext());
 
 

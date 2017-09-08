@@ -1,8 +1,5 @@
 package com.train.proxevent.Objects;
 
-/**
- * Created by Helder on 29.08.2017.
- */
 
 public class Users {
 
@@ -10,7 +7,7 @@ public class Users {
     private String image;
     private String status;
 
-    public Users(){
+    public Users() {
 
     }
 

@@ -3,43 +3,35 @@ package com.train.proxevent;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import android.widget.AdapterView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.train.proxevent.Objects.Activities;
 import com.train.proxevent.Objects.UserActivity;
 import com.train.proxevent.Objects.Users;
 
-import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 
 public class display_activity extends AppCompatActivity {
@@ -143,13 +135,13 @@ public class display_activity extends AppCompatActivity {
         listViewOnClickListener();
 
         //check infos
-        if(mActivityAllDatabase ==  null){
-            Intent toHome = new Intent(display_activity.this,home.class);
+        if (mActivityAllDatabase == null) {
+            Intent toHome = new Intent(display_activity.this, home.class);
             // Intent to redirect the user at home not at the display_activity when they push back
             toHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(toHome);
             finish();
-        }else {
+        } else {
             getCurrentActivity();
         }
 
@@ -161,7 +153,6 @@ public class display_activity extends AppCompatActivity {
                 // to ordenate data for db
                 HashMap<String, String> userActivity = new HashMap<>();
                 userActivity.put("idUser", currentUserId);
-//                userActivity.put("idActivity",content);
 
                 mUserActivityDatabaseAdd.child(mUserActivity_id).setValue(userActivity).
                         addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -182,59 +173,6 @@ public class display_activity extends AppCompatActivity {
                         );
             }
         });
-
-        //test author & currentUser
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        String uid = currentUser.getUid();
-//        //Mask the delete Activity Button
-//        String Act_owner = getIntent().getExtras().getString("owner");
-//        if(!mCurrentUserCreator.equals(mCurrentUser)){
-//
-//            fabDelete.hide();
-//        }else{
-//            fabDelete.show();
-//            //to delete the activity
-//            fabDelete.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(display_activity.this);
-//                    builder.setTitle(R.string.dilog_message_deleteActivity);
-//                    builder.setMessage(R.string.dialog_title_deleteActivity);
-//
-//                    builder.setPositiveButton(getResources().getString(R.string.Continue), new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                            //Code to delete in All and topic related
-//                            mActivityAllDatabase.removeValue();
-//                            mActivityTopicDatabase.removeValue();
-//
-//                            Intent toHome = new Intent(display_activity.this,home.class);
-//                            // Intent to redirect the user at home not at the display_activity when they push back
-//                            toHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                            startActivity(toHome);
-//                            finish();
-//                        }
-//                    });
-//                    builder.setNegativeButton(getResources().getString(R.string.Cancel), new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialogInterface, int i) {
-//                            dialogInterface.cancel();
-//                        }
-//                    });
-//
-//                    //create
-//                    AlertDialog dialog = builder.create();
-//                    dialog.show();
-//
-//                }
-//
-//            });
-//
-//        }
-
-
-
 
     }
 
@@ -257,7 +195,7 @@ public class display_activity extends AppCompatActivity {
                 activityDate.setText(activityDate.getText() + " " + dateCrea);
                 activityDateEnd.setText(activityDateEnd.getText() + " " + dateEnd);
                 //load image
-                if(!imgTop.equals("ic_action_clock")) {
+                if (!imgTop.equals("ic_action_clock")) {
                     Picasso.with(display_activity.this).load(imgTop).placeholder(R.drawable.ic_action_clock).into(imageTop);
                 }
                 //User creator
@@ -288,60 +226,50 @@ public class display_activity extends AppCompatActivity {
                 Picasso.with(display_activity.this).load(imgAuthor).into(imageCreator);
 
 
+                if (mCurrentUserCreator.equals(mUserTestDelete)) {
+                    fabDelete.show();
+                    //to delete the activity
+                    fabDelete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(display_activity.this);
+                            builder.setTitle(R.string.dilog_message_deleteActivity);
+                            builder.setMessage(R.string.dialog_title_deleteActivity);
 
-                    if(mCurrentUserCreator.equals(mUserTestDelete)){
-                        fabDelete.show();
-                        //to delete the activity
-                        fabDelete.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(display_activity.this);
-                                builder.setTitle(R.string.dilog_message_deleteActivity);
-                                builder.setMessage(R.string.dialog_title_deleteActivity);
+                            builder.setPositiveButton(getResources().getString(R.string.Continue), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    mActivityAllDatabase.removeValue();
+                                    mActivityAllDatabase.removeEventListener(listner);
+                                    mActivityTopicDatabase.removeValue();
+                                    mActivityTopicDatabase.removeEventListener(listner);
+                                    Intent toHome = new Intent(display_activity.this, home.class);
+                                    // Intent to redirect the user at home not at the display_activity when they push back
+                                    toHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(toHome);
+                                    finish();
 
-                                builder.setPositiveButton(getResources().getString(R.string.Continue), new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        mActivityAllDatabase.removeValue();
-                                        mActivityAllDatabase.removeEventListener(listner);
-                                        mActivityTopicDatabase.removeValue();
-                                        mActivityTopicDatabase.removeEventListener(listner);
-                                        Intent toHome = new Intent(display_activity.this,home.class);
-                                        // Intent to redirect the user at home not at the display_activity when they push back
-                                        toHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(toHome);
-                                        finish();
+                                }
+                            });
+                            builder.setNegativeButton(getResources().getString(R.string.Cancel), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            });
 
-                                    }
-                                });
-                                builder.setNegativeButton(getResources().getString(R.string.Cancel), new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        dialogInterface.cancel();
-                                    }
-                                });
+                            //create
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
 
-                                //create
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
+                    });
 
-                            }
+                } else {
 
-                        });
+                    fabDelete.setVisibility(View.GONE);
 
-                    }else{
-//                        fabDelete.hide;
-                        fabDelete.setVisibility(View.GONE);
-//                        fabDelete.hide();
-
-                    }
-
-
-
-
-
-
-
+                }
             }
 
             @Override
@@ -350,7 +278,6 @@ public class display_activity extends AppCompatActivity {
         };
         mCurrentUserCreator.addValueEventListener(postListener);
     }
-
 
 
     public void setUserDetails() {

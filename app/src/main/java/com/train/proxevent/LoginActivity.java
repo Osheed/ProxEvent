@@ -2,10 +2,10 @@ package com.train.proxevent;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent regIntent = new Intent(LoginActivity.this,RegisterActivity.class);
+                Intent regIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(regIntent);
 
             }
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = til_Email.getEditText().getText().toString();
                 String password = til_Password.getEditText().getText().toString();
 
-                if(!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)){
+                if (!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {
 
                     mLoginProgress.setTitle("Logging In");
                     mLoginProgress.setMessage("Please wait while we check your credentials ");
@@ -82,19 +82,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if( task.isSuccessful() ){
+                if (task.isSuccessful()) {
 
                     mLoginProgress.dismiss();
 
-
-
                     FirebaseUser currentUser = mAuth.getCurrentUser();
-                    Log.i("currentUser", "you are admin + "+currentUser.getUid());
+                    Log.i("currentUser", "you are admin + " + currentUser.getUid());
                     String uid = currentUser.getUid();
-                    String admin ="mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
+                    String admin = "mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
 
-                    if (uid.equalsIgnoreCase(admin)){
-                        Log.i("aaa", "aaa admin + "+currentUser.getUid());
+                    if (uid.equalsIgnoreCase(admin)) {
+                        Log.i("aaa", "aaa admin + " + currentUser.getUid());
 
                         Intent goAdmin = new Intent(LoginActivity.this, admin.class);
 
@@ -102,9 +100,8 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
 
 
-
-                    }else {
-                        Log.i("home", "home admin + "+currentUser.getUid());
+                    } else {
+                        Log.i("home", "home admin + " + currentUser.getUid());
                         Intent mainIntent = new Intent(LoginActivity.this, home.class);
 
                         //Clear previous tasks
@@ -113,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(mainIntent);
                         finish();
                     }
-                }else{
+                } else {
 
                     mLoginProgress.hide();
                     Toast.makeText(LoginActivity.this, "Cannot Sign in. Please check the form and try again ", Toast.LENGTH_LONG).show();

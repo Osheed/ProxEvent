@@ -4,11 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-/**
- * Created by Helder on 06.09.2017.
- */
 
-class HomePagerAdapter extends FragmentPagerAdapter{
+class HomePagerAdapter extends FragmentPagerAdapter {
     public HomePagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -16,7 +13,7 @@ class HomePagerAdapter extends FragmentPagerAdapter{
     @Override
     public Fragment getItem(int position) {
 
-        switch (position){
+        switch (position) {
             case 0:
                 MapFragment mapFragment = new MapFragment();
                 return mapFragment;
@@ -35,9 +32,9 @@ class HomePagerAdapter extends FragmentPagerAdapter{
         return 2;
     }
 
-    public CharSequence getPageTitle(int position){
+    public CharSequence getPageTitle(int position) {
 
-        switch (position){
+        switch (position) {
             case 0:
                 return "Map";
             case 1:

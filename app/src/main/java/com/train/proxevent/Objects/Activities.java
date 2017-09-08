@@ -1,11 +1,5 @@
 package com.train.proxevent.Objects;
 
-import java.util.Date;
-
-/**
- * Created by David on 14.07.2017.
- */
-
 public class Activities {
 
     private String Act_adresse;
@@ -19,7 +13,8 @@ public class Activities {
     private String Act_topic;
     private String Act_image;
 
-    public Activities(){}
+    public Activities() {
+    }
 
     public Activities(String act_adresse, String act_content, String act_date_crea, String act_date_end, String act_latitude, String act_longitude, String act_owner, String act_title, String act_topic, String act_image) {
         Act_adresse = act_adresse;

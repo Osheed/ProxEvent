@@ -28,7 +28,8 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:textSize="5pt"
-        app:srcCompat="@drawable/ic_add_a_photo" />
+        app:srcCompat="@drawable/ic_add_a_photo"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/tv_profile_displayName"
@@ -42,7 +43,8 @@
         android:text="@string/display_name"
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        tools:ignore="RtlHardcoded" />
 
     <TextView
         android:id="@+id/tv_profile_status"
@@ -58,7 +60,8 @@
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="18sp"
         android:layout_alignLeft="@+id/tv_profile_displayName"
-        android:layout_alignRight="@+id/tv_profile_displayName" />
+        android:layout_alignRight="@+id/tv_profile_displayName"
+        tools:ignore="RtlHardcoded" />
 
     <Button
         android:id="@+id/btn_settings_chStatus"

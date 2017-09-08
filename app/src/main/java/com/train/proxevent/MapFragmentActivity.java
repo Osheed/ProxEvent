@@ -1,15 +1,11 @@
 package com.train.proxevent;
 
-/**
- * Created by David on 07.09.2017.
- */
 
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -103,7 +99,6 @@ public class MapFragmentActivity extends FragmentActivity implements
             latitude = location.getLatitude();
 
 
-
             //moving the map to location
             moveMap();
         }
@@ -112,7 +107,7 @@ public class MapFragmentActivity extends FragmentActivity implements
     //Function to move the map
     private void moveMap() {
         //String to display current latitude and longitude
-        String msg = latitude + ", "+longitude;
+        String msg = latitude + ", " + longitude;
 
         //Creating a LatLng Object to store Coordinates
         LatLng latLng = new LatLng(latitude, longitude);
@@ -194,7 +189,7 @@ public class MapFragmentActivity extends FragmentActivity implements
 
     @Override
     public void onClick(View v) {
-        if(v == buttonCurrent){
+        if (v == buttonCurrent) {
             getCurrentLocation();
             moveMap();
         }

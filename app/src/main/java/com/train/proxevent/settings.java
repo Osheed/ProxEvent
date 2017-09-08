@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -36,14 +35,13 @@ public class settings extends AppCompatActivity {
         setTitle(R.string.Settings);
 
 
-//        String admin = currentUser.getUid().toString();
-
+        //check if the current user is the admin
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         String current_uid = mCurrentUser.getUid();
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
         mUserDatabase.getKey();
 
-        String admin = "mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
+        final String admin = "mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
 
 
         if (mUserDatabase.getKey().equalsIgnoreCase(admin)) {
@@ -118,7 +116,7 @@ public class settings extends AppCompatActivity {
     }
 
     public void goAdmin(View view) {
-        //  Intent goToAdmin = new Intent(this, messageFromAdmin.class);
+
         Intent goToAdmin = new Intent(this, admin.class);
         startActivity(goToAdmin);
 

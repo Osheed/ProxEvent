@@ -2,13 +2,10 @@ package com.train.proxevent.Objects;
 
 import java.util.Date;
 
-/**
- * Created by David on 14.07.2017.
- */
 
 public class Message {
-    int id, idSender,idActivity;
-    String content,title;
+    int id, idSender, idActivity;
+    String content, title;
     Date date;
     boolean open;
 

@@ -206,7 +206,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="MessageFromAdmin">Message From Admin</string>
+    <string name="MessageFromAdmin">Messages from admin</string>
     <string name="administrate">Administrate</string>
 
 

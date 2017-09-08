@@ -111,7 +111,7 @@ public class display_activity extends AppCompatActivity {
                     }
                 }
 
-                tvEmptyUserCurrentList.setText("Chat with activity's members (" + user_list_adapter.getCount() + ")");
+                tvEmptyUserCurrentList.setText(" Chat (" + user_list_adapter.getCount() + ")");
 
 
             }

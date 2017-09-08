@@ -134,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
                     } catch (FirebaseAuthUserCollisionException e) {
                         error = "Existing Account";
                     } catch (Exception e) {
-                        error = "Unknown error";
+                        error = "Check your internet connection";
                         e.printStackTrace();
                     }
                     regProgress.hide();

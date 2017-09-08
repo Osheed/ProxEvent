@@ -33,6 +33,7 @@ android {
 repositories {
     maven { url "https://jitpack.io" }
 }
+apply plugin: 'com.android.application'
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -41,8 +42,11 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.5.2'
     compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.google.android.gms:play-services-fitness:11.0.2'
+    compile 'com.google.android.gms:play-services-wearable:11.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+
     compile 'com.google.android.gms:play-services-maps:11.0.2'
     compile 'com.google.android.gms:play-services-location:11.0.2'
     compile 'com.google.android.gms:play-services-analytics:11.0.2'

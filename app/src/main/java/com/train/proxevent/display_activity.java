@@ -217,8 +217,7 @@ public class display_activity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
-//                Users creator = dataSnapshot.getValue(Users.class);
-//                UserDetails.username = post.getName();
+
                 String creatorName = dataSnapshot.child("name").getValue().toString();
                 tvCreator.setText(creatorName);
 

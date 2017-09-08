@@ -67,9 +67,18 @@
         android:id="@+id/btn_settings_chStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:text="@string/change_status"
         android:layout_below="@+id/tv_profile_status"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/greenDark"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/change_status"
+        android:textColor="@color/white"
+        tools:ignore="RtlHardcoded" />
 
 </RelativeLayout>

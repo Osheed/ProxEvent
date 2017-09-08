@@ -55,7 +55,8 @@
 
         <activity
             android:name=".display_activity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".home"/>
 
 
         <activity android:name=".favorites_list" />

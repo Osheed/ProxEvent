@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
       <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/topic_layout"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:id="@+id/topic_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="4dp">
+        android:padding="4dp"
+          tools:ignore="DisableBaselineAlignment">
 
         <ListView
             android:id="@+id/listviewTopics"
@@ -15,6 +17,7 @@
             android:gravity="center_vertical"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_margin="2dp"/>
+            android:layout_margin="2dp"
+            tools:ignore="InefficientWeight" />
 
     </LinearLayout>

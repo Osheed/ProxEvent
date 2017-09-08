@@ -17,6 +17,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class messageFromAdmin extends AppCompatActivity {
@@ -25,6 +26,8 @@ public class messageFromAdmin extends AppCompatActivity {
     private FirebaseListAdapter<com.train.proxevent.Objects.MessageAdmin> adapter;
     private FloatingActionButton fab;
     private EditText input;
+    private FirebaseUser mCurrentUser;
+    private DatabaseReference mUserDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +48,27 @@ public class messageFromAdmin extends AppCompatActivity {
             displayChatMessages();
         }
 
+
+        //check if the current user is the admin
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String current_uid = mCurrentUser.getUid();
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
+        mUserDatabase.getKey();
+
+        final String admin = "mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
+
+
+        if (mUserDatabase.getKey().equalsIgnoreCase(admin)) {
+
+
+        }
         //button send message visible if admin
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         String uid = currentUser.getUid();
-        String admin = "mJ4aJAWSSeeQ8mEcAtTySQlPJOU2";
+
 
         if (uid.equalsIgnoreCase(admin)) {
             fab = (FloatingActionButton) findViewById(R.id.fab);

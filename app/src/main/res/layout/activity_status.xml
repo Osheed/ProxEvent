@@ -28,8 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="32dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="30dp"
+        android:background="@color/greenDark"
         android:paddingBottom="10dp"
         android:paddingEnd="10dp"
         android:paddingLeft="10dp"
@@ -37,10 +37,9 @@
         android:paddingStart="10dp"
         android:paddingTop="20dp"
         android:text="@string/save_changes"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textColor="@color/white"
+        tools:ignore="RtlHardcoded"
         android:layout_below="@+id/til_status_change"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        tools:ignore="RtlHardcoded" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -211,10 +211,13 @@
 
                             <TextView
                                 android:id="@+id/tvEmptyUserCurrentList"
-                                android:layout_width="match_parent"
+                                android:layout_width="355dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginStart="8dp"
                                 android:text="Chat with activity's members "
+                                android:textAlignment="textStart"
                                 android:textColor="@color/darkGray"
                                 android:textSize="10pt"
                                 android:textStyle="bold"
